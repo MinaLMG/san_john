@@ -1,0 +1,1356 @@
+{
+	"info": {
+		"_postman_id": "a929caf7-09fa-4c0d-80bf-a6ea4eba71da",
+		"name": "san_john",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "create team",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\":\"new\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/Teams",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"Teams"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get team",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/Team/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"Team",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "62bacdc217bf50c2c8e5f423"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get teams",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/Teams",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"Teams"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete team",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/Teams/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"Teams",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "62bacd9c17bf50c2c8e5f41f"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "patch team",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\":\"newc\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/Teams/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"Teams",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "62bacdc217bf50c2c8e5f423"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create role",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\":\"5amsa\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/Roles",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"Roles"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get role",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/Role/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"Role",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "62ba1823574565e3f7ca13b3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get roles",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/Roles",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"Roles"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete role",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/Roles/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"Roles",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "62ba1823574565e3f7ca13b3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "patch role",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\":\"ydsdsa\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/Roles/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"Roles",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "62ba181d574565e3f7ca13b1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create status",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\":\"active\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/Status",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"Status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get status",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/Status/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"Status",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "62ba1a8c61f849f1646e5b15"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get statuses",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/Status",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"Status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete status",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/Status/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"Status",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "62ba1a8c61f849f1646e5b15"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "patch status",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\":\"ydsdsa\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/Status/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"Status",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "62ba1aaa61f849f1646e5b1b"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create Father",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\":\"عازر\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/Fathers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"Fathers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get Father",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/Father/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"Father",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "62ba2186b90d58d2b30231e1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get Fathers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/Fathers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"Fathers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete Father",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/Fathers/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"Fathers",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "62ba2186b90d58d2b30231e1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "patch Father",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\":\"ميخائيل\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/Fathers/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"Fathers",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "62ba217fb90d58d2b30231df"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create Education_Year",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\":\"hfjdasd]\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/Education_Years",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"Education_Years"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get Education_Year",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/Education_Year/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"Education_Year",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "62ba240db18459a64172a384"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get Education_Years",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/Education_Years",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"Education_Years"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete Education_Year",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/Education_Years/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"Education_Years",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "62ba240db18459a64172a384"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "patch Education_Year",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\":\"ابتدائى\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/Education_Years/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"Education_Years",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "62ba2412b18459a64172a386"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create Phone_Number",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\":\"عازر\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/Phone_Numbers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"Phone_Numbers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get Phone_Number",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/Phone_Number/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"Phone_Number",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "62ba3c3e2bc7b14ba9e98bbd"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get Phone_Numbers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/Phone_Numbers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"Phone_Numbers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete Phone_Number",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/Phone_Numbers/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"Phone_Numbers",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "62ba29ce2bc7b14ba9e98bb7"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "patch Phone_Number",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"number\":\"01276011964\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/Phone_Numbers/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"Phone_Numbers",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "62ba3c3e2bc7b14ba9e98bbd"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create Person",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"ID\":\"14258965257845\",\"birth_date\":\"2012-04-23T18:25:43.511Z\",\"team\":\"62bacdc217bf50c2c8e5f423\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/Persons",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"Persons"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get Persons",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/Persons",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"Persons"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get Person",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/Person/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"Person",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "62ba2186b90d58d2b30231e1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "patch Person",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"team\":\"62b9faa9948e2f16eee50c56\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/Persons/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"Persons",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "62ba43300158c40a0d5ac399"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete Person",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/Persons/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"Persons",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "62ba5922d20f992bbe0e9eea"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create Meeting",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"date\":\"2012-04-23T18:25:43.511Z\",\r\n    \"date_created\":\"2012-04-23T18:25:43.511Z\",\r\n    \"description\":\"sakdhksa\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/Meetings/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"Meetings",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get Meetings",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/Meetings",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"Meetings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get Meeting",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/Meeting/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"Meeting",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "62babdc3be043e4e4d0ba9c4"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete Meeting",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/Meetings/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"Meetings",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "62babdc3be043e4e4d0ba9c4"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "patch Meeting",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"description\":\"nice one\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/Meetings/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"Meetings",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "62babdcfbe043e4e4d0ba9c6"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create Speaker",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"name\":\"kola\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/Speakers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"Speakers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get Speaker",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/Speaker/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"Speaker",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "62baca442aa41e0520b21b0a"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get Speakers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/Speakers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"Speakers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete Speaker",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/Speakers/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"Speakers",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "62bad19aefae9845a52e8c88"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "patch Speaker",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\":\"ميخا\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/Speakers/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"Speakers",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "62baca392aa41e0520b21b07"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create Meeting_Attended",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"p_ID\":\"62ba40f1e1f7e5e35de1c7c1\",\"m_ID\":\"62babdcfbe043e4e4d0ba9c6\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/Meeting_Attendeds",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"Meeting_Attendeds"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get Meeting_Attended",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/Meeting_Attended/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"Meeting_Attended",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "62baca442aa41e0520b21b0a"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get Meetings_Attended",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/Meeting_Attendeds",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"Meeting_Attendeds"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete Meeting_Attended",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/Meeting_Attendeds/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"Meeting_Attendeds",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "62bad19aefae9845a52e8c88"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "patch Meeting_Attended",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\":\"ميخا\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/Meeting_Attendeds/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"Meeting_Attendeds",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "62baca392aa41e0520b21b07"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
