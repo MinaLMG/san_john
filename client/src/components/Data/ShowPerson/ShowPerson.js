@@ -22,6 +22,35 @@ export default function ShowPerson(props) {
   }, []);
   const [chosen, setChosen] = useState(null);
   console.log(chosen);
+
+  async function getPerson() {
+    let person = persons.find((x) => x._id === chosen.id);
+    // setPerson(props.person);
+    if (person.team) {
+      const res = await instance.get(`/Team/${person.team}`);
+      // setPerson((prev) => {
+      //   prev.team = res.data.name;
+      //   return prev;
+      // });
+      person.team = res.data.name;
+    }
+    if (person.role) {
+      const res = await instance.get(`/Role/${person.role}`);
+      person.role = res.data.name;
+    }
+    if (person.status) {
+      const res = await instance.get(`/Status/${person.status}`);
+      person.status = res.data.name;
+    }
+    if (person.education_year) {
+      const res = await instance.get(
+        `/Education_Year/${person.education_year}`
+      );
+      person.education_year = res.data.name;
+    }
+    console.log(person);
+    return person;
+  }
   return (
     <React.Fragment>
       <div className={classes2.actions}>
@@ -81,7 +110,7 @@ export default function ShowPerson(props) {
       ></Auto> */}
       {chosen != null && (
         <ShowPersonItem
-          person={persons.find((x) => x._id === chosen.id)}
+          person={chosen ? persons.find((x) => x._id === chosen.id) : null}
         ></ShowPersonItem>
       )}
     </React.Fragment>

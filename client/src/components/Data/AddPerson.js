@@ -142,6 +142,7 @@ export default function AddPerson(props) {
       const res = await instance.post("/Persons", person);
       //   console.log(res);
       console.log(res.data);
+      props.onGoBack();
     } catch (error) {
       console.log(error);
       setAddingError(true);

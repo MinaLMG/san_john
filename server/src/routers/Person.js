@@ -67,6 +67,23 @@ router.get("/Person/:id", async (req, res) => {
       return res.status(404).send();
     }
 
+    // if (person.team) {
+    //   const team = Team.findById(person.team);
+    //   person.team = team;
+    // }
+    // if (person.role) {
+    //   const role = Role.findById(person.role);
+    //   person.role = role;
+    // }
+    // if (person.status) {
+    //   const status = Status.findById(person.status);
+    //   person.status = status;
+    // }
+    // if (person.education_year) {
+    //   const edu_y = Education_Year.findById(person.edu_y);
+    //   person.edu_y = edu_y;
+    // }
+
     res.send(person);
   } catch (e) {
     res.status(500).send();
@@ -76,6 +93,31 @@ router.get("/Person/:id", async (req, res) => {
 router.get("/Persons", async (req, res) => {
   try {
     const persons = await Person.find({}).sort({ name: 1 });
+    // persons = persons.map((person) => {
+    //   if (person.team) {
+    //     const team = Team.findById(person.team);
+    //     person.team = team;
+    //   }
+    //   console.log(person);
+    //   if (person.role) {
+    //     const role = Role.findById(person.role);
+    //     person.role = role;
+    //   }
+    //   console.log(person);
+
+    //   if (person.status) {
+    //     const status = Status.findById(person.status);
+    //     person.status = status;
+    //   }
+    //   console.log(person);
+
+    //   if (person.education_year) {
+    //     const edu_y = Education_Year.findById(person.edu_y);
+    //     person.edu_y = edu_y;
+    //   }
+    //   console.log(person);
+    //   return person;
+    // });
     res.send(persons);
   } catch (e) {
     res.status(400).send();
@@ -92,6 +134,22 @@ router.patch("/Persons/:id", async (req, res) => {
       return res.status(400).send({ error: "Invalid updates!" });
     }
   }
+  // if (person.team) {
+  //   const team = Team.findById(person.team);
+  //   person.team = team;
+  // }
+  // if (person.role) {
+  //   const role = Role.findById(person.role);
+  //   person.role = role;
+  // }
+  // if (person.status) {
+  //   const status = Status.findById(person.status);
+  //   person.status = status;
+  // }
+  // if (person.education_year) {
+  //   const edu_y = Education_Year.findById(person.edu_y);
+  //   person.edu_y = edu_y;
+  // }
   const updates = Object.keys(req.body);
   // TODO:detrmine what to update
   const allowedUpdates = ["team", "name", "education_year"];

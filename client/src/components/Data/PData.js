@@ -3,7 +3,7 @@ import AddPerson from "./AddPerson";
 import classes from "./PData.module.css";
 import ShowPerson from "./ShowPerson/ShowPerson";
 export default function PData(props) {
-  const [chosen, setChosen] = useState("Show");
+  const [chosen, setChosen] = useState(undefined);
   return (
     <div className="container-width">
       {chosen == undefined && (
