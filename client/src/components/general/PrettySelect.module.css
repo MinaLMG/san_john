@@ -1,0 +1,19 @@
+.width{
+    width: 100%;
+    /* font-size: 0.8rem; */
+}
+.red{
+    border-color: red !important;
+}
+.reset{
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: red;
+    position: relative;
+    left: 10px;
+    cursor: pointer;
+    opacity: 0.3;
+}
+.reset:hover{
+opacity: 1;}

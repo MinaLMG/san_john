@@ -1,0 +1,14 @@
+.form-g{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.label{
+    margin-left: 5px;
+}
+.input{
+    display: inline-block; 
+    flex-grow: 1;
+    width: 0;
+}
+.red{border-color: red;}

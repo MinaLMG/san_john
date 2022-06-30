@@ -1,9 +1,46 @@
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
+import PrettySelect from "../general/PrettySelect";
+import AddPerson from "./AddPerson";
 import classes from "./PData.module.css";
+import ShowPerson from "./ShowPerson";
 export default function PData(props) {
+  const [chosen, setChosen] = useState("Show");
   return (
-    <Fragment>
-      <button onClick={props.onGoBack}> back</button>
-    </Fragment>
+    <div className="container-width">
+      {chosen == undefined && (
+        <div className={classes.options}>
+          <button onClick={props.onGoBack}> back</button>
+          <button
+            onClick={() => {
+              setChosen("Add");
+            }}
+          >
+            اضافة خادم
+          </button>
+          <button
+            onClick={() => {
+              setChosen("Show");
+            }}
+          >
+            عرض الخدام
+          </button>
+        </div>
+      )}
+      {chosen == "Add" && (
+        <AddPerson
+          onGoBack={() => {
+            setChosen(undefined);
+          }}
+        ></AddPerson>
+      )}
+
+      {chosen == "Show" && (
+        <ShowPerson
+          onGoBack={() => {
+            setChosen(undefined);
+          }}
+        ></ShowPerson>
+      )}
+    </div>
   );
 }

@@ -1,8 +1,20 @@
+*{margin:0;
+  padding:0;
+  box-sizing: border-box;
+}
+:root{
+  --dark-red:#941b0d;
+  --dark-yellow:#a1840d;
+  --light-yellow:#fee265;
+}
 .App {
   text-align: center;
   direction: rtl;
 }
-
+.container-width{
+  max-width: 1168px;
+  margin: auto;
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;

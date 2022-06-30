@@ -1,0 +1,25 @@
+.container{
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+.select{
+    border-radius: 10%;
+    /* font-size: large; */
+    margin-left: 10px;
+    padding: 2px;
+direction: ltr;
+}
+.reset{
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: red;
+    position: relative;
+    left: 10px;
+    cursor: pointer;
+    opacity: 0.3;
+}
+.reset:hover{
+opacity: 1;}

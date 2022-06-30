@@ -3,7 +3,26 @@
     display :flex;
     justify-content: center;
     align-items: center;
+  /* background-image: url(../assets/7abw.jpeg); */
+
+  /* background-repeat: no-repeat; */
+  /* background-position-x: 50%; */
+  /* background-position-y: 50%; */
+  /* background-size: ; */
 }
 .button{
+background-color: transparent;
+padding: 15px;
+border: 1px solid #ccc;
+border-radius: 999px;
+cursor: pointer;
+font-size: large;
+color: var(--dark-red);
+font-weight: 800;
 
+background-color: var(--light-yellow);
+opacity: 0.8;
+}
+.button:hover{
+   opacity: 1;
 }

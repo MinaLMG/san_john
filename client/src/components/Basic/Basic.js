@@ -107,9 +107,62 @@ export default function Basic(props) {
     getMeetings();
   }, []);
 
+  async function createTeams() {
+    const Teams = [
+      { name: "الملايكة" },
+      { name: "baby class" },
+      { name: "kg1" },
+      { name: "kg2" },
+      { name: "الاول الابتدائى" },
+      { name: "الثاني الابتدائى" },
+      { name: "الثالث الابتدائى" },
+      { name: "الرابع الابتدائى" },
+      { name: "الخامس الابتدائى" },
+      { name: "السادس الابتدائى" },
+    ];
+    for (let i = 0; i < Teams.length; i++) {
+      const team = await instance.post("/Teams", Teams[i]);
+    }
+  }
+  async function createRoles() {
+    const Roles = [
+      { name: "قائد مجموعة" },
+      { name: "جيمر" },
+      { name: "سكرتارية" },
+      { name: "اية وقبطى" },
+      { name: "انشطة طفولة" },
+      { name: "انشطة خدام" },
+      { name: "فنى" },
+      { name: "مساعد فنى" },
+      { name: "منسق" },
+      { name: "وسائل ايضاح" },
+      { name: "امين خدمة" },
+    ];
+    for (let i = 0; i < Roles.length; i++) {
+      const role = await instance.post("/Roles", Roles[i]);
+    }
+  }
+  async function create_e_y() {
+    const e_y = [{ name: "الثانوى" }, { name: " الجامعى" }, { name: "خريج" }];
+    for (let i = 0; i < e_y.length; i++) {
+      const team = await instance.post("/Education_years", e_y[i]);
+    }
+  }
+  async function createStatus() {
+    const status = [{ name: "ارشيف" }, { name: "مستمر" }, { name: "منقطع" }];
+    for (let i = 0; i < status.length; i++) {
+      const team = await instance.post("/Status", status[i]);
+    }
+  }
   return (
     <Fragment>
       <button onClick={props.onGoBack}> back</button>
+      {/*  <h1>scripts </h1>
+     <button onClick={createTeams}> create teams</button>
+      <button onClick={createRoles}> create roles</button>
+      <button onClick={create_e_y}> create education_years</button>
+      <button onClick={createStatus}> create status</button> */}
+
       <h1> الفرق </h1>
       {teams.length != 0 && (
         <ul>

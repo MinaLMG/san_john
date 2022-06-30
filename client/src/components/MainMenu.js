@@ -6,16 +6,20 @@ import Attendance from "./Attendance/Attendance";
 import Reports from "./reports/Reports";
 import Basic from "./Basic/Basic";
 import MainMenuItem from "./MainMenuItem";
+import logo from "../assets/logo.jpeg";
 export default function MainMenu() {
-  const [chosen, setChosen] = useState(undefined);
+  const [chosen, setChosen] = useState("data");
   function changeChosen(val) {
     setChosen(val);
   }
   return (
-    <div>
+    <div className={classes.backgroud}>
+      <header className={classes.header}>
+        <h1 className={classes.title}>خدمة القديس حبيب جرجس</h1>
+        <img src={logo} className={classes.image}></img>
+      </header>
       {chosen == undefined && (
-        <React.Fragment>
-          <h1>خدمة القديس حبيب جرجس</h1>
+        <div className=" container-width">
           <MainMenuItem
             onClick={() => {
               changeChosen("data");
@@ -38,9 +42,9 @@ export default function MainMenu() {
             onClick={() => {
               changeChosen("basic");
             }}
-            buttonContent={"قاعدة البيانات"}
+            buttonContent={"قاعدة البيانات (not recommended)"}
           ></MainMenuItem>
-        </React.Fragment>
+        </div>
       )}
       {chosen == "data" && (
         <PData
