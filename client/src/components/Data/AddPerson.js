@@ -521,8 +521,7 @@ export default function AddPerson(props) {
               } else {
                 setFather_phone_error(false);
                 setPerson((prev) => {
-                  delete prev["father_phone_number"];
-                  return prev;
+                  return { ...prev, father_phone_number: val };
                 });
               }
             }}
@@ -781,7 +780,7 @@ export default function AddPerson(props) {
         </button>
         {addingError && (
           <span className={classes.error}>
-            فيه حاجة غلط .. راجع البيانات:D .. ممكن الرقم القومى متكرر
+            فيه حاجة غلط .. راجع البيانات:D .. ممكن الاسم او الرقم القومى متكرر
           </span>
         )}
       </div>

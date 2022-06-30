@@ -94,7 +94,7 @@ router.patch("/Persons/:id", async (req, res) => {
   }
   const updates = Object.keys(req.body);
   // TODO:detrmine what to update
-  const allowedUpdates = ["team", "name"];
+  const allowedUpdates = ["team", "name", "education_year"];
   const isValidOperation = updates.every((update) =>
     allowedUpdates.includes(update)
   );

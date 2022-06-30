@@ -12,9 +12,9 @@ export default function DateGet(props) {
     setC_year(temp);
     if (c_day && c_month) {
       if (temp % 4 !== 0 && c_month == 2 && c_day == 29) {
-        props.onChange(new Date(temp, c_month - 1, 1));
+        props.onChange(new Date(temp, c_month - 1, 1, 3));
       } else {
-        props.onChange(new Date(temp, c_month - 1, c_day));
+        props.onChange(new Date(temp, c_month - 1, c_day, 3));
       }
     } else props.onChange(undefined);
   }
@@ -30,13 +30,13 @@ export default function DateGet(props) {
     setC_month(temp);
     if (c_day && c_year) {
       if ([1, 3, 5, 7, 8, 10, 12].includes(temp)) {
-        props.onChange(new Date(c_year, temp - 1, c_day));
+        props.onChange(new Date(c_year, temp - 1, c_day, 3));
       } else if ([4, 6, 9, 11].includes(temp) && c_day >= 31)
-        props.onChange(new Date(c_year, temp - 1, 1));
+        props.onChange(new Date(c_year, temp - 1, 1, 3));
       else if (temp == 2 && c_year % 4 == 0 && c_day >= 30) {
-        props.onChange(new Date(c_year, temp - 1, 1));
+        props.onChange(new Date(c_year, temp - 1, 1, 3));
       } else if (temp == 2 && c_year % 4 !== 0 && c_day >= 29) {
-        props.onChange(new Date(c_year, temp - 1, 1));
+        props.onChange(new Date(c_year, temp - 1, 1, 3));
       }
     } else props.onChange(undefined);
   }
@@ -50,7 +50,8 @@ export default function DateGet(props) {
   function dayChangeHandler(e) {
     let temp = +e.target.value;
     setC_day(+e.target.value);
-    if (c_month && c_year) props.onChange(new Date(c_year, c_month - 1, temp));
+    if (c_month && c_year)
+      props.onChange(new Date(c_year, c_month - 1, temp, 3));
     else props.onChange(undefined);
   }
   function dateReset() {

@@ -3,7 +3,7 @@ const validator = require("validator");
 const Team = require("./Team");
 
 const Person = mongoose.model("Person", {
-  name: { type: String, required: true, trim: true },
+  name: { type: String, required: true, trim: true, unique: true },
   ID: {
     type: String,
     required: true,
@@ -34,6 +34,10 @@ const Person = mongoose.model("Person", {
   status: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Status",
+  },
+  education_year: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Education_Year",
   },
   father: {
     type: String,

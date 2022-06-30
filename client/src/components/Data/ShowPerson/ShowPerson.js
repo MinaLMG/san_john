@@ -1,16 +1,17 @@
 import classes from "./ShowPerson.module.css";
-import classes2 from "./AddPerson.module.css";
+import classes2 from "../AddPerson.module.css";
 import React, { useEffect, useState } from "react";
-import back from "../../assets/icons/arrow.png";
+import back from "../../../assets/icons/arrow.png";
 import { Autocomplete, TextField } from "@mui/material";
-import instance from "../axios";
+import instance from "../../axios";
+import ShowPersonItem from "./ShowPersonItem";
 export default function ShowPerson(props) {
   const [persons, setPersons] = useState([]);
   const getPersons = async () => {
     try {
       const res = await instance.get("/Persons");
       //   console.log(res);
-      console.log(res.data);
+      // console.log(res.data);
       setPersons(res.data);
     } catch (error) {
       console.log(error);
@@ -78,7 +79,11 @@ export default function ShowPerson(props) {
           { id: 4, name: "di" },
         ]}
       ></Auto> */}
-      <ShowPersonItem></ShowPersonItem>
+      {chosen != null && (
+        <ShowPersonItem
+          person={persons.find((x) => x._id === chosen.id)}
+        ></ShowPersonItem>
+      )}
     </React.Fragment>
   );
 }

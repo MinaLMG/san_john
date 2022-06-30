@@ -1,8 +1,7 @@
 import { Fragment, useState } from "react";
-import PrettySelect from "../general/PrettySelect";
 import AddPerson from "./AddPerson";
 import classes from "./PData.module.css";
-import ShowPerson from "./ShowPerson";
+import ShowPerson from "./ShowPerson/ShowPerson";
 export default function PData(props) {
   const [chosen, setChosen] = useState("Show");
   return (
