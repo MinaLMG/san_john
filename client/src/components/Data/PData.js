@@ -30,7 +30,7 @@ export default function PData(props) {
                 }}
                 className={classes1.button}
               >
-                اضافة خادم
+                إضافة خادم
               </button>
             </div>
             <div className={classes.area}>
