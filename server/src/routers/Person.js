@@ -126,14 +126,46 @@ router.get("/Persons", async (req, res) => {
 
 router.patch("/Persons/:id", async (req, res) => {
   const team_to_get = req.body.team;
+  const status_to_get = req.body.status;
+  const role_to_get = req.body.role;
+  const education_year_to_get = req.body.education_year;
+  // console.log("starting");
   if (team_to_get) {
     try {
       const team = await Team.findById(team_to_get);
       if (!team) return res.status(400).send({ error: "no team exists" });
     } catch (e) {
-      return res.status(400).send({ error: "Invalid updates!" });
+      return res.status(400).send({ error: "Invalid id for team!" });
     }
   }
+
+  if (status_to_get) {
+    try {
+      const status = await Status.findById(status_to_get);
+      if (!status) return res.status(400).send({ error: "no status exists" });
+    } catch (e) {
+      return res.status(400).send({ error: "Invalid  id for status!" });
+    }
+  }
+
+  if (role_to_get) {
+    try {
+      const role = await Role.findById(role_to_get);
+      if (!role) return res.status(400).send({ error: "no role exists" });
+    } catch (e) {
+      return res.status(400).send({ error: "Invalid  id for role!" });
+    }
+  }
+  if (education_year_to_get) {
+    try {
+      const e_y = await Education_Year.findById(education_year_to_get);
+      if (!e_y)
+        return res.status(400).send({ error: "no education year exists" });
+    } catch (e) {
+      return res.status(400).send({ error: "Invalid  id for education year!" });
+    }
+  }
+
   // if (person.team) {
   //   const team = Team.findById(person.team);
   //   person.team = team;
@@ -152,7 +184,30 @@ router.patch("/Persons/:id", async (req, res) => {
   // }
   const updates = Object.keys(req.body);
   // TODO:detrmine what to update
-  const allowedUpdates = ["team", "name", "education_year"];
+  const allowedUpdates = [
+    "team",
+    "name",
+    "education_year",
+    "birth_date",
+    "role",
+    "status",
+    "father",
+    "bapitization_father",
+    "bapitization_date",
+    "bapitization_church",
+    "address",
+    "email",
+    "facebook",
+    "father_job",
+    "father_phone_number",
+    "mother_job",
+    "mother_phone_number",
+    "prep_date_entered",
+    "prep_date_graduated",
+    "serv_date_entered",
+    "serv_date_graduated",
+    "ID",
+  ];
   const isValidOperation = updates.every((update) =>
     allowedUpdates.includes(update)
   );
@@ -160,7 +215,7 @@ router.patch("/Persons/:id", async (req, res) => {
   if (!isValidOperation) {
     return res.status(400).send({ error: "Invalid updates!" });
   }
-
+  console.log(req.params);
   try {
     const person = await Person.findByIdAndUpdate(req.params.id, req.body, {
       new: true,

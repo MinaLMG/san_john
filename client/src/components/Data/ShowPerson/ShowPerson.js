@@ -5,6 +5,7 @@ import back from "../../../assets/icons/arrow.png";
 import { Autocomplete, TextField } from "@mui/material";
 import instance from "../../axios";
 import ShowPersonItem from "./ShowPersonItem";
+import AddPerson from "../AddPerson";
 export default function ShowPerson(props) {
   const [persons, setPersons] = useState([]);
   const getPersons = async () => {
@@ -24,7 +25,9 @@ export default function ShowPerson(props) {
   console.log(chosen);
 
   async function getPerson() {
-    let person = persons.find((x) => x._id === chosen.id);
+    let person = JSON.parse(
+      JSON.stringify(persons.find((x) => x._id === chosen.id))
+    );
     // setPerson(props.person);
     if (person.team) {
       const res = await instance.get(`/Team/${person.team}`);
@@ -51,21 +54,24 @@ export default function ShowPerson(props) {
     console.log(person);
     return person;
   }
+  const [edit, setEdit] = useState(undefined);
   return (
     <React.Fragment>
-      <div className={classes2.actions}>
-        <h3> الخدام المسجلون : </h3>
-        <h3 className={classes2.h3} onClick={props.onGoBack}>
-          back
-          <img
-            className={classes2.img}
-            src={back}
-            onClick={props.onGoBack}
-          ></img>
-        </h3>
-      </div>
-      <div className={classes.auto}>
-        {/* <Autocomplete
+      {!edit && (
+        <React.Fragment>
+          <div className={classes2.actions}>
+            <h3> الخدام المسجلون : </h3>
+            <h3 className={classes2.h3} onClick={props.onGoBack}>
+              back
+              <img
+                className={classes2.img}
+                src={back}
+                onClick={props.onGoBack}
+              ></img>
+            </h3>
+          </div>
+          <div className={classes.auto}>
+            {/* <Autocomplete
           disablePortal
           id="combo-box-demo"
           options={persons.map((person) => {
@@ -80,27 +86,27 @@ export default function ShowPerson(props) {
             setChosen(newVal);
           }}
         /> */}
-        <Autocomplete
-          disablePortal
-          id="combo-box-demo"
-          options={persons.map((person) => {
-            return { id: person._id, name: person.name };
-          })}
-          getOptionLabel={(option) => option.name}
-          // getOptionSelected={(option, value) => option.id === value.id}
-          isOptionEqualToValue={(option, value) => option.id === value.id}
-          sx={{ width: "50%" }}
-          renderInput={(params) => (
-            <TextField {...params} label="اسم الخادم"></TextField>
-          )}
-          value={chosen}
-          onChange={(e, newVal) => {
-            setChosen(newVal);
-          }}
-        />
-      </div>
-      {/* <MuiAutoComplete options={["ko", "mo", "do", "va"]}></MuiAutoComplete> */}
-      {/* <Auto
+            <Autocomplete
+              disablePortal
+              id="combo-box-demo"
+              options={persons.map((person) => {
+                return { id: person._id, name: person.name };
+              })}
+              getOptionLabel={(option) => option.name}
+              // getOptionSelected={(option, value) => option.id === value.id}
+              isOptionEqualToValue={(option, value) => option.id === value.id}
+              sx={{ width: "50%" }}
+              renderInput={(params) => (
+                <TextField {...params} label="اسم الخادم"></TextField>
+              )}
+              value={chosen}
+              onChange={(e, newVal) => {
+                setChosen(newVal);
+              }}
+            />
+          </div>
+          {/* <MuiAutoComplete options={["ko", "mo", "do", "va"]}></MuiAutoComplete> */}
+          {/* <Auto
         data={[
           { id: 1, name: "ko" },
           { id: 2, name: "me" },
@@ -108,10 +114,48 @@ export default function ShowPerson(props) {
           { id: 4, name: "di" },
         ]}
       ></Auto> */}
-      {chosen != null && (
-        <ShowPersonItem
+          {chosen != null && (
+            <React.Fragment>
+              <ShowPersonItem
+                person={
+                  chosen && persons
+                    ? persons.find((x) => x._id === chosen.id)
+                    : null
+                }
+              ></ShowPersonItem>
+              <div className={classes2.final}>
+                <button
+                  className={classes2.button}
+                  disabled={false}
+                  onClick={() => {
+                    setEdit(true);
+                  }}
+                >
+                  تعديل الخادم
+                </button>
+                {/* {addingError && (
+          <span className={classes2.error}>
+            فيه حاجة غلط .. راجع البيانات:D .. ممكن الاسم او الرقم القومى متكرر
+          </span>
+        )} */}
+              </div>
+            </React.Fragment>
+          )}
+        </React.Fragment>
+      )}
+      {edit && (
+        <AddPerson
+          onGoBack={() => {
+            setEdit(undefined);
+          }}
+          onEdit={async (id, name) => {
+            setEdit(undefined);
+            await getPersons();
+            setChosen({ id: id, name: name });
+          }}
+          edit={true}
           person={chosen ? persons.find((x) => x._id === chosen.id) : null}
-        ></ShowPersonItem>
+        ></AddPerson>
       )}
     </React.Fragment>
   );

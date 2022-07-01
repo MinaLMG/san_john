@@ -15,7 +15,7 @@ export default function PrettySelect(props) {
     <React.Fragment>
       <div className={classes.reset} onClick={reset}></div>
       <select
-        className={`form-select ${classes.width}${
+        className={` ${classes["form-select"]} ${classes.width}${
           props.className ? props.className : ""
         } ${props.red ? classes.red : ""}`}
         aria-label="Default select example"

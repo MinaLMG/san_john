@@ -6,7 +6,7 @@ export default function DateGet(props) {
       return year + 1970;
     })
   );
-  const [c_year, setC_year] = useState(undefined);
+  const [c_year, setC_year] = useState(props.c_year ? props.c_year : undefined);
   function yearChangeHandler(e) {
     let temp = +e.target.value;
     setC_year(temp);
@@ -24,7 +24,9 @@ export default function DateGet(props) {
       return month + 1;
     })
   );
-  const [c_month, setC_month] = useState(undefined);
+  const [c_month, setC_month] = useState(
+    props.c_month ? props.c_month : undefined
+  );
   function monthChangeHandler(e) {
     let temp = +e.target.value;
     setC_month(temp);
@@ -46,7 +48,7 @@ export default function DateGet(props) {
       return day + 1;
     })
   );
-  const [c_day, setC_day] = useState(undefined);
+  const [c_day, setC_day] = useState(props.c_day ? props.c_day : undefined);
   function dayChangeHandler(e) {
     let temp = +e.target.value;
     setC_day(+e.target.value);
@@ -73,7 +75,11 @@ export default function DateGet(props) {
           year
         </option>
         {years.map((year) => {
-          return <option value={year}>{year}</option>;
+          return (
+            <option value={year} selected={c_year === year}>
+              {year}
+            </option>
+          );
         })}
       </select>
 
@@ -86,7 +92,11 @@ export default function DateGet(props) {
           month
         </option>
         {months.map((month) => {
-          return <option value={month}>{month}</option>;
+          return (
+            <option value={month} selected={c_month === month}>
+              {month}
+            </option>
+          );
         })}
       </select>
       <select
@@ -107,7 +117,11 @@ export default function DateGet(props) {
                 ([2].includes(c_month) && c_year % 4 == 0 && day < 30) ||
                 ([2].includes(c_month) && c_year % 4 !== 0 && day < 29)
               )
-                return <option value={day}>{day}</option>;
+                return (
+                  <option value={day} selected={c_day === day}>
+                    {day}
+                  </option>
+                );
             }
           })}
       </select>

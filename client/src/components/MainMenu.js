@@ -8,7 +8,7 @@ import Basic from "./Basic/Basic";
 import MainMenuItem from "./MainMenuItem";
 import logo from "../assets/logo.jpeg";
 export default function MainMenu() {
-  const [chosen, setChosen] = useState(undefined);
+  const [chosen, setChosen] = useState("data");
   function changeChosen(val) {
     setChosen(val);
   }

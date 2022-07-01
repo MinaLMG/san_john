@@ -104,7 +104,9 @@ export default function AddPerson(props) {
     getFathers();
   }, []);
 
-  const [person, setPerson] = useState({ name: "", ID: "" });
+  const [person, setPerson] = useState(
+    props.edit ? props.person : { name: "", ID: "" }
+  );
   const [name_error, setName_error] = useState(false);
   const [birth_date_error, setBirth_date_error] = useState(false);
   const [educ_year_error, setEduc_year_error] = useState(false);
@@ -123,8 +125,16 @@ export default function AddPerson(props) {
   const [facebook_error, setFacebook_error] = useState(false);
   const [father_job_error, setFather_job_error] = useState(false);
   const [father_phone_error, setFather_phone_error] = useState(false);
+  const [father_phone_number, setFather_phone_number] = useState(
+    props.edit
+      ? person.father_phone_number
+        ? person.father_phone_number
+        : ""
+      : ""
+  );
   const [mother_job_error, setMother_job_error] = useState(false);
   const [ID_error, setID_error] = useState(false);
+  const [ID, setID] = useState(props.edit ? person.ID : "");
   const [serv_date_entered_error, setServ_date_entered_error] = useState(false);
   const [serv_date_graduated_error, setServ_date_graduated_error] =
     useState(false);
@@ -134,7 +144,7 @@ export default function AddPerson(props) {
   const [status_error, setStatus_error] = useState(false);
   const [team_error, setTeam_error] = useState(false);
   const [role_error, setRole_error] = useState(false);
-  const [disableButton, setDisableButton] = useState(true);
+  const [disableButton, setDisableButton] = useState(props.edit ? false : true);
   const [duplicatedID, setDuplicatedID] = useState(false);
   const [addingError, setAddingError] = useState(false);
   const add_person = async () => {
@@ -158,10 +168,30 @@ export default function AddPerson(props) {
       // }
     }
   };
+  const edit_person = async () => {
+    try {
+      console.log(person);
+      let to_send = JSON.parse(JSON.stringify(person));
+      delete to_send["__v"];
+      let id_to_send = to_send["_id"];
+      delete to_send["_id"];
+      console.log(to_send);
+      const res = await instance.patch(`/Persons/${id_to_send}`, to_send);
+      //   console.log(res);
+      console.log(res.data);
+      props.onEdit(id_to_send, to_send["name"]);
+    } catch (error) {
+      console.log(error);
+      setAddingError(true);
+      setTimeout(() => {
+        setAddingError(false);
+      }, 3000);
+    }
+  };
   return (
     <React.Fragment>
       <div className={classes.actions}>
-        <h3> اضافة خادم جديد : </h3>
+        <h3> {props.edit ? "تعديل بيانات الخادم :" : "  اضافة خادم جديد :"}</h3>
         <h3 className={classes.h3} onClick={props.onGoBack}>
           back
           <img
@@ -180,7 +210,7 @@ export default function AddPerson(props) {
             type={"text"}
             width={"100%"}
             onChange={(e) => {
-              const val = e.target.value.trim();
+              const val = e.target.value;
               if (val == "") {
                 setName_error(true);
                 setDisableButton(true);
@@ -195,6 +225,7 @@ export default function AddPerson(props) {
                 });
               }
             }}
+            value={props.edit ? person.name : person.name ? person.name : ""}
             red={name_error}
           ></InputWithLabel>
         </div>
@@ -219,6 +250,22 @@ export default function AddPerson(props) {
                   });
                 }
               }}
+              edit={props.edit}
+              c_year={
+                person.birth_date && props.edit
+                  ? new Date(person.birth_date).getFullYear()
+                  : undefined
+              }
+              c_month={
+                person.birth_date && props.edit
+                  ? new Date(person.birth_date).getMonth() + 1
+                  : undefined
+              }
+              c_day={
+                person.birth_date && props.edit
+                  ? new Date(person.birth_date).getDate()
+                  : undefined
+              }
             ></DateGet>
           </div>
         </div>
@@ -276,7 +323,7 @@ export default function AddPerson(props) {
             type={"text"}
             width={"100%"}
             onChange={(e) => {
-              const val = e.target.value.trim();
+              const val = e.target.value;
               if (val == "=") {
                 setFather_error(true);
                 setPerson((prev) => {
@@ -293,6 +340,9 @@ export default function AddPerson(props) {
             red={false}
             label="اب الاعتراف"
             placeHolder="اب الاعتراف"
+            value={
+              props.edit ? person.father : person.father ? person.father : ""
+            }
           ></InputWithLabel>
         </div>
         <div className={classes["data-element"]}>
@@ -302,7 +352,7 @@ export default function AddPerson(props) {
             type={"text"}
             width={"100%"}
             onChange={(e) => {
-              const val = e.target.value.trim();
+              const val = e.target.value;
               if (val == "") {
                 setBapitization_father_error(true);
                 setPerson((prev) => {
@@ -317,6 +367,13 @@ export default function AddPerson(props) {
               }
             }}
             red={false}
+            value={
+              props.edit
+                ? person.bapitization_father
+                : person.bapitization_father
+                ? person.bapitization_father
+                : ""
+            }
           ></InputWithLabel>
         </div>
         <div className={classes["data-element"]}>
@@ -326,7 +383,7 @@ export default function AddPerson(props) {
             type={"text"}
             width={"100%"}
             onChange={(e) => {
-              const val = e.target.value.trim();
+              const val = e.target.value;
               if (val == "") {
                 setBapitization_church_error(true);
                 setPerson((prev) => {
@@ -341,6 +398,13 @@ export default function AddPerson(props) {
               }
             }}
             red={false}
+            value={
+              props.edit
+                ? person.bapitization_church
+                : person.bapitization_church
+                ? person.bapitization_church
+                : ""
+            }
           ></InputWithLabel>
         </div>
         <div className={classes["data-element"]}>
@@ -364,6 +428,22 @@ export default function AddPerson(props) {
                   });
                 }
               }}
+              edit={props.edit}
+              c_year={
+                person.birth_date && props.edit
+                  ? new Date(person.bapitization_date).getFullYear()
+                  : undefined
+              }
+              c_month={
+                person.birth_date && props.edit
+                  ? new Date(person.bapitization_date).getMonth() + 1
+                  : undefined
+              }
+              c_day={
+                person.birth_date && props.edit
+                  ? new Date(person.bapitization_date).getDate()
+                  : undefined
+              }
             ></DateGet>
           </div>
         </div>
@@ -375,7 +455,7 @@ export default function AddPerson(props) {
             type={"text"}
             width={"100%"}
             onChange={(e) => {
-              const val = e.target.value.trim();
+              const val = e.target.value;
               if (val == "") {
                 setAddress_error(true);
                 setPerson((prev) => {
@@ -390,6 +470,9 @@ export default function AddPerson(props) {
               }
             }}
             red={false}
+            value={
+              props.edit ? person.address : person.address ? person.address : ""
+            }
           ></InputWithLabel>
         </div>
         <div className={classes["data-element"]}>
@@ -399,9 +482,10 @@ export default function AddPerson(props) {
             type={"text"}
             width={"100%"}
             onChange={(e) => {
-              const val = e.target.value.trim();
+              const val = e.target.value;
               if (val.trim().length == 0) {
                 setPhone_error(false);
+                setPhone(val);
                 setPhone("");
               } else if (
                 val[0] !== "0" ||
@@ -410,13 +494,14 @@ export default function AddPerson(props) {
                 !/^[0-9]+$/.test(val)
               ) {
                 setPhone_error(true);
-                setPhone("");
+                setPhone(val);
               } else {
                 setPhone_error(false);
                 setPhone(val);
               }
             }}
             red={phone_error}
+            value={props.edit ? phone : phone ? phone : ""}
           ></InputWithLabel>
         </div>
 
@@ -427,7 +512,7 @@ export default function AddPerson(props) {
             type={"text"}
             width={"100%"}
             onChange={(e) => {
-              const val = e.target.value.trim();
+              const val = e.target.value;
               if (val == "") {
                 setEmail_error(true);
                 setPerson((prev) => {
@@ -442,6 +527,7 @@ export default function AddPerson(props) {
               }
             }}
             red={false}
+            value={props.edit ? person.email : person.email ? person.email : ""}
           ></InputWithLabel>
         </div>
 
@@ -452,7 +538,7 @@ export default function AddPerson(props) {
             type={"text"}
             width={"100%"}
             onChange={(e) => {
-              const val = e.target.value.trim();
+              const val = e.target.value;
               if (val == "") {
                 setFacebook_error(true);
                 setPerson((prev) => {
@@ -467,6 +553,13 @@ export default function AddPerson(props) {
               }
             }}
             red={false}
+            value={
+              props.edit
+                ? person.facebook
+                : person.facebook
+                ? person.facebook
+                : ""
+            }
           ></InputWithLabel>
         </div>
 
@@ -477,7 +570,7 @@ export default function AddPerson(props) {
             type={"text"}
             width={"100%"}
             onChange={(e) => {
-              const val = e.target.value.trim();
+              const val = e.target.value;
               if (val == "") {
                 setFather_job_error(true);
                 setPerson((prev) => {
@@ -492,6 +585,13 @@ export default function AddPerson(props) {
               }
             }}
             red={false}
+            value={
+              props.edit
+                ? person.father_job
+                : person.father_job
+                ? person.father_job
+                : ""
+            }
           ></InputWithLabel>
         </div>
         <div className={classes["data-element"]}>
@@ -501,9 +601,10 @@ export default function AddPerson(props) {
             type={"text"}
             width={"100%"}
             onChange={(e) => {
-              const val = e.target.value.trim();
+              const val = e.target.value;
               if (val.trim().length == 0) {
                 setFather_phone_error(false);
+                setFather_phone_number(val);
                 setPerson((prev) => {
                   delete prev["father_phone_number"];
                   return prev;
@@ -515,18 +616,21 @@ export default function AddPerson(props) {
                 !/^[0-9]+$/.test(val)
               ) {
                 setFather_phone_error(true);
+                setFather_phone_number(val);
                 setPerson((prev) => {
                   delete prev["father_phone_number"];
                   return prev;
                 });
               } else {
                 setFather_phone_error(false);
+                setFather_phone_number(val);
                 setPerson((prev) => {
                   return { ...prev, father_phone_number: val };
                 });
               }
             }}
             red={father_phone_error}
+            value={props.edit ? father_phone_number : father_phone_number}
           ></InputWithLabel>
         </div>
         <div className={classes["data-element"]}>
@@ -536,7 +640,7 @@ export default function AddPerson(props) {
             type={"text"}
             width={"100%"}
             onChange={(e) => {
-              const val = e.target.value.trim();
+              const val = e.target.value;
               if (val == "") {
                 setMother_job_error(true);
                 setPerson((prev) => {
@@ -551,6 +655,13 @@ export default function AddPerson(props) {
               }
             }}
             red={false}
+            value={
+              props.edit
+                ? person.mother_job
+                : person.mother_job
+                ? person.mother_job
+                : ""
+            }
           ></InputWithLabel>
         </div>
         <div className={classes["data-element"]}>
@@ -563,6 +674,7 @@ export default function AddPerson(props) {
               const val = e.target.value.trim();
               if (val == "" || val.length !== 14 || !/^[0-9]+$/.test(val)) {
                 setID_error(true);
+                setID(val);
                 if (person.name != "") setDisableButton(true);
 
                 setPerson((prev) => {
@@ -570,6 +682,8 @@ export default function AddPerson(props) {
                 });
               } else {
                 setID_error(false);
+                setID(val);
+
                 setDisableButton(false);
 
                 setPerson((prev) => {
@@ -578,6 +692,7 @@ export default function AddPerson(props) {
               }
             }}
             red={ID_error}
+            value={props.edit ? ID : ID}
           ></InputWithLabel>
         </div>
         <div className={classes["data-element"]}></div>
@@ -603,6 +718,22 @@ export default function AddPerson(props) {
                   });
                 }
               }}
+              edit={props.edit}
+              c_year={
+                person.birth_date && props.edit
+                  ? new Date(person.prep_date_entered).getFullYear()
+                  : undefined
+              }
+              c_month={
+                person.birth_date && props.edit
+                  ? new Date(person.prep_date_entered).getMonth() + 1
+                  : undefined
+              }
+              c_day={
+                person.birth_date && props.edit
+                  ? new Date(person.prep_date_entered).getDate()
+                  : undefined
+              }
             ></DateGet>
           </div>
         </div>
@@ -628,6 +759,22 @@ export default function AddPerson(props) {
                   });
                 }
               }}
+              edit={props.edit}
+              c_year={
+                person.birth_date && props.edit
+                  ? new Date(person.prep_date_graduated).getFullYear()
+                  : undefined
+              }
+              c_month={
+                person.birth_date && props.edit
+                  ? new Date(person.prep_date_graduated).getMonth() + 1
+                  : undefined
+              }
+              c_day={
+                person.birth_date && props.edit
+                  ? new Date(person.prep_date_graduated).getDate()
+                  : undefined
+              }
             ></DateGet>
           </div>
         </div>
@@ -654,6 +801,22 @@ export default function AddPerson(props) {
                   });
                 }
               }}
+              edit={props.edit}
+              c_year={
+                person.birth_date && props.edit
+                  ? new Date(person.serv_date_entered).getFullYear()
+                  : undefined
+              }
+              c_month={
+                person.birth_date && props.edit
+                  ? new Date(person.serv_date_entered).getMonth() + 1
+                  : undefined
+              }
+              c_day={
+                person.birth_date && props.edit
+                  ? new Date(person.serv_date_entered).getDate()
+                  : undefined
+              }
             ></DateGet>
           </div>
         </div>
@@ -679,6 +842,22 @@ export default function AddPerson(props) {
                   });
                 }
               }}
+              edit={props.edit}
+              c_year={
+                person.birth_date && props.edit
+                  ? new Date(person.serv_date_graduated).getFullYear()
+                  : undefined
+              }
+              c_month={
+                person.birth_date && props.edit
+                  ? new Date(person.serv_date_graduated).getMonth() + 1
+                  : undefined
+              }
+              c_day={
+                person.birth_date && props.edit
+                  ? new Date(person.serv_date_graduated).getDate()
+                  : undefined
+              }
             ></DateGet>
           </div>
         </div>
@@ -775,9 +954,9 @@ export default function AddPerson(props) {
         <button
           className={classes.button}
           disabled={disableButton}
-          onClick={add_person}
+          onClick={props.edit ? edit_person : add_person}
         >
-          اضافة الخادم
+          {props.edit ? "حفظ التعديلات" : " اضافة الخادم"}
         </button>
         {addingError && (
           <span className={classes.error}>

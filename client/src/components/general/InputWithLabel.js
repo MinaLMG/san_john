@@ -16,6 +16,7 @@ export default function InputWithLabel(props) {
         aria-describedby="emailHelp"
         placeholder={props.placeHolder}
         onChange={props.onChange}
+        value={props.value ? props.value : ""}
       />
     </div>
   );
