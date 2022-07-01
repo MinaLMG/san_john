@@ -157,11 +157,11 @@ export default function Basic(props) {
   return (
     <Fragment>
       <button onClick={props.onGoBack}> back</button>
-      <h1>scripts </h1>
+      {/* <h1>scripts </h1>
       <button onClick={createTeams}> create teams</button>
       <button onClick={createRoles}> create roles</button>
       <button onClick={create_e_y}> create education_years</button>
-      <button onClick={createStatus}> create status</button>
+      <button onClick={createStatus}> create status</button> */}
 
       <h1> الفرق </h1>
       {teams.length != 0 && (
