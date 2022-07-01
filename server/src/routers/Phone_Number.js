@@ -7,14 +7,15 @@ router.post("/Phone_Numbers", async (req, res) => {
   try {
     // console.log(req);
     const person_to_get = req.body.p_ID;
-    if (!person_to_get) res.status(400).send({ error: "not enough params" });
+    if (!person_to_get)
+      return res.status(400).send({ error: "not enough params" });
     const person = await Person.findById(req.body.p_ID);
     if (!person) {
-      res.status(400).send({ error: "no person exists" });
+      return res.status(400).send({ error: "no person exists" });
     }
     const phone_number = new Phone_Number(req.body);
     await phone_number.save();
-    res.status(201).send(phone_number);
+    return res.status(201).send(phone_number);
   } catch (e) {
     // console.log(e);
     res.status(400).send(e);
@@ -112,7 +113,7 @@ router.delete("/Phone_Numbers/:id", async (req, res) => {
     const phone_number = await Phone_Number.findByIdAndDelete(req.params.id);
 
     if (!phone_number) {
-      res.status(404).send();
+      return res.status(404).send();
     }
 
     res.send(phone_number);

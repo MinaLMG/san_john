@@ -151,7 +151,8 @@ export default function ShowPerson(props) {
           onEdit={async (id, name) => {
             setEdit(undefined);
             await getPersons();
-            setChosen({ id: id, name: name });
+            if (id) setChosen({ id: id, name: name });
+            else setChosen(null);
           }}
           edit={true}
           person={chosen ? persons.find((x) => x._id === chosen.id) : null}

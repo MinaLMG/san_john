@@ -200,6 +200,7 @@ router.patch("/Persons/:id", async (req, res) => {
     "facebook",
     "father_job",
     "father_phone_number",
+    "phone_number",
     "mother_job",
     "mother_phone_number",
     "prep_date_entered",

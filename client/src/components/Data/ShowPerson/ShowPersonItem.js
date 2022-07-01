@@ -121,7 +121,7 @@ export default function ShowPersonItem(props) {
         ></ShowPersonDataItem>
         <ShowPersonDataItem
           title="  رقم الموبايل :"
-          content={undefined}
+          content={person.phone_number ? person.phone_number : undefined}
         ></ShowPersonDataItem>{" "}
         <ShowPersonDataItem
           title=" الايميل :"

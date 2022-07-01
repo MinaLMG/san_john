@@ -74,7 +74,10 @@ const Person = mongoose.model("Person", {
     type: String,
     trim: true,
   },
-
+  phone_number: {
+    type: String,
+    trim: true,
+  },
   father_phone_number: {
     type: String,
     trim: true,

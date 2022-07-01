@@ -5,6 +5,7 @@ import InputWithLabel from "../general/InputWithLabel";
 import DateGet from "../general/DateGet";
 import PrettySelect from "../general/PrettySelect";
 import instance from "../axios";
+import Modal from "../general/Modal";
 export default function AddPerson(props) {
   const [teams, setTeams] = useState([]);
   const [teams_M, setTeams_M] = useState([]);
@@ -119,7 +120,9 @@ export default function AddPerson(props) {
   const [address_error, setAddress_error] = useState(false);
 
   const [phone_error, setPhone_error] = useState(false);
-  const [phone, setPhone] = useState("");
+  const [phone, setPhone] = useState(
+    props.edit ? (person.phone_number ? person.phone_number : "") : ""
+  );
 
   const [eamil_error, setEmail_error] = useState(false);
   const [facebook_error, setFacebook_error] = useState(false);
@@ -152,6 +155,13 @@ export default function AddPerson(props) {
       const res = await instance.post("/Persons", person);
       //   console.log(res);
       console.log(res.data);
+      // if (!phone_error && phone) {
+      //   const res2 = await instance.post("/Phone_Numbers", {
+      //     number: phone,
+      //     p_ID: person._id,
+      //   });
+      // }
+
       props.onGoBack();
     } catch (error) {
       console.log(error);
@@ -180,6 +190,23 @@ export default function AddPerson(props) {
       //   console.log(res);
       console.log(res.data);
       props.onEdit(id_to_send, to_send["name"]);
+    } catch (error) {
+      console.log(error);
+      setAddingError(true);
+      setTimeout(() => {
+        setAddingError(false);
+      }, 3000);
+    }
+  };
+  const [tryToDelete, setTryToDelete] = useState(false);
+  const delete_person = async () => {
+    try {
+      console.log(person);
+      let id_to_send = person["_id"];
+      const res = await instance.delete(`/Persons/${id_to_send}`);
+      //   console.log(res);
+      console.log(res.data);
+      props.onEdit(null);
     } catch (error) {
       console.log(error);
       setAddingError(true);
@@ -487,6 +514,10 @@ export default function AddPerson(props) {
                 setPhone_error(false);
                 setPhone(val);
                 setPhone("");
+                setPerson((prev) => {
+                  delete prev["phone_number"];
+                  return prev;
+                });
               } else if (
                 val[0] !== "0" ||
                 val[1] !== "1" ||
@@ -495,9 +526,16 @@ export default function AddPerson(props) {
               ) {
                 setPhone_error(true);
                 setPhone(val);
+                setPerson((prev) => {
+                  delete prev["phone_number"];
+                  return prev;
+                });
               } else {
                 setPhone_error(false);
                 setPhone(val);
+                setPerson((prev) => {
+                  return { ...prev, phone_number: val };
+                });
               }
             }}
             red={phone_error}
@@ -950,7 +988,11 @@ export default function AddPerson(props) {
         </div> */}
         {/* <hr className={classes.hr}></hr> */}
       </form>
-      <div className={classes.final}>
+      <div
+        className={`${classes.final} ${
+          props.edit ? classes["more-buttons"] : ""
+        }`}
+      >
         <button
           className={classes.button}
           disabled={disableButton}
@@ -962,6 +1004,33 @@ export default function AddPerson(props) {
           <span className={classes.error}>
             فيه حاجة غلط .. راجع البيانات:D .. ممكن الاسم او الرقم القومى متكرر
           </span>
+        )}
+        {props.edit && (
+          <button
+            className={classes.button}
+            disabled={disableButton}
+            onClick={() => {
+              setTryToDelete(true);
+            }}
+          >
+            حذف الخادم
+          </button>
+        )}
+        {tryToDelete && (
+          <Modal
+            onHide={() => {
+              setTryToDelete(false);
+            }}
+            data={{
+              header: "حذف الخادم ",
+              message:
+                "متأكد انك عاوز تحذفه ؟ لو مش عاوز دوس علامة الغلط او برة البلوك ده :D",
+              button: "أيوة",
+            }}
+            onOk={() => {
+              delete_person();
+            }}
+          ></Modal>
         )}
       </div>
       {/* {person.name}
