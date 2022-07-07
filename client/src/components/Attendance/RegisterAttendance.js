@@ -98,11 +98,14 @@ export default function RegisterAttendance(props) {
     console.log(error);
   }
   function handleScan(data) {
-    // console.log(data);
-    const person = persons.find((person) => {
-      return person.ID == data;
-    });
-    setChosen({ id: person._id, name: person.name });
+    try {
+      const person = persons.find((person) => {
+        return person.ID == data;
+      });
+      setChosen({ id: person._id, name: person.name });
+    } catch (error) {
+      setChosen(null);
+    }
   }
   return (
     <React.Fragment>
