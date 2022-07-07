@@ -6,9 +6,9 @@ router.post("/Roles", async (req, res) => {
   try {
     const role = new Role(req.body);
     await role.save();
-    res.status(201).send(role);
+    return res.status(201).send(role);
   } catch (e) {
-    res.status(400).send(e);
+    return res.status(400).send(e);
   }
 });
 

@@ -6,9 +6,9 @@ router.post("/Education_Years", async (req, res) => {
   try {
     const education_year = new Education_Year(req.body);
     await education_year.save();
-    res.status(201).send(education_year);
+    return res.status(201).send(education_year);
   } catch (e) {
-    res.status(400).send(e);
+    return res.status(400).send(e);
   }
 });
 
@@ -22,18 +22,18 @@ router.get("/Education_Year/:id", async (req, res) => {
       return res.status(404).send();
     }
 
-    res.send(education_year);
+    return res.send(education_year);
   } catch (e) {
-    res.status(500).send();
+    return res.status(500).send();
   }
 });
 
 router.get("/Education_Years", async (req, res) => {
   try {
     const education_years = await Education_Year.find({});
-    res.send(education_years);
+    return res.send(education_years);
   } catch (e) {
-    res.status(400).send();
+    return res.status(400).send();
   }
 });
 
@@ -62,9 +62,9 @@ router.patch("/Education_Years/:id", async (req, res) => {
       return res.status(404).send();
     }
 
-    res.send(education_year);
+    return res.send(education_year);
   } catch (e) {
-    res.status(400).send(e);
+    return res.status(400).send(e);
   }
 });
 
@@ -75,12 +75,12 @@ router.delete("/Education_Years/:id", async (req, res) => {
     );
 
     if (!education_year) {
-      res.status(404).send();
+      return res.status(404).send();
     }
 
-    res.send(education_year);
+    return res.send(education_year);
   } catch (e) {
-    res.status(500).send();
+    return res.status(500).send();
   }
 });
 

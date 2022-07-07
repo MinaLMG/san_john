@@ -1,22 +1,29 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import AddPerson from "./AddPerson";
 import classes from "./PData.module.css";
-import classes1 from "../MainMenuItem.module.css";
-import classes2 from "./AddPerson.module.css";
+import General from "../general/General.module.css";
 import back from "../../assets/icons/arrow.png";
 import ShowPerson from "./ShowPerson/ShowPerson";
 export default function PData(props) {
-  const [chosen, setChosen] = useState(undefined);
+  const [chosen, setChosen] = useState(
+    localStorage.getItem("PDataChosen")
+      ? localStorage.getItem("PDataChosen")
+      : undefined
+  );
+  useEffect(() => {
+    if (chosen != undefined) localStorage.setItem("PDataChosen", chosen);
+    else localStorage.removeItem("PDataChosen");
+  }, [chosen]);
   return (
-    <div className="container-width">
+    <React.Fragment>
       {chosen == undefined && (
         <React.Fragment>
-          <div className={classes2.actions}>
+          <div className={General.actions}>
             <h3> بيانات الخدام : </h3>
-            <h3 className={classes2.h3} onClick={props.onGoBack}>
+            <h3 className={General.h3} onClick={props.onGoBack}>
               back
               <img
-                className={classes2.img}
+                className={General.img}
                 src={back}
                 onClick={props.onGoBack}
               ></img>
@@ -28,7 +35,7 @@ export default function PData(props) {
                 onClick={() => {
                   setChosen("Add");
                 }}
-                className={classes1.button}
+                className={General["area-button"]}
               >
                 إضافة خادم
               </button>
@@ -38,7 +45,7 @@ export default function PData(props) {
                 onClick={() => {
                   setChosen("Show");
                 }}
-                className={classes1.button}
+                className={General["area-button"]}
               >
                 عرض الخدام
               </button>
@@ -61,6 +68,6 @@ export default function PData(props) {
           }}
         ></ShowPerson>
       )}
-    </div>
+    </React.Fragment>
   );
 }

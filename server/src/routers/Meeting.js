@@ -6,9 +6,9 @@ router.post("/Meetings", async (req, res) => {
   try {
     const meeting = new Meeting(req.body);
     await meeting.save();
-    res.status(201).send(meeting);
+    return res.status(201).send(meeting);
   } catch (e) {
-    res.status(400).send(e);
+    return res.status(400).send(e);
   }
 });
 
@@ -22,18 +22,20 @@ router.get("/Meeting/:id", async (req, res) => {
       return res.status(404).send();
     }
 
-    res.send(meeting);
+    return res.send(meeting);
   } catch (e) {
-    res.status(500).send();
+    return res.status(500).send();
   }
 });
 
 router.get("/Meetings", async (req, res) => {
   try {
-    const meetings = await Meeting.find({});
-    res.send(meetings);
+    const meetings = await Meeting.find({}).sort({ date: -1 });
+
+    // console.log(meetings);
+    return res.send(meetings);
   } catch (e) {
-    res.status(400).send();
+    return res.status(400).send();
   }
 });
 
@@ -58,9 +60,9 @@ router.patch("/Meetings/:id", async (req, res) => {
       return res.status(404).send();
     }
 
-    res.send(meeting);
+    return res.send(meeting);
   } catch (e) {
-    res.status(400).send(e);
+    return res.status(400).send(e);
   }
 });
 
@@ -69,12 +71,12 @@ router.delete("/Meetings/:id", async (req, res) => {
     const meeting = await Meeting.findByIdAndDelete(req.params.id);
 
     if (!meeting) {
-      res.status(404).send();
+      return res.status(404).send();
     }
 
-    res.send(meeting);
+    return res.send(meeting);
   } catch (e) {
-    res.status(500).send();
+    return res.status(500).send();
   }
 });
 

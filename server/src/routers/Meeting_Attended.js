@@ -28,9 +28,17 @@ router.post("/Meeting_Attendeds", async (req, res) => {
     }
     const meeting_attended = new Meeting_Attended(req.body);
     await meeting_attended.save();
-    res.status(201).send(meeting_attended);
+
+    return res.status(201).send({
+      m: meeting_attended,
+      attendance: {
+        date: meeting_attended.time_attended,
+        person: person,
+        _id: meeting_attended._id,
+      },
+    });
   } catch (e) {
-    res.status(400).send(e);
+    return res.status(400).send(e);
   }
 });
 
@@ -44,18 +52,43 @@ router.get("/Meeting_Attended/:id", async (req, res) => {
       return res.status(404).send();
     }
 
-    res.send(meeting_attended);
+    return res.send(meeting_attended);
   } catch (e) {
-    res.status(500).send();
+    return res.status(500).send();
+  }
+});
+
+router.get("/Meeting_Attendeds/Meeting/:id", async (req, res) => {
+  try {
+    const _id = req.params.id;
+    const meeting_attendeds = await Meeting_Attended.find({ m_ID: _id }).sort({
+      time_attended: -1,
+    });
+    if (!meeting_attendeds) {
+      return res.status(404).send();
+    }
+    let meeting_attendees = await Promise.all(
+      meeting_attendeds.map(async (x) => {
+        let p = await Person.findById(x.p_ID);
+        let d = new Date(x.time_attended);
+        let i = x._id;
+        return { person: p, date: d, _id: i };
+      })
+    );
+
+    console.log(meeting_attendees);
+    return res.send(meeting_attendees);
+  } catch (e) {
+    return res.status(500).send(e);
   }
 });
 
 router.get("/Meeting_Attendeds", async (req, res) => {
   try {
     const meeting_attendeds = await Meeting_Attended.find({});
-    res.send(meeting_attendeds);
+    return res.send(meeting_attendeds);
   } catch (e) {
-    res.status(400).send();
+    return res.status(400).send();
   }
 });
 
@@ -64,22 +97,22 @@ router.patch("/Meeting_Attendeds/:id", async (req, res) => {
   if (person) {
     try {
       const person = await Person.findById();
-      if (!person) res.status(400).send({ error: "no person exists" });
+      if (!person) return res.status(400).send({ error: "no person exists" });
     } catch {
-      res.status(400).send({ error: "no person exists" });
+      return res.status(400).send({ error: "no person exists" });
     }
   }
-  const meeting = req.body.team;
+  const meeting = req.body.m_ID;
   if (meeting) {
     try {
-      const meeting = await Team.findById();
-      if (!team) throw Error("no team exists");
+      const meeting = await Meeting.findById(meeting);
+      if (!team) throw Error("no meeting exists");
     } catch {
-      res.status(400).send({ error: "no team exists" });
+      return res.status(400).send({ error: "no team exists" });
     }
   }
   const updates = Object.keys(req.body);
-  const allowedUpdates = ["name"];
+  const allowedUpdates = ["m_ID", "p_ID", "time_attended  "];
   const isValidOperation = updates.every((update) =>
     allowedUpdates.includes(update)
   );
@@ -97,14 +130,15 @@ router.patch("/Meeting_Attendeds/:id", async (req, res) => {
         runValidators: true,
       }
     );
+    console.log(meeting_attended);
 
     if (!meeting_attended) {
       return res.status(404).send();
     }
 
-    res.send(meeting_attended);
+    return res.send(meeting_attended);
   } catch (e) {
-    res.status(400).send(e);
+    return res.status(400).send(e);
   }
 });
 
@@ -115,12 +149,12 @@ router.delete("/Meeting_Attendeds/:id", async (req, res) => {
     );
 
     if (!meeting_attended) {
-      res.status(404).send();
+      return res.status(404).send();
     }
 
-    res.send(meeting_attended);
+    return res.send(meeting_attended);
   } catch (e) {
-    res.status(500).send();
+    return res.status(500).send();
   }
 });
 

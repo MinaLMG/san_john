@@ -5,10 +5,10 @@ const Meeting = mongoose.model("Meeting", {
   date: {
     type: Date,
     required: true,
+    unique: true,
   },
   description: {
     type: String,
-    required: true,
     trim: true,
   },
   date_created: {

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import classes from "./AddPerson.module.css";
+import General from "../general/General.module.css";
 import back from "../../assets/icons/arrow.png";
 import InputWithLabel from "../general/InputWithLabel";
 import DateGet from "../general/DateGet";
@@ -217,20 +217,20 @@ export default function AddPerson(props) {
   };
   return (
     <React.Fragment>
-      <div className={classes.actions}>
+      <div className={General.actions}>
         <h3> {props.edit ? "تعديل بيانات الخادم :" : "  اضافة خادم جديد :"}</h3>
-        <h3 className={classes.h3} onClick={props.onGoBack}>
+        <h3 className={General.h3} onClick={props.onGoBack}>
           back
           <img
-            className={classes.img}
+            className={General.img}
             src={back}
             onClick={props.onGoBack}
           ></img>
         </h3>
       </div>
-      <form className={classes.form}>
-        {/* <div className={classes["data-element"]}></div> */}
-        <div className={classes["data-element"]}>
+      <form className={General.form}>
+        {/* <div className={General["data-element"]}></div> */}
+        <div className={General["data-element"]}>
           <InputWithLabel
             label={"الاسم *"}
             placeHolder={"اسم الخادم"}
@@ -256,9 +256,9 @@ export default function AddPerson(props) {
             red={name_error}
           ></InputWithLabel>
         </div>
-        <div className={classes["data-element"]}>
-          <div className={classes["element-container"]}>
-            <div className={classes["element-container-title"]}>
+        <div className={General["data-element"]}>
+          <div className={General["element-container"]}>
+            <div className={General["element-container-title"]}>
               تاريخ الميلاد
             </div>
             <DateGet
@@ -296,8 +296,8 @@ export default function AddPerson(props) {
             ></DateGet>
           </div>
         </div>
-        <div className={classes["data-element"]}>
-          <div className={classes["element-container"]}>
+        <div className={General["data-element"]}>
+          <div className={General["element-container"]}>
             <PrettySelect
               data={education_years_M}
               onChange={(e_y) => {
@@ -321,8 +321,8 @@ export default function AddPerson(props) {
             ></PrettySelect>
           </div>
         </div>
-        {/* <div className={classes["data-element"]}>
-          <div className={classes["element-container"]}>
+        {/* <div className={General["data-element"]}>
+          <div className={General["element-container"]}>
             <PrettySelect
               data={fathers_M}
               option="اب الاعتراف"
@@ -345,7 +345,7 @@ export default function AddPerson(props) {
             ></PrettySelect>
           </div>
         </div> */}
-        <div className={classes["data-element"]}>
+        <div className={General["data-element"]}>
           <InputWithLabel
             type={"text"}
             width={"100%"}
@@ -372,7 +372,7 @@ export default function AddPerson(props) {
             }
           ></InputWithLabel>
         </div>
-        <div className={classes["data-element"]}>
+        <div className={General["data-element"]}>
           <InputWithLabel
             label={"اب العماد"}
             placeHolder={"الكاهن الذى تمت على يده المعمودية"}
@@ -403,7 +403,7 @@ export default function AddPerson(props) {
             }
           ></InputWithLabel>
         </div>
-        <div className={classes["data-element"]}>
+        <div className={General["data-element"]}>
           <InputWithLabel
             label={"كنيسة المعمودية"}
             placeHolder={"كنيسة المعمودية"}
@@ -434,9 +434,9 @@ export default function AddPerson(props) {
             }
           ></InputWithLabel>
         </div>
-        <div className={classes["data-element"]}>
-          <div className={classes["element-container"]}>
-            <div className={classes["element-container-title"]}>
+        <div className={General["data-element"]}>
+          <div className={General["element-container"]}>
+            <div className={General["element-container-title"]}>
               تاريخ المعمودية
             </div>
             <DateGet
@@ -475,7 +475,7 @@ export default function AddPerson(props) {
           </div>
         </div>
 
-        <div className={classes["data-element"]}>
+        <div className={General["data-element"]}>
           <InputWithLabel
             label={"العنوان"}
             placeHolder={"العنوان"}
@@ -502,7 +502,7 @@ export default function AddPerson(props) {
             }
           ></InputWithLabel>
         </div>
-        <div className={classes["data-element"]}>
+        <div className={General["data-element"]}>
           <InputWithLabel
             label={"رقم الموبايل"}
             placeHolder={"رقم الموبايل"}
@@ -543,7 +543,7 @@ export default function AddPerson(props) {
           ></InputWithLabel>
         </div>
 
-        <div className={classes["data-element"]}>
+        <div className={General["data-element"]}>
           <InputWithLabel
             label={"الايميل (email)"}
             placeHolder={"الايميل (email)"}
@@ -569,7 +569,7 @@ export default function AddPerson(props) {
           ></InputWithLabel>
         </div>
 
-        <div className={classes["data-element"]}>
+        <div className={General["data-element"]}>
           <InputWithLabel
             label={"الفيسبوك (facebook)"}
             placeHolder={"الفيسبوك (facebook)"}
@@ -601,7 +601,7 @@ export default function AddPerson(props) {
           ></InputWithLabel>
         </div>
 
-        <div className={classes["data-element"]}>
+        <div className={General["data-element"]}>
           <InputWithLabel
             label={"عمل الوالد"}
             placeHolder={"عمل الوالد"}
@@ -632,7 +632,7 @@ export default function AddPerson(props) {
             }
           ></InputWithLabel>
         </div>
-        <div className={classes["data-element"]}>
+        <div className={General["data-element"]}>
           <InputWithLabel
             label={"رقم الوالد"}
             placeHolder={"رقم الوالد"}
@@ -671,7 +671,7 @@ export default function AddPerson(props) {
             value={props.edit ? father_phone_number : father_phone_number}
           ></InputWithLabel>
         </div>
-        <div className={classes["data-element"]}>
+        <div className={General["data-element"]}>
           <InputWithLabel
             label={"عمل الام"}
             placeHolder={"عمل الام"}
@@ -702,7 +702,7 @@ export default function AddPerson(props) {
             }
           ></InputWithLabel>
         </div>
-        <div className={classes["data-element"]}>
+        <div className={General["data-element"]}>
           <InputWithLabel
             label={"الرقم القومى *"}
             placeHolder={"الرقم القومى"}
@@ -733,11 +733,11 @@ export default function AddPerson(props) {
             value={props.edit ? ID : ID}
           ></InputWithLabel>
         </div>
-        <div className={classes["data-element"]}></div>
+        <div className={General["data-element"]}></div>
 
-        <div className={classes["data-element"]}>
-          <div className={classes["element-container"]}>
-            <div className={classes["element-container-title"]}>
+        <div className={General["data-element"]}>
+          <div className={General["element-container"]}>
+            <div className={General["element-container-title"]}>
               تاريخ الالتحاق باعداد خدام
             </div>
             <DateGet
@@ -775,10 +775,10 @@ export default function AddPerson(props) {
             ></DateGet>
           </div>
         </div>
-        {/* <hr className={classes.hr}></hr> */}
-        <div className={classes["data-element"]}>
-          <div className={classes["element-container"]}>
-            <div className={classes["element-container-title"]}>
+        {/* <hr className={General.hr}></hr> */}
+        <div className={General["data-element"]}>
+          <div className={General["element-container"]}>
+            <div className={General["element-container-title"]}>
               تاريخ التخرج من اعداد خدام
             </div>
             <DateGet
@@ -816,11 +816,11 @@ export default function AddPerson(props) {
             ></DateGet>
           </div>
         </div>
-        {/* <hr className={classes.hr}></hr> */}
+        {/* <hr className={General.hr}></hr> */}
 
-        <div className={classes["data-element"]}>
-          <div className={classes["element-container"]}>
-            <div className={classes["element-container-title"]}>
+        <div className={General["data-element"]}>
+          <div className={General["element-container"]}>
+            <div className={General["element-container-title"]}>
               تاريخ الالتحاق بالخدمة
             </div>
             <DateGet
@@ -858,10 +858,10 @@ export default function AddPerson(props) {
             ></DateGet>
           </div>
         </div>
-        {/* <hr className={classes.hr}></hr> */}
-        <div className={classes["data-element"]}>
-          <div className={classes["element-container"]}>
-            <div className={classes["element-container-title"]}>
+        {/* <hr className={General.hr}></hr> */}
+        <div className={General["data-element"]}>
+          <div className={General["element-container"]}>
+            <div className={General["element-container-title"]}>
               تاريخ التخرج من الخدمة
             </div>
             <DateGet
@@ -899,9 +899,9 @@ export default function AddPerson(props) {
             ></DateGet>
           </div>
         </div>
-        {/* <hr className={classes.hr}></hr> */}
-        <div className={classes["data-element"]}>
-          <div className={classes["element-container"]}>
+        {/* <hr className={General.hr}></hr> */}
+        <div className={General["data-element"]}>
+          <div className={General["element-container"]}>
             <PrettySelect
               data={teams_M}
               option="الفرقة"
@@ -924,8 +924,8 @@ export default function AddPerson(props) {
             ></PrettySelect>
           </div>
         </div>
-        <div className={classes["data-element"]}>
-          <div className={classes["element-container"]}>
+        <div className={General["data-element"]}>
+          <div className={General["element-container"]}>
             <PrettySelect
               data={roles_M}
               option="التخصص"
@@ -948,8 +948,8 @@ export default function AddPerson(props) {
             ></PrettySelect>
           </div>
         </div>
-        <div className={classes["data-element"]}>
-          <div className={classes["element-container"]}>
+        <div className={General["data-element"]}>
+          <div className={General["element-container"]}>
             <PrettySelect
               data={Status_M}
               option="الحالة"
@@ -972,13 +972,13 @@ export default function AddPerson(props) {
             ></PrettySelect>
           </div>
         </div>
-        <div className={classes["data-element"]}></div>
+        <div className={General["data-element"]}></div>
 
-        {/* <hr className={classes.hr}></hr> */}
+        {/* <hr className={General.hr}></hr> */}
 
-        {/* <hr className={classes.hr}></hr> */}
+        {/* <hr className={General.hr}></hr> */}
 
-        {/* <div className={classes["data-element"]}>
+        {/* <div className={General["data-element"]}>
           <InputWithLabel
             label={"رقم الام"}
             placeHolder={"رقم الام"}
@@ -986,28 +986,28 @@ export default function AddPerson(props) {
             width={"100%"}
           ></InputWithLabel>
         </div> */}
-        {/* <hr className={classes.hr}></hr> */}
+        {/* <hr className={General.hr}></hr> */}
       </form>
       <div
-        className={`${classes.final} ${
-          props.edit ? classes["more-buttons"] : ""
+        className={`${General.final} ${
+          props.edit ? General["more-buttons"] : ""
         }`}
       >
         <button
-          className={classes.button}
+          className={General.button}
           disabled={disableButton}
           onClick={props.edit ? edit_person : add_person}
         >
           {props.edit ? "حفظ التعديلات" : " اضافة الخادم"}
         </button>
         {addingError && (
-          <span className={classes.error}>
+          <span className={General.error}>
             فيه حاجة غلط .. راجع البيانات:D .. ممكن الاسم او الرقم القومى متكرر
           </span>
         )}
         {props.edit && (
           <button
-            className={classes.button}
+            className={General.button}
             disabled={disableButton}
             onClick={() => {
               setTryToDelete(true);

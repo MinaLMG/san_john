@@ -1,5 +1,5 @@
 import classes from "./ShowPerson.module.css";
-import classes2 from "../AddPerson.module.css";
+import General from "../../general/General.module.css";
 import React, { useEffect, useState } from "react";
 import back from "../../../assets/icons/arrow.png";
 import { Autocomplete, TextField } from "@mui/material";
@@ -59,33 +59,18 @@ export default function ShowPerson(props) {
     <React.Fragment>
       {!edit && (
         <React.Fragment>
-          <div className={classes2.actions}>
+          <div className={General.actions}>
             <h3> الخدام المسجلون : </h3>
-            <h3 className={classes2.h3} onClick={props.onGoBack}>
+            <h3 className={General.h3} onClick={props.onGoBack}>
               back
               <img
-                className={classes2.img}
+                className={General.img}
                 src={back}
                 onClick={props.onGoBack}
               ></img>
             </h3>
           </div>
-          <div className={classes.auto}>
-            {/* <Autocomplete
-          disablePortal
-          id="combo-box-demo"
-          options={persons.map((person) => {
-            return person.name;
-          })}
-          sx={{ width: "50%" }}
-          renderInput={(params) => (
-            <TextField {...params} label="اسم الخادم" sep></TextField>
-          )}
-          value={chosen}
-          onChange={(e, newVal) => {
-            setChosen(newVal);
-          }}
-        /> */}
+          <div className={General.auto}>
             <Autocomplete
               disablePortal
               id="combo-box-demo"
@@ -123,9 +108,9 @@ export default function ShowPerson(props) {
                     : null
                 }
               ></ShowPersonItem>
-              <div className={classes2.final}>
+              <div className={General.final}>
                 <button
-                  className={classes2.button}
+                  className={General.button}
                   disabled={false}
                   onClick={() => {
                     setEdit(true);
@@ -134,7 +119,7 @@ export default function ShowPerson(props) {
                   تعديل الخادم
                 </button>
                 {/* {addingError && (
-          <span className={classes2.error}>
+          <span className={General.error}>
             فيه حاجة غلط .. راجع البيانات:D .. ممكن الاسم او الرقم القومى متكرر
           </span>
         )} */}

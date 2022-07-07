@@ -6,6 +6,7 @@
 }
 .label{
     margin-left: 5px;
+    margin-bottom: 0;
 }
 .input{
     display: inline-block; 

@@ -84,9 +84,9 @@ router.get("/Person/:id", async (req, res) => {
     //   person.edu_y = edu_y;
     // }
 
-    res.send(person);
+    return res.send(person);
   } catch (e) {
-    res.status(500).send();
+    return res.status(500).send();
   }
 });
 
@@ -118,9 +118,9 @@ router.get("/Persons", async (req, res) => {
     //   console.log(person);
     //   return person;
     // });
-    res.send(persons);
+    return res.send(persons);
   } catch (e) {
-    res.status(400).send();
+    return res.status(400).send();
   }
 });
 
@@ -227,9 +227,9 @@ router.patch("/Persons/:id", async (req, res) => {
       return res.status(404).send();
     }
 
-    res.send(person);
+    return res.send(person);
   } catch (e) {
-    res.status(400).send(e);
+    return res.status(400).send(e);
   }
 });
 
@@ -238,12 +238,12 @@ router.delete("/Persons/:id", async (req, res) => {
     const person = await Person.findByIdAndDelete(req.params.id);
 
     if (!person) {
-      res.status(404).send();
+      return res.status(404).send();
     }
 
-    res.send(person);
+    return res.send(person);
   } catch (e) {
-    res.status(500).send();
+    return res.status(500).send();
   }
 });
 

@@ -22,7 +22,7 @@ export default class Test extends Component {
     return (
       <div>
         <BarcodeReader onError={this.handleError} onScan={this.handleScan} />
-        <p>{this.state.result}</p>
+        {/* <p>{this.state.result}</p> */}
       </div>
     );
   }
