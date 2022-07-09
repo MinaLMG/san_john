@@ -63,11 +63,22 @@ export default function ServantsReport(props) {
     status: true,
     education_year: true,
   });
-  //   console.log("options" + options["الاسم"]);
+  useEffect(() => {
+    setPerPage(1);
+    setUpdate((prev) => prev + 1);
+  }, [
+    options.phone_number,
+    options.father,
+    options.birth_date,
+    options.team,
+    options.role,
+    options.status,
+    options.education_year,
+  ]);
   const [update, setUpdate] = useState(1);
   const [personsToReport, setPersonsToReport] = useState([]);
   const [showReport, setShowReport] = useState(false);
-  const perPage = 1;
+  const [perPage, setPerPage] = useState(1);
   const perTable = 42;
   return (
     <Fragment>
@@ -379,6 +390,9 @@ export default function ServantsReport(props) {
                       showStatus={options.status}
                       showBirth_date={options.birth_date}
                       perPage={perPage}
+                      changePerPage={(val) => {
+                        setPerPage(val);
+                      }}
                       perTable={perTable}
                     ></Report>
                   </React.Fragment>

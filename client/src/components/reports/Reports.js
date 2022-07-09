@@ -131,7 +131,7 @@ export default function Reports(props) {
     });
   }, [education_years]);
   const perTable = 42;
-  const perPage = 1;
+  const [perPage, setPerPage] = useState(1);
 
   const [showReport, setShowReport] = useState(false);
   const [chosen, setChosen] = useState(undefined);

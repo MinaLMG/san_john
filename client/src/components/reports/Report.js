@@ -34,16 +34,16 @@ export default function Report(props) {
     return day + "/" + month + "/" + year;
   }
   const [perPage, setPerPage] = useState(1);
-  const ref = useRef(null);
+  const ref = useRef();
   useEffect(() => {
-    // console.log("width", ref.current ? ref.current.offsetWidth : 0);
     if (ref.current) {
       let cm = 37.795275591;
       let cms = ref.current.offsetWidth / cm;
       let floored = Math.floor((0.95 * 28) / cms);
       setPerPage(floored);
+      props.changePerPage(floored);
     }
-  }, [ref.current, props]);
+  }, [ref.current, props.people]);
   return (
     <div className={classes.report}>
       <header className={classes.header}>
@@ -65,7 +65,10 @@ export default function Report(props) {
                 key={index}
               >
                 {tablePersons.length != 0 ? (
-                  <table className={classes.table} ref={index == 0 ? ref : ""}>
+                  <table
+                    className={classes.table}
+                    ref={index == 0 ? ref : undefined}
+                  >
                     <thead>
                       <tr>
                         {props.showName && <th>الاسم</th>}
