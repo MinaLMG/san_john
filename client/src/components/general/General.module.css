@@ -44,6 +44,16 @@
     max-width:95%
     }
 }
+.data-element-small{
+    margin: 5px 0;
+    width:22.5%;
+}
+@media(max-width:950px){
+    .data-element-small{
+    width:17.5rem;
+    max-width:95%
+    }
+}
 .final{
     display: flex;
     align-content: center;
@@ -93,4 +103,16 @@ margin: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+.print-button{
+    padding: 10px;
+    border:1px solid #ccc ;
+    color: beige;
+    background-color: var(--dark-red);
+    border-radius: 9999px;
+    opacity: 0.8;
+    margin-bottom: 15px;
+}
+.print-button:hover{
+    opacity: 1;
 }

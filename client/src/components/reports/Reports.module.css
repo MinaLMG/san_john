@@ -1,0 +1,41 @@
+.print-button{
+    padding: 10px;
+    border:1px solid #ccc ;
+    color: beige;
+    background-color: var(--dark-red);
+    border-radius: 9999px;
+    opacity: 0.8;
+}
+.print-button:hover{
+    opacity: 1;
+}
+.reports{
+    display: flex;
+}
+.report{
+    padding: 0 0 10px 10px;
+    border-bottom: 1px solid#ccc;
+    border-left: 1px solid#ccc;
+}
+.report-header{
+    font-size: 25px;
+    margin: 5px 10px;
+}
+.birth-date-container{
+    display: flex;
+    align-items: center;
+}
+.birth-date{
+    display: flex;
+    align-content: center;
+    justify-content:space-between;
+    align-items: center;
+    width: 50%;
+    margin-right: 15px;
+}
+.area{
+    height:20vh;
+    display :flex;
+    justify-content: center;
+    align-items: center;
+}

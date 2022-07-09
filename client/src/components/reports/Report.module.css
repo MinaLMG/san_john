@@ -1,0 +1,77 @@
+.report{
+  height: 40.429cm;
+  width: 28cm;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  justify-content: space-between;
+  direction: rtl;
+}
+*{
+    direction: rtl;
+}
+.header{
+    height: 10%;
+    display: flex;
+    flex-direction: row;
+    background-color: #b3d7ff;
+    align-content: center;
+    justify-content: flex-start;
+    align-items: center;
+}
+.header-content{
+   flex-grow: 1;
+   text-align: center;
+   font-size: 30px;
+}
+.header-date{
+    direction: ltr;
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-bottom: auto;
+    font-size: 20px;
+}
+.header-image{
+    height: 90%;
+    margin-right: 10px;
+}
+.body{
+    padding: 30px 0;
+    flex-grow: 1;
+    display: flex;
+    justify-content: flex-start;
+}
+.table-container{
+display: flex;
+justify-content: center;
+}
+.table{
+    all: unset;
+    flex-grow:0 ;
+    border-collapse:collapse ;
+    max-width: 95%;
+}
+.table tr:nth-of-type(even){
+    background-color: #dee2e6;
+}
+.table tr:nth-of-type(odd){
+    background-color:transparent;
+    
+}
+.table th{
+    border: 3px solid #ccc;
+    padding: 2px;
+    text-align: center;
+}
+.table td{
+    border: 1px solid #ccc;
+    padding: 2px;
+    text-align: center;
+}
+.footer{
+    height: 2%;
+    display: flex;
+    flex-flow: row;
+    padding-right: 20px;
+}
