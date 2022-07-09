@@ -108,20 +108,18 @@ export default function Basic(props) {
   }, []);
 
   async function createTeams() {
-    // const Teams = [
-    //   { name: "الملايكة" },
-    //   { name: "baby class" },
-    //   { name: "kg1" },
-    //   { name: "kg2" },
-    //   { name: "الاول الابتدائى" },
-    //   { name: "الثاني الابتدائى" },
-    //   { name: "الثالث الابتدائى" },
-    //   { name: "الرابع الابتدائى" },
-    //   { name: "الخامس الابتدائى" },
-    //   { name: "السادس الابتدائى" },
-    // ];
-    const Teams = [{ name: "احتياطى" }, { name: "عام" }];
-
+    const Teams = [
+      { name: "الملايكة" },
+      { name: "baby class" },
+      { name: "kg1" },
+      { name: "kg2" },
+      { name: "الاول الابتدائى" },
+      { name: "الثاني الابتدائى" },
+      { name: "الثالث الابتدائى" },
+      { name: "الرابع الابتدائى" },
+      { name: "الخامس الابتدائى" },
+      { name: "السادس الابتدائى" },
+    ];
     for (let i = 0; i < Teams.length; i++) {
       const team = await instance.post("/Teams", Teams[i]);
     }
@@ -145,7 +143,12 @@ export default function Basic(props) {
     }
   }
   async function create_e_y() {
-    const e_y = [{ name: "الثانوى" }, { name: " الجامعى" }, { name: "خريج" }];
+    // const e_y = [{ name: "الثانوى" }, { name: " الجامعى" }, { name: "خريج" }];
+    const e_y = [
+      { name: "الاول الثانوى" },
+      { name: "الثانى الثانوى" },
+      { name: "الثالث الثانوى" },
+    ];
     for (let i = 0; i < e_y.length; i++) {
       const team = await instance.post("/Education_years", e_y[i]);
     }
@@ -179,7 +182,7 @@ export default function Basic(props) {
       <button onClick={create_e_y}> create education_years</button>
       <button onClick={createStatus}> create status</button> */}
       {/* <button onClick={randomizeDates}> randomize dates</button> */}
-      <button onClick={createTeams}> create teams</button>
+      <button onClick={create_e_y}> create education_years</button>
 
       <h1> الفرق </h1>
       {teams.length != 0 && (
