@@ -1,2 +1,8 @@
 
 .hr{width: 50%;}
+.age{
+    color: darkblue;
+    border: 1px solid #ccc;
+    padding: 2px 4px;
+    border-radius: 9999px;
+}

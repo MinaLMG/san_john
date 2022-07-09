@@ -6,6 +6,7 @@ import DateGet from "../general/DateGet";
 import PrettySelect from "../general/PrettySelect";
 import instance from "../axios";
 import Modal from "../general/Modal";
+import classes from "./AddPerson.module.css";
 export default function AddPerson(props) {
   const [teams, setTeams] = useState([]);
   const [teams_M, setTeams_M] = useState([]);
@@ -216,6 +217,23 @@ export default function AddPerson(props) {
     }
   };
   const [update, setUpdate] = useState(1);
+  const [showAge, setShowAge] = useState(person.birth_date ? true : false);
+  const [age, setAge] = useState(person.birth_date ? true : false);
+  useEffect(() => {
+    if (person.birth_date == undefined) setShowAge(false);
+    else {
+      setShowAge(true);
+      let Now = new Date(Date.now());
+      let compare = new Date(person.birth_date);
+      let age = Now.getFullYear() - compare.getFullYear();
+      age =
+        Now.getMonth() >= compare.getMonth() &&
+        Now.getDate() >= compare.getDate()
+          ? age
+          : age - 1;
+      setAge(age);
+    }
+  }, [person.birth_date]);
   return (
     <React.Fragment>
       <div className={General.actions}>
@@ -388,6 +406,7 @@ export default function AddPerson(props) {
                   : undefined
               }
             ></DateGet>
+            {showAge && <div className={classes.age}>{age} سنة</div>}
           </div>
         </div>
         <div className={General["data-element"]}>
@@ -413,17 +432,17 @@ export default function AddPerson(props) {
               }}
               edit={props.edit}
               c_year={
-                person.birth_date && props.edit
+                person.bapitization_date && props.edit
                   ? new Date(person.bapitization_date).getFullYear()
                   : undefined
               }
               c_month={
-                person.birth_date && props.edit
+                person.bapitization_date && props.edit
                   ? new Date(person.bapitization_date).getMonth() + 1
                   : undefined
               }
               c_day={
-                person.birth_date && props.edit
+                person.bapitization_date && props.edit
                   ? new Date(person.bapitization_date).getDate()
                   : undefined
               }
@@ -604,17 +623,17 @@ export default function AddPerson(props) {
               }}
               edit={props.edit}
               c_year={
-                person.birth_date && props.edit
+                person.prep_date_entered && props.edit
                   ? new Date(person.prep_date_entered).getFullYear()
                   : undefined
               }
               c_month={
-                person.birth_date && props.edit
+                person.prep_date_entered && props.edit
                   ? new Date(person.prep_date_entered).getMonth() + 1
                   : undefined
               }
               c_day={
-                person.birth_date && props.edit
+                person.prep_date_entered && props.edit
                   ? new Date(person.prep_date_entered).getDate()
                   : undefined
               }
@@ -675,17 +694,17 @@ export default function AddPerson(props) {
               }}
               edit={props.edit}
               c_year={
-                person.birth_date && props.edit
+                person.prep_date_graduated && props.edit
                   ? new Date(person.prep_date_graduated).getFullYear()
                   : undefined
               }
               c_month={
-                person.birth_date && props.edit
+                person.prep_date_graduated && props.edit
                   ? new Date(person.prep_date_graduated).getMonth() + 1
                   : undefined
               }
               c_day={
-                person.birth_date && props.edit
+                person.prep_date_graduated && props.edit
                   ? new Date(person.prep_date_graduated).getDate()
                   : undefined
               }
@@ -756,17 +775,17 @@ export default function AddPerson(props) {
               }}
               edit={props.edit}
               c_year={
-                person.birth_date && props.edit
+                person.serv_date_entered && props.edit
                   ? new Date(person.serv_date_entered).getFullYear()
                   : undefined
               }
               c_month={
-                person.birth_date && props.edit
+                person.serv_date_entered && props.edit
                   ? new Date(person.serv_date_entered).getMonth() + 1
                   : undefined
               }
               c_day={
-                person.birth_date && props.edit
+                person.serv_date_entered && props.edit
                   ? new Date(person.serv_date_entered).getDate()
                   : undefined
               }
@@ -827,17 +846,17 @@ export default function AddPerson(props) {
               }}
               edit={props.edit}
               c_year={
-                person.birth_date && props.edit
+                person.serv_date_graduated && props.edit
                   ? new Date(person.serv_date_graduated).getFullYear()
                   : undefined
               }
               c_month={
-                person.birth_date && props.edit
+                person.serv_date_graduated && props.edit
                   ? new Date(person.serv_date_graduated).getMonth() + 1
                   : undefined
               }
               c_day={
-                person.birth_date && props.edit
+                person.serv_date_graduated && props.edit
                   ? new Date(person.serv_date_graduated).getDate()
                   : undefined
               }
