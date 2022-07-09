@@ -96,6 +96,10 @@ export default function ShowPersonItem(props) {
           content={person.father ? person.father : undefined}
         ></ShowPersonDataItem>
         <ShowPersonDataItem
+          title="الجنس:"
+          content={person.gender ? person.gender : undefined}
+        ></ShowPersonDataItem>
+        <ShowPersonDataItem
           title="اب العماد :"
           content={
             person.bapitization_father ? person.bapitization_father : undefined

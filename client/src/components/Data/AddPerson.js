@@ -215,6 +215,7 @@ export default function AddPerson(props) {
       }, 3000);
     }
   };
+  const [update, setUpdate] = useState(1);
   return (
     <React.Fragment>
       <div className={General.actions}>
@@ -257,6 +258,99 @@ export default function AddPerson(props) {
           ></InputWithLabel>
         </div>
         <div className={General["data-element"]}>
+          <InputWithLabel
+            label={"اب العماد"}
+            placeHolder={"الكاهن الذى تمت على يده المعمودية"}
+            type={"text"}
+            width={"100%"}
+            onChange={(e) => {
+              const val = e.target.value;
+              if (val == "") {
+                setBapitization_father_error(true);
+                setPerson((prev) => {
+                  delete prev["bapitization_father"];
+                  return prev;
+                });
+              } else {
+                setBapitization_father_error(false);
+                setPerson((prev) => {
+                  return { ...prev, bapitization_father: val };
+                });
+              }
+            }}
+            red={false}
+            value={
+              props.edit
+                ? person.bapitization_father
+                : person.bapitization_father
+                ? person.bapitization_father
+                : ""
+            }
+          ></InputWithLabel>
+        </div>
+        <div className={General["data-element"]}>
+          <InputWithLabel
+            label={"الرقم القومى *"}
+            placeHolder={"الرقم القومى"}
+            type={"text"}
+            width={"100%"}
+            onChange={(e) => {
+              const val = e.target.value.trim();
+              if (val == "" || val.length !== 14 || !/^[0-9]+$/.test(val)) {
+                setID_error(true);
+                setID(val);
+                if (person.name != "") setDisableButton(true);
+
+                setPerson((prev) => {
+                  return { ...prev, ID: "" };
+                });
+              } else {
+                setID_error(false);
+                setID(val);
+
+                setDisableButton(false);
+
+                setPerson((prev) => {
+                  return { ...prev, ID: val };
+                });
+              }
+            }}
+            red={ID_error}
+            value={props.edit ? ID : ID}
+          ></InputWithLabel>
+        </div>
+        <div className={General["data-element"]}>
+          <InputWithLabel
+            label={"كنيسة المعمودية"}
+            placeHolder={"كنيسة المعمودية"}
+            type={"text"}
+            width={"100%"}
+            onChange={(e) => {
+              const val = e.target.value;
+              if (val == "") {
+                setBapitization_church_error(true);
+                setPerson((prev) => {
+                  delete prev["bapitization_church"];
+                  return prev;
+                });
+              } else {
+                setBapitization_church_error(false);
+                setPerson((prev) => {
+                  return { ...prev, bapitization_church: val };
+                });
+              }
+            }}
+            red={false}
+            value={
+              props.edit
+                ? person.bapitization_church
+                : person.bapitization_church
+                ? person.bapitization_church
+                : ""
+            }
+          ></InputWithLabel>
+        </div>
+        <div className={General["data-element"]}>
           <div className={General["element-container"]}>
             <div className={General["element-container-title"]}>
               تاريخ الميلاد
@@ -296,6 +390,490 @@ export default function AddPerson(props) {
             ></DateGet>
           </div>
         </div>
+        <div className={General["data-element"]}>
+          <div className={General["element-container"]}>
+            <div className={General["element-container-title"]}>
+              تاريخ المعمودية
+            </div>
+            <DateGet
+              onChange={(date) => {
+                const val = date;
+                if (val == undefined) {
+                  setBapitization_date_error(true);
+                  setPerson((prev) => {
+                    delete prev["bapitization_date"];
+                    return prev;
+                  });
+                } else {
+                  setBapitization_date_error(false);
+                  setPerson((prev) => {
+                    return { ...prev, bapitization_date: val };
+                  });
+                }
+              }}
+              edit={props.edit}
+              c_year={
+                person.birth_date && props.edit
+                  ? new Date(person.bapitization_date).getFullYear()
+                  : undefined
+              }
+              c_month={
+                person.birth_date && props.edit
+                  ? new Date(person.bapitization_date).getMonth() + 1
+                  : undefined
+              }
+              c_day={
+                person.birth_date && props.edit
+                  ? new Date(person.bapitization_date).getDate()
+                  : undefined
+              }
+            ></DateGet>
+          </div>
+        </div>
+        <div className={General["data-element"]}>
+          <InputWithLabel
+            type={"text"}
+            width={"100%"}
+            onChange={(e) => {
+              const val = e.target.value;
+              if (val == "=") {
+                setFather_error(true);
+                setPerson((prev) => {
+                  delete prev["father"];
+                  return prev;
+                });
+              } else {
+                setFather_error(false);
+                setPerson((prev) => {
+                  return { ...prev, father: val };
+                });
+              }
+            }}
+            red={false}
+            label="اب الاعتراف"
+            placeHolder="اب الاعتراف"
+            value={
+              props.edit ? person.father : person.father ? person.father : ""
+            }
+          ></InputWithLabel>
+        </div>
+
+        <div className={General["data-element"]}>
+          <InputWithLabel
+            label={"الفيسبوك (facebook)"}
+            placeHolder={"الفيسبوك (facebook)"}
+            type={"text"}
+            width={"100%"}
+            onChange={(e) => {
+              const val = e.target.value;
+              if (val == "") {
+                setFacebook_error(true);
+                setPerson((prev) => {
+                  delete prev["facebook"];
+                  return prev;
+                });
+              } else {
+                setFacebook_error(false);
+                setPerson((prev) => {
+                  return { ...prev, facebook: val };
+                });
+              }
+            }}
+            red={false}
+            value={
+              props.edit
+                ? person.facebook
+                : person.facebook
+                ? person.facebook
+                : ""
+            }
+          ></InputWithLabel>
+        </div>
+        <div className={General["data-element"]}>
+          <div className={General["element-container"]}>
+            {update && (
+              <PrettySelect
+                data={{ ذكر: "ذكر", أنثى: "أنثى" }}
+                onChange={(e_y) => {
+                  const val = e_y;
+                  if (val == undefined) {
+                    setPerson((prev) => {
+                      delete prev["gender"];
+                      return prev;
+                    });
+                    setUpdate((prev) => prev + 1);
+                  } else {
+                    setPerson((prev) => {
+                      return { ...prev, gender: val };
+                    });
+                  }
+                }}
+                option="الجنس"
+                noDefault={false}
+                chosen={person.gender}
+              ></PrettySelect>
+            )}
+          </div>
+        </div>
+        <div className={General["data-element"]}>
+          <InputWithLabel
+            label={"الايميل (email)"}
+            placeHolder={"الايميل (email)"}
+            type={"text"}
+            width={"100%"}
+            onChange={(e) => {
+              const val = e.target.value;
+              if (val == "") {
+                setEmail_error(true);
+                setPerson((prev) => {
+                  delete prev["email"];
+                  return prev;
+                });
+              } else {
+                setEmail_error(false);
+                setPerson((prev) => {
+                  return { ...prev, email: val };
+                });
+              }
+            }}
+            red={false}
+            value={props.edit ? person.email : person.email ? person.email : ""}
+          ></InputWithLabel>
+        </div>
+        <div className={General["data-element"]}>
+          <InputWithLabel
+            label={"رقم الموبايل"}
+            placeHolder={"رقم الموبايل"}
+            type={"text"}
+            width={"100%"}
+            onChange={(e) => {
+              const val = e.target.value;
+              if (val.trim().length == 0) {
+                setPhone_error(false);
+                setPhone(val);
+                setPhone("");
+                setPerson((prev) => {
+                  delete prev["phone_number"];
+                  return prev;
+                });
+              } else if (
+                val[0] !== "0" ||
+                val[1] !== "1" ||
+                val.length !== 11 ||
+                !/^[0-9]+$/.test(val)
+              ) {
+                setPhone_error(true);
+                setPhone(val);
+                setPerson((prev) => {
+                  delete prev["phone_number"];
+                  return prev;
+                });
+              } else {
+                setPhone_error(false);
+                setPhone(val);
+                setPerson((prev) => {
+                  return { ...prev, phone_number: val };
+                });
+              }
+            }}
+            red={phone_error}
+            value={props.edit ? phone : phone ? phone : ""}
+          ></InputWithLabel>
+        </div>
+
+        <div className={General["data-element"]}>
+          <div className={General["element-container"]}>
+            <div className={General["element-container-title"]}>
+              تاريخ الالتحاق باعداد خدام
+            </div>
+            <DateGet
+              onChange={(date) => {
+                const val = date;
+                if (val == undefined) {
+                  setPrep_date_entered_error(true);
+                  setPerson((prev) => {
+                    delete prev["prep_date_entered"];
+                    return prev;
+                  });
+                } else {
+                  setPrep_date_entered_error(false);
+                  setPerson((prev) => {
+                    return { ...prev, prep_date_entered: val };
+                  });
+                }
+              }}
+              edit={props.edit}
+              c_year={
+                person.birth_date && props.edit
+                  ? new Date(person.prep_date_entered).getFullYear()
+                  : undefined
+              }
+              c_month={
+                person.birth_date && props.edit
+                  ? new Date(person.prep_date_entered).getMonth() + 1
+                  : undefined
+              }
+              c_day={
+                person.birth_date && props.edit
+                  ? new Date(person.prep_date_entered).getDate()
+                  : undefined
+              }
+            ></DateGet>
+          </div>
+        </div>
+        <div className={General["data-element"]}>
+          <InputWithLabel
+            label={"عمل الوالد"}
+            placeHolder={"عمل الوالد"}
+            type={"text"}
+            width={"100%"}
+            onChange={(e) => {
+              const val = e.target.value;
+              if (val == "") {
+                setFather_job_error(true);
+                setPerson((prev) => {
+                  delete prev["father_job"];
+                  return prev;
+                });
+              } else {
+                setFather_job_error(false);
+                setPerson((prev) => {
+                  return { ...prev, father_job: val };
+                });
+              }
+            }}
+            red={false}
+            value={
+              props.edit
+                ? person.father_job
+                : person.father_job
+                ? person.father_job
+                : ""
+            }
+          ></InputWithLabel>
+        </div>
+        <div className={General["data-element"]}>
+          <div className={General["element-container"]}>
+            <div className={General["element-container-title"]}>
+              تاريخ التخرج من اعداد خدام
+            </div>
+            <DateGet
+              onChange={(date) => {
+                const val = date;
+                if (val == undefined) {
+                  setPrep_date_graduated_error(true);
+                  setPerson((prev) => {
+                    delete prev["prep_date_graduated"];
+                    return prev;
+                  });
+                } else {
+                  setPrep_date_graduated_error(false);
+                  setPerson((prev) => {
+                    return { ...prev, prep_date_graduated: val };
+                  });
+                }
+              }}
+              edit={props.edit}
+              c_year={
+                person.birth_date && props.edit
+                  ? new Date(person.prep_date_graduated).getFullYear()
+                  : undefined
+              }
+              c_month={
+                person.birth_date && props.edit
+                  ? new Date(person.prep_date_graduated).getMonth() + 1
+                  : undefined
+              }
+              c_day={
+                person.birth_date && props.edit
+                  ? new Date(person.prep_date_graduated).getDate()
+                  : undefined
+              }
+            ></DateGet>
+          </div>
+        </div>
+
+        <div className={General["data-element"]}>
+          <InputWithLabel
+            label={"رقم الوالد"}
+            placeHolder={"رقم الوالد"}
+            type={"text"}
+            width={"100%"}
+            onChange={(e) => {
+              const val = e.target.value;
+              if (val.trim().length == 0) {
+                setFather_phone_error(false);
+                setFather_phone_number(val);
+                setPerson((prev) => {
+                  delete prev["father_phone_number"];
+                  return prev;
+                });
+              } else if (
+                val[0] !== "0" ||
+                val[1] !== "1" ||
+                val.length !== 11 ||
+                !/^[0-9]+$/.test(val)
+              ) {
+                setFather_phone_error(true);
+                setFather_phone_number(val);
+                setPerson((prev) => {
+                  delete prev["father_phone_number"];
+                  return prev;
+                });
+              } else {
+                setFather_phone_error(false);
+                setFather_phone_number(val);
+                setPerson((prev) => {
+                  return { ...prev, father_phone_number: val };
+                });
+              }
+            }}
+            red={father_phone_error}
+            value={props.edit ? father_phone_number : father_phone_number}
+          ></InputWithLabel>
+        </div>
+
+        <div className={General["data-element"]}>
+          <div className={General["element-container"]}>
+            <div className={General["element-container-title"]}>
+              تاريخ الالتحاق بالخدمة
+            </div>
+            <DateGet
+              onChange={(date) => {
+                const val = date;
+                if (val == undefined) {
+                  setServ_date_entered_error(true);
+                  setPerson((prev) => {
+                    delete prev["serv_date_entered"];
+                    return prev;
+                  });
+                } else {
+                  setServ_date_entered_error(false);
+                  setPerson((prev) => {
+                    return { ...prev, serv_date_entered: val };
+                  });
+                }
+              }}
+              edit={props.edit}
+              c_year={
+                person.birth_date && props.edit
+                  ? new Date(person.serv_date_entered).getFullYear()
+                  : undefined
+              }
+              c_month={
+                person.birth_date && props.edit
+                  ? new Date(person.serv_date_entered).getMonth() + 1
+                  : undefined
+              }
+              c_day={
+                person.birth_date && props.edit
+                  ? new Date(person.serv_date_entered).getDate()
+                  : undefined
+              }
+            ></DateGet>
+          </div>
+        </div>
+        <div className={General["data-element"]}>
+          <InputWithLabel
+            label={"عمل الام"}
+            placeHolder={"عمل الام"}
+            type={"text"}
+            width={"100%"}
+            onChange={(e) => {
+              const val = e.target.value;
+              if (val == "") {
+                setMother_job_error(true);
+                setPerson((prev) => {
+                  delete prev["mother_job"];
+                  return prev;
+                });
+              } else {
+                setMother_job_error(false);
+                setPerson((prev) => {
+                  return { ...prev, mother_job: val };
+                });
+              }
+            }}
+            red={false}
+            value={
+              props.edit
+                ? person.mother_job
+                : person.mother_job
+                ? person.mother_job
+                : ""
+            }
+          ></InputWithLabel>
+        </div>
+        <div className={General["data-element"]}>
+          <div className={General["element-container"]}>
+            <div className={General["element-container-title"]}>
+              تاريخ التخرج من الخدمة
+            </div>
+            <DateGet
+              onChange={(date) => {
+                const val = date;
+                if (val == undefined) {
+                  setServ_date_graduated_error(true);
+                  setPerson((prev) => {
+                    delete prev["serv_date_graduated"];
+                    return prev;
+                  });
+                } else {
+                  setServ_date_graduated_error(false);
+                  setPerson((prev) => {
+                    return { ...prev, serv_date_graduated: val };
+                  });
+                }
+              }}
+              edit={props.edit}
+              c_year={
+                person.birth_date && props.edit
+                  ? new Date(person.serv_date_graduated).getFullYear()
+                  : undefined
+              }
+              c_month={
+                person.birth_date && props.edit
+                  ? new Date(person.serv_date_graduated).getMonth() + 1
+                  : undefined
+              }
+              c_day={
+                person.birth_date && props.edit
+                  ? new Date(person.serv_date_graduated).getDate()
+                  : undefined
+              }
+            ></DateGet>
+          </div>
+        </div>
+
+        <div className={General["data-element"]}>
+          <InputWithLabel
+            label={"العنوان"}
+            placeHolder={"العنوان"}
+            type={"text"}
+            width={"100%"}
+            onChange={(e) => {
+              const val = e.target.value;
+              if (val == "") {
+                setAddress_error(true);
+                setPerson((prev) => {
+                  delete prev["address"];
+                  return prev;
+                });
+              } else {
+                setAddress_error(false);
+                setPerson((prev) => {
+                  return { ...prev, address: val };
+                });
+              }
+            }}
+            red={false}
+            value={
+              props.edit ? person.address : person.address ? person.address : ""
+            }
+          ></InputWithLabel>
+        </div>
+        <div className={General["data-element"]}></div>
+
         <div className={General["data-element"]}>
           <div className={General["element-container"]}>
             <PrettySelect
@@ -345,560 +923,12 @@ export default function AddPerson(props) {
             ></PrettySelect>
           </div>
         </div> */}
-        <div className={General["data-element"]}>
-          <InputWithLabel
-            type={"text"}
-            width={"100%"}
-            onChange={(e) => {
-              const val = e.target.value;
-              if (val == "=") {
-                setFather_error(true);
-                setPerson((prev) => {
-                  delete prev["father"];
-                  return prev;
-                });
-              } else {
-                setFather_error(false);
-                setPerson((prev) => {
-                  return { ...prev, father: val };
-                });
-              }
-            }}
-            red={false}
-            label="اب الاعتراف"
-            placeHolder="اب الاعتراف"
-            value={
-              props.edit ? person.father : person.father ? person.father : ""
-            }
-          ></InputWithLabel>
-        </div>
-        <div className={General["data-element"]}>
-          <InputWithLabel
-            label={"اب العماد"}
-            placeHolder={"الكاهن الذى تمت على يده المعمودية"}
-            type={"text"}
-            width={"100%"}
-            onChange={(e) => {
-              const val = e.target.value;
-              if (val == "") {
-                setBapitization_father_error(true);
-                setPerson((prev) => {
-                  delete prev["bapitization_father"];
-                  return prev;
-                });
-              } else {
-                setBapitization_father_error(false);
-                setPerson((prev) => {
-                  return { ...prev, bapitization_father: val };
-                });
-              }
-            }}
-            red={false}
-            value={
-              props.edit
-                ? person.bapitization_father
-                : person.bapitization_father
-                ? person.bapitization_father
-                : ""
-            }
-          ></InputWithLabel>
-        </div>
-        <div className={General["data-element"]}>
-          <InputWithLabel
-            label={"كنيسة المعمودية"}
-            placeHolder={"كنيسة المعمودية"}
-            type={"text"}
-            width={"100%"}
-            onChange={(e) => {
-              const val = e.target.value;
-              if (val == "") {
-                setBapitization_church_error(true);
-                setPerson((prev) => {
-                  delete prev["bapitization_church"];
-                  return prev;
-                });
-              } else {
-                setBapitization_church_error(false);
-                setPerson((prev) => {
-                  return { ...prev, bapitization_church: val };
-                });
-              }
-            }}
-            red={false}
-            value={
-              props.edit
-                ? person.bapitization_church
-                : person.bapitization_church
-                ? person.bapitization_church
-                : ""
-            }
-          ></InputWithLabel>
-        </div>
-        <div className={General["data-element"]}>
-          <div className={General["element-container"]}>
-            <div className={General["element-container-title"]}>
-              تاريخ المعمودية
-            </div>
-            <DateGet
-              onChange={(date) => {
-                const val = date;
-                if (val == undefined) {
-                  setBapitization_date_error(true);
-                  setPerson((prev) => {
-                    delete prev["bapitization_date"];
-                    return prev;
-                  });
-                } else {
-                  setBapitization_date_error(false);
-                  setPerson((prev) => {
-                    return { ...prev, bapitization_date: val };
-                  });
-                }
-              }}
-              edit={props.edit}
-              c_year={
-                person.birth_date && props.edit
-                  ? new Date(person.bapitization_date).getFullYear()
-                  : undefined
-              }
-              c_month={
-                person.birth_date && props.edit
-                  ? new Date(person.bapitization_date).getMonth() + 1
-                  : undefined
-              }
-              c_day={
-                person.birth_date && props.edit
-                  ? new Date(person.bapitization_date).getDate()
-                  : undefined
-              }
-            ></DateGet>
-          </div>
-        </div>
 
-        <div className={General["data-element"]}>
-          <InputWithLabel
-            label={"العنوان"}
-            placeHolder={"العنوان"}
-            type={"text"}
-            width={"100%"}
-            onChange={(e) => {
-              const val = e.target.value;
-              if (val == "") {
-                setAddress_error(true);
-                setPerson((prev) => {
-                  delete prev["address"];
-                  return prev;
-                });
-              } else {
-                setAddress_error(false);
-                setPerson((prev) => {
-                  return { ...prev, address: val };
-                });
-              }
-            }}
-            red={false}
-            value={
-              props.edit ? person.address : person.address ? person.address : ""
-            }
-          ></InputWithLabel>
-        </div>
-        <div className={General["data-element"]}>
-          <InputWithLabel
-            label={"رقم الموبايل"}
-            placeHolder={"رقم الموبايل"}
-            type={"text"}
-            width={"100%"}
-            onChange={(e) => {
-              const val = e.target.value;
-              if (val.trim().length == 0) {
-                setPhone_error(false);
-                setPhone(val);
-                setPhone("");
-                setPerson((prev) => {
-                  delete prev["phone_number"];
-                  return prev;
-                });
-              } else if (
-                val[0] !== "0" ||
-                val[1] !== "1" ||
-                val.length !== 11 ||
-                !/^[0-9]+$/.test(val)
-              ) {
-                setPhone_error(true);
-                setPhone(val);
-                setPerson((prev) => {
-                  delete prev["phone_number"];
-                  return prev;
-                });
-              } else {
-                setPhone_error(false);
-                setPhone(val);
-                setPerson((prev) => {
-                  return { ...prev, phone_number: val };
-                });
-              }
-            }}
-            red={phone_error}
-            value={props.edit ? phone : phone ? phone : ""}
-          ></InputWithLabel>
-        </div>
-
-        <div className={General["data-element"]}>
-          <InputWithLabel
-            label={"الايميل (email)"}
-            placeHolder={"الايميل (email)"}
-            type={"text"}
-            width={"100%"}
-            onChange={(e) => {
-              const val = e.target.value;
-              if (val == "") {
-                setEmail_error(true);
-                setPerson((prev) => {
-                  delete prev["email"];
-                  return prev;
-                });
-              } else {
-                setEmail_error(false);
-                setPerson((prev) => {
-                  return { ...prev, email: val };
-                });
-              }
-            }}
-            red={false}
-            value={props.edit ? person.email : person.email ? person.email : ""}
-          ></InputWithLabel>
-        </div>
-
-        <div className={General["data-element"]}>
-          <InputWithLabel
-            label={"الفيسبوك (facebook)"}
-            placeHolder={"الفيسبوك (facebook)"}
-            type={"text"}
-            width={"100%"}
-            onChange={(e) => {
-              const val = e.target.value;
-              if (val == "") {
-                setFacebook_error(true);
-                setPerson((prev) => {
-                  delete prev["facebook"];
-                  return prev;
-                });
-              } else {
-                setFacebook_error(false);
-                setPerson((prev) => {
-                  return { ...prev, facebook: val };
-                });
-              }
-            }}
-            red={false}
-            value={
-              props.edit
-                ? person.facebook
-                : person.facebook
-                ? person.facebook
-                : ""
-            }
-          ></InputWithLabel>
-        </div>
-
-        <div className={General["data-element"]}>
-          <InputWithLabel
-            label={"عمل الوالد"}
-            placeHolder={"عمل الوالد"}
-            type={"text"}
-            width={"100%"}
-            onChange={(e) => {
-              const val = e.target.value;
-              if (val == "") {
-                setFather_job_error(true);
-                setPerson((prev) => {
-                  delete prev["father_job"];
-                  return prev;
-                });
-              } else {
-                setFather_job_error(false);
-                setPerson((prev) => {
-                  return { ...prev, father_job: val };
-                });
-              }
-            }}
-            red={false}
-            value={
-              props.edit
-                ? person.father_job
-                : person.father_job
-                ? person.father_job
-                : ""
-            }
-          ></InputWithLabel>
-        </div>
-        <div className={General["data-element"]}>
-          <InputWithLabel
-            label={"رقم الوالد"}
-            placeHolder={"رقم الوالد"}
-            type={"text"}
-            width={"100%"}
-            onChange={(e) => {
-              const val = e.target.value;
-              if (val.trim().length == 0) {
-                setFather_phone_error(false);
-                setFather_phone_number(val);
-                setPerson((prev) => {
-                  delete prev["father_phone_number"];
-                  return prev;
-                });
-              } else if (
-                val[0] !== "0" ||
-                val[1] !== "1" ||
-                val.length !== 11 ||
-                !/^[0-9]+$/.test(val)
-              ) {
-                setFather_phone_error(true);
-                setFather_phone_number(val);
-                setPerson((prev) => {
-                  delete prev["father_phone_number"];
-                  return prev;
-                });
-              } else {
-                setFather_phone_error(false);
-                setFather_phone_number(val);
-                setPerson((prev) => {
-                  return { ...prev, father_phone_number: val };
-                });
-              }
-            }}
-            red={father_phone_error}
-            value={props.edit ? father_phone_number : father_phone_number}
-          ></InputWithLabel>
-        </div>
-        <div className={General["data-element"]}>
-          <InputWithLabel
-            label={"عمل الام"}
-            placeHolder={"عمل الام"}
-            type={"text"}
-            width={"100%"}
-            onChange={(e) => {
-              const val = e.target.value;
-              if (val == "") {
-                setMother_job_error(true);
-                setPerson((prev) => {
-                  delete prev["mother_job"];
-                  return prev;
-                });
-              } else {
-                setMother_job_error(false);
-                setPerson((prev) => {
-                  return { ...prev, mother_job: val };
-                });
-              }
-            }}
-            red={false}
-            value={
-              props.edit
-                ? person.mother_job
-                : person.mother_job
-                ? person.mother_job
-                : ""
-            }
-          ></InputWithLabel>
-        </div>
-        <div className={General["data-element"]}>
-          <InputWithLabel
-            label={"الرقم القومى *"}
-            placeHolder={"الرقم القومى"}
-            type={"text"}
-            width={"100%"}
-            onChange={(e) => {
-              const val = e.target.value.trim();
-              if (val == "" || val.length !== 14 || !/^[0-9]+$/.test(val)) {
-                setID_error(true);
-                setID(val);
-                if (person.name != "") setDisableButton(true);
-
-                setPerson((prev) => {
-                  return { ...prev, ID: "" };
-                });
-              } else {
-                setID_error(false);
-                setID(val);
-
-                setDisableButton(false);
-
-                setPerson((prev) => {
-                  return { ...prev, ID: val };
-                });
-              }
-            }}
-            red={ID_error}
-            value={props.edit ? ID : ID}
-          ></InputWithLabel>
-        </div>
-        <div className={General["data-element"]}></div>
-
-        <div className={General["data-element"]}>
-          <div className={General["element-container"]}>
-            <div className={General["element-container-title"]}>
-              تاريخ الالتحاق باعداد خدام
-            </div>
-            <DateGet
-              onChange={(date) => {
-                const val = date;
-                if (val == undefined) {
-                  setPrep_date_entered_error(true);
-                  setPerson((prev) => {
-                    delete prev["prep_date_entered"];
-                    return prev;
-                  });
-                } else {
-                  setPrep_date_entered_error(false);
-                  setPerson((prev) => {
-                    return { ...prev, prep_date_entered: val };
-                  });
-                }
-              }}
-              edit={props.edit}
-              c_year={
-                person.birth_date && props.edit
-                  ? new Date(person.prep_date_entered).getFullYear()
-                  : undefined
-              }
-              c_month={
-                person.birth_date && props.edit
-                  ? new Date(person.prep_date_entered).getMonth() + 1
-                  : undefined
-              }
-              c_day={
-                person.birth_date && props.edit
-                  ? new Date(person.prep_date_entered).getDate()
-                  : undefined
-              }
-            ></DateGet>
-          </div>
-        </div>
         {/* <hr className={General.hr}></hr> */}
-        <div className={General["data-element"]}>
-          <div className={General["element-container"]}>
-            <div className={General["element-container-title"]}>
-              تاريخ التخرج من اعداد خدام
-            </div>
-            <DateGet
-              onChange={(date) => {
-                const val = date;
-                if (val == undefined) {
-                  setPrep_date_graduated_error(true);
-                  setPerson((prev) => {
-                    delete prev["prep_date_graduated"];
-                    return prev;
-                  });
-                } else {
-                  setPrep_date_graduated_error(false);
-                  setPerson((prev) => {
-                    return { ...prev, prep_date_graduated: val };
-                  });
-                }
-              }}
-              edit={props.edit}
-              c_year={
-                person.birth_date && props.edit
-                  ? new Date(person.prep_date_graduated).getFullYear()
-                  : undefined
-              }
-              c_month={
-                person.birth_date && props.edit
-                  ? new Date(person.prep_date_graduated).getMonth() + 1
-                  : undefined
-              }
-              c_day={
-                person.birth_date && props.edit
-                  ? new Date(person.prep_date_graduated).getDate()
-                  : undefined
-              }
-            ></DateGet>
-          </div>
-        </div>
         {/* <hr className={General.hr}></hr> */}
 
-        <div className={General["data-element"]}>
-          <div className={General["element-container"]}>
-            <div className={General["element-container-title"]}>
-              تاريخ الالتحاق بالخدمة
-            </div>
-            <DateGet
-              onChange={(date) => {
-                const val = date;
-                if (val == undefined) {
-                  setServ_date_entered_error(true);
-                  setPerson((prev) => {
-                    delete prev["serv_date_entered"];
-                    return prev;
-                  });
-                } else {
-                  setServ_date_entered_error(false);
-                  setPerson((prev) => {
-                    return { ...prev, serv_date_entered: val };
-                  });
-                }
-              }}
-              edit={props.edit}
-              c_year={
-                person.birth_date && props.edit
-                  ? new Date(person.serv_date_entered).getFullYear()
-                  : undefined
-              }
-              c_month={
-                person.birth_date && props.edit
-                  ? new Date(person.serv_date_entered).getMonth() + 1
-                  : undefined
-              }
-              c_day={
-                person.birth_date && props.edit
-                  ? new Date(person.serv_date_entered).getDate()
-                  : undefined
-              }
-            ></DateGet>
-          </div>
-        </div>
         {/* <hr className={General.hr}></hr> */}
-        <div className={General["data-element"]}>
-          <div className={General["element-container"]}>
-            <div className={General["element-container-title"]}>
-              تاريخ التخرج من الخدمة
-            </div>
-            <DateGet
-              onChange={(date) => {
-                const val = date;
-                if (val == undefined) {
-                  setServ_date_graduated_error(true);
-                  setPerson((prev) => {
-                    delete prev["serv_date_graduated"];
-                    return prev;
-                  });
-                } else {
-                  setServ_date_graduated_error(false);
-                  setPerson((prev) => {
-                    return { ...prev, serv_date_graduated: val };
-                  });
-                }
-              }}
-              edit={props.edit}
-              c_year={
-                person.birth_date && props.edit
-                  ? new Date(person.serv_date_graduated).getFullYear()
-                  : undefined
-              }
-              c_month={
-                person.birth_date && props.edit
-                  ? new Date(person.serv_date_graduated).getMonth() + 1
-                  : undefined
-              }
-              c_day={
-                person.birth_date && props.edit
-                  ? new Date(person.serv_date_graduated).getDate()
-                  : undefined
-              }
-            ></DateGet>
-          </div>
-        </div>
+
         {/* <hr className={General.hr}></hr> */}
         <div className={General["data-element"]}>
           <div className={General["element-container"]}>

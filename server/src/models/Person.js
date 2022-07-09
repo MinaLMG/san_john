@@ -15,6 +15,17 @@ const Person = mongoose.model("Person", {
       }
     },
   },
+  gender: {
+    type: String,
+    required: true,
+    trim: true,
+    unique: true,
+    validate(value) {
+      if (value != "ذكر" && value != "أنثى") {
+        throw new Error("not valid gender");
+      }
+    },
+  },
   birth_date: {
     type: Date,
     // validate(value) {
