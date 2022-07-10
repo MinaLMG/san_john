@@ -6,6 +6,7 @@ const Status = mongoose.model("Status", {
     type: String,
     required: true,
     trim: true,
+    unique: true,
   },
 });
 

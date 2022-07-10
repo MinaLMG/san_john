@@ -1,6 +1,7 @@
 const express = require("express");
 const Education_Year = require("../models/Education_Year");
 const router = new express.Router();
+const Person = require("../models/Person");
 
 router.post("/Education_Years", async (req, res) => {
   try {
@@ -70,6 +71,10 @@ router.patch("/Education_Years/:id", async (req, res) => {
 
 router.delete("/Education_Years/:id", async (req, res) => {
   try {
+    const persons = await Person.updateMany(
+      { education_year: req.params.id },
+      { $unset: { education_year: "" } }
+    );
     const education_year = await Education_Year.findByIdAndDelete(
       req.params.id
     );

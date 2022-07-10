@@ -1,7 +1,9 @@
 import { Fragment, useEffect, useState } from "react";
 import classes from "./Basic.module.css";
-// import axios from "../axios";
+import General from "../general/General.module.css";
+import back from "../../assets/icons/arrow.png";
 import instance from "../axios";
+import BasicChosen from "./BasicChosen";
 export default function Basic(props) {
   const [teams, setTeams] = useState([]);
   const getTeams = async () => {
@@ -107,77 +109,159 @@ export default function Basic(props) {
     getMeetings();
   }, []);
 
-  async function createTeams() {
-    const Teams = [
-      { name: "الملايكة" },
-      { name: "baby class" },
-      { name: "kg1" },
-      { name: "kg2" },
-      { name: "الاول الابتدائى" },
-      { name: "الثاني الابتدائى" },
-      { name: "الثالث الابتدائى" },
-      { name: "الرابع الابتدائى" },
-      { name: "الخامس الابتدائى" },
-      { name: "السادس الابتدائى" },
-    ];
-    for (let i = 0; i < Teams.length; i++) {
-      const team = await instance.post("/Teams", Teams[i]);
-    }
-  }
-  async function createRoles() {
-    const Roles = [
-      { name: "قائد مجموعة" },
-      { name: "جيمر" },
-      { name: "سكرتارية" },
-      { name: "اية وقبطى" },
-      { name: "انشطة طفولة" },
-      { name: "انشطة خدام" },
-      { name: "فنى" },
-      { name: "مساعد فنى" },
-      { name: "منسق" },
-      { name: "وسائل ايضاح" },
-      { name: "امين خدمة" },
-    ];
-    for (let i = 0; i < Roles.length; i++) {
-      const role = await instance.post("/Roles", Roles[i]);
-    }
-  }
-  async function create_e_y() {
-    const e_y = [{ name: "الثانوى" }, { name: " الجامعى" }, { name: "خريج" }];
-    for (let i = 0; i < e_y.length; i++) {
-      const team = await instance.post("/Education_years", e_y[i]);
-    }
-  }
-  async function createStatus() {
-    const status = [{ name: "ارشيف" }, { name: "مستمر" }, { name: "منقطع" }];
-    for (let i = 0; i < status.length; i++) {
-      const team = await instance.post("/Status", status[i]);
-    }
-  }
-  function randomizeDates() {
-    persons.map(async (person) => {
-      if (!person.birth_date) {
-        let x = new Date(Date.now() - Math.random() * Date.now());
-        let to_send = JSON.parse(JSON.stringify(person));
-        delete to_send["__v"];
-        let id_to_send = to_send["_id"];
-        delete to_send["_id"];
-        to_send["birth_date"] = x;
-        const res = await instance.patch(`/Persons/${id_to_send}`, to_send);
-        console.log(res.data);
-      }
-    });
-  }
+  // async function createTeams() {
+  //   const Teams = [
+  //     { name: "الملايكة" },
+  //     { name: "baby class" },
+  //     { name: "kg1" },
+  //     { name: "kg2" },
+  //     { name: "الاول الابتدائى" },
+  //     { name: "الثاني الابتدائى" },
+  //     { name: "الثالث الابتدائى" },
+  //     { name: "الرابع الابتدائى" },
+  //     { name: "الخامس الابتدائى" },
+  //     { name: "السادس الابتدائى" },
+  //   ];
+  //   for (let i = 0; i < Teams.length; i++) {
+  //     const team = await instance.post("/Teams", Teams[i]);
+  //   }
+  // }
+  // async function createRoles() {
+  //   const Roles = [
+  //     { name: "قائد مجموعة" },
+  //     { name: "جيمر" },
+  //     { name: "سكرتارية" },
+  //     { name: "اية وقبطى" },
+  //     { name: "انشطة طفولة" },
+  //     { name: "انشطة خدام" },
+  //     { name: "فنى" },
+  //     { name: "مساعد فنى" },
+  //     { name: "منسق" },
+  //     { name: "وسائل ايضاح" },
+  //     { name: "امين خدمة" },
+  //   ];
+  //   for (let i = 0; i < Roles.length; i++) {
+  //     const role = await instance.post("/Roles", Roles[i]);
+  //   }
+  // }
+  // async function create_e_y() {
+  //   const e_y = [{ name: "الثانوى" }, { name: " الجامعى" }, { name: "خريج" }];
+  //   for (let i = 0; i < e_y.length; i++) {
+  //     const team = await instance.post("/Education_years", e_y[i]);
+  //   }
+  // }
+  // async function createStatus() {
+  //   const status = [{ name: "ارشيف" }, { name: "مستمر" }, { name: "منقطع" }];
+  //   for (let i = 0; i < status.length; i++) {
+  //     const team = await instance.post("/Status", status[i]);
+  //   }
+  // }
+  // function randomizeDates() {
+  //   persons.map(async (person) => {
+  //     if (!person.birth_date) {
+  //       let x = new Date(Date.now() - Math.random() * Date.now());
+  //       let to_send = JSON.parse(JSON.stringify(person));
+  //       delete to_send["__v"];
+  //       let id_to_send = to_send["_id"];
+  //       delete to_send["_id"];
+  //       to_send["birth_date"] = x;
+  //       const res = await instance.patch(`/Persons/${id_to_send}`, to_send);
+  //       console.log(res.data);
+  //     }
+  //   });
+  // }
+  const [chosen, setChosen] = useState(
+    localStorage.getItem("BasicChosen")
+      ? localStorage.getItem("BasicChosen")
+      : undefined
+  );
+  useEffect(() => {
+    if (chosen != undefined) localStorage.setItem("BasicChosen", chosen);
+    else localStorage.removeItem("BasicChosen");
+  }, [chosen]);
   return (
     <Fragment>
-      <button onClick={props.onGoBack}> back</button>
-      {/* <h1>scripts </h1>
-      <button onClick={createTeams}> create teams</button>
-      <button onClick={createRoles}> create roles</button>
-      <button onClick={create_e_y}> create education_years</button>
-      <button onClick={createStatus}> create status</button> */}
-      {/* <button onClick={randomizeDates}> randomize dates</button> */}
+      {chosen == undefined && (
+        <Fragment>
+          <div className={General.actions}>
+            <h3> تعديل قاعدة البيانات :</h3>
+            <h3 className={General.h3} onClick={props.onGoBack}>
+              back
+              <img
+                className={General.img}
+                src={back}
+                onClick={props.onGoBack}
+              ></img>
+            </h3>
+          </div>
+          <div className={classes.options}>
+            <div className={classes.area}>
+              <button
+                onClick={() => {
+                  setChosen("teams");
+                }}
+                className={General["area-button"]}
+              >
+                الفرق
+              </button>
+            </div>
+            <div className={classes.area}>
+              <button
+                onClick={() => {
+                  setChosen("roles");
+                }}
+                className={General["area-button"]}
+              >
+                الأدوار
+              </button>
+            </div>
+            <div className={classes.area}>
+              <button
+                onClick={() => {
+                  setChosen("status");
+                }}
+                className={General["area-button"]}
+              >
+                الحالة
+              </button>
+            </div>
+            <div className={classes.area}>
+              <button
+                onClick={() => {
+                  setChosen("edu");
+                }}
+                className={General["area-button"]}
+              >
+                المراحل الدراسية
+              </button>
+            </div>
+          </div>
+        </Fragment>
+      )}
+      {chosen && (
+        <BasicChosen
+          data={chosen}
+          onGoBack={() => {
+            setChosen(undefined);
+          }}
+        ></BasicChosen>
+      )}
+    </Fragment>
+  );
+}
 
+{
+  /* <h1>scripts </h1>
+  <button onClick={createTeams}> create teams</button>
+  <button onClick={createRoles}> create roles</button>
+  <button onClick={create_e_y}> create education_years</button>
+  <button onClick={createStatus}> create status</button> */
+}
+{
+  /* <button onClick={randomizeDates}> randomize dates</button> */
+}
+{
+  /* 
       <h1> الفرق </h1>
       {teams.length != 0 && (
         <ul>
@@ -241,7 +325,5 @@ export default function Basic(props) {
             return <li key={meeting._id}> {meeting.description} </li>;
           })}
         </ul>
-      )}
-    </Fragment>
-  );
+      )} */
 }

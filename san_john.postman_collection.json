@@ -414,7 +414,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"name\":\"عازر\"}",
+					"raw": "{\"name\":\"ابونا تيموثاوس\"}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -682,7 +682,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"name\":\"عازر\"}",
+					"raw": "{\"number\":\"01276011964\",\"p_ID\":\"62be058da284ede5aedf5683\"}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -816,7 +816,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"ID\":\"14258965257845\",\"birth_date\":\"2012-04-23T18:25:43.511Z\",\"team\":\"62bacdc217bf50c2c8e5f423\"\r\n}",
+					"raw": "{\r\n  \"name\": \"شادى جميل\",\r\n  \"ID\": \"17523552393412\",\r\n  \"birth_date\": \"2010-03-07T21:00:00.000Z\",\r\n  \"education_year\": \"62bdbbc886fb879b79cacb8d\",\r\n  \"father\": \"ابونا عازر\",\r\n  \"bapitization_father\": \"ابونا تيموثاوش\",\r\n  \"bapitization_church\": \"العدرا\",\r\n  \"bapitization_date\": \"1972-04-03T22:00:00.000Z\",\r\n  \"address\": \"المجتمع\",\r\n  \"email\": \"shadygamil\",\r\n  \"father_job\": \"رئيس\",\r\n  \"mother_job\": \"وزيرة\",\r\n  \"facebook\": \"jok\",\r\n  \"prep_date_entered\": \"1986-09-14T21:00:00.000Z\",\r\n  \"serv_date_entered\": \"1983-10-15T22:00:00.000Z\",\r\n  \"prep_date_graduated\": \"1989-10-15T22:00:00.000Z\",\r\n  \"team\": \"62bdbbc786fb879b79cacb67\",\r\n  \"role\": \"62bdbbc786fb879b79cacb7d\",\r\n  \"status\": \"62bdbbc986fb879b79cacb93\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -889,7 +889,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"team\":\"62b9faa9948e2f16eee50c56\"}",
+					"raw": "{\r\n    \"_id\": \"62be32e8fbdf1eed8812dcbc\",\r\n    \"name\": \"مش فاضى\",\r\n    \"ID\": \"01258965422365\",\r\n    \"birth_date\": \"1970-01-01T01:00:00.000Z\",\r\n    \"team\": \"62bdbbc786fb879b79cacb63\",\r\n    \"role\": \"62bdbbc786fb879b79cacb77\",\r\n    \"status\": \"62bdbbc986fb879b79cacb93\",\r\n    \"education_year\": \"62bdbbc886fb879b79cacb8d\",\r\n    \"father\": \"مش فاضى\",\r\n    \"bapitization_father\": \"مش فاضى\",\r\n    \"bapitization_church\": \"مش فاضى\",\r\n    \"address\": \"مش فاضى\",\r\n    \"email\": \"مش فاضى\",\r\n    \"facebook\": \"مش فاضى\",\r\n    \"father_job\": \"مش فاضى\",\r\n    \"mother_job\": \"مش فاضى\",\r\n    \"prep_date_entered\": \"1975-03-15T01:00:00.000Z\",\r\n    \"prep_date_graduated\": \"1975-04-15T01:00:00.000Z\",\r\n    \"serv_date_entered\": \"1985-08-15T00:00:00.000Z\",\r\n    \"serv_date_graduated\": \"1984-08-14T00:00:00.000Z\",\r\n    \"__v\": 0,\r\n    \"father_phone_number\": \"01276011964\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -910,7 +910,7 @@
 					"variable": [
 						{
 							"key": "id",
-							"value": "62ba43300158c40a0d5ac399"
+							"value": "62be32e8fbdf1eed8812dcbc"
 						}
 					]
 				}
@@ -1225,7 +1225,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n\"p_ID\":\"62ba40f1e1f7e5e35de1c7c1\",\"m_ID\":\"62babdcfbe043e4e4d0ba9c6\"\r\n}",
+					"raw": "{\r\n\"p_ID\":\"62be019e4ac6f35768793651\",\"m_ID\":\"62c35ae128454a48585ef8fd\",\"time_attended\": \"2022-08-05T00:25:53.740Z\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -1292,7 +1292,168 @@
 			"response": []
 		},
 		{
+			"name": "get Meetings_Attended by m_ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/Meeting_Attendeds/Meeting/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"Meeting_Attendeds",
+						"Meeting",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "62c367850f5686e134ab626c"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "delete Meeting_Attended",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/Meeting_Attendeds/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"Meeting_Attendeds",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "62c3a1c2bb40af342dc81711"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "patch Meeting_Attended",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"time_attended\": \"2022-08-05T00:25:53.740Z\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/Meeting_Attendeds/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"Meeting_Attendeds",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "62c36b70fde230e407710e6e"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create Meeting_spoken",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"p_ID\":\"62ba40f1e1f7e5e35de1c7c1\",\"m_ID\":\"62babdcfbe043e4e4d0ba9c6\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/Meeting_Attendeds",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"Meeting_Attendeds"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get Meetings_spoken",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/Meeting_Attendeds",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"Meeting_Attendeds"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get Meeting_spoken",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/Meeting_Attended/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"Meeting_Attended",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "62baca442aa41e0520b21b0a"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete Meeting_spoken",
 			"request": {
 				"method": "DELETE",
 				"header": [],
@@ -1318,7 +1479,7 @@
 			"response": []
 		},
 		{
-			"name": "patch Meeting_Attended",
+			"name": "patch Meeting_spoken",
 			"request": {
 				"method": "PATCH",
 				"header": [],

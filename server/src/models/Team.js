@@ -6,6 +6,7 @@ const Team = mongoose.model("Team", {
     type: String,
     required: true,
     trim: true,
+    unique: true,
   },
 });
 

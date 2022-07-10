@@ -6,6 +6,7 @@ const Role = mongoose.model("Role", {
     type: String,
     required: true,
     trim: true,
+    unique: true,
   },
 });
 

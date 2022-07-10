@@ -1,4 +1,5 @@
 const express = require("express");
+const Person = require("../models/Person");
 const Team = require("../models/Team");
 const router = new express.Router();
 
@@ -66,6 +67,10 @@ router.patch("/Teams/:id", async (req, res) => {
 
 router.delete("/Teams/:id", async (req, res) => {
   try {
+    const persons = await Person.updateMany(
+      { team: req.params.id },
+      { $unset: { team: "" } }
+    );
     const team = await Team.findByIdAndDelete(req.params.id);
 
     if (!team) {

@@ -149,7 +149,6 @@ export default function AddPerson(props) {
   const [team_error, setTeam_error] = useState(false);
   const [role_error, setRole_error] = useState(false);
   const [disableButton, setDisableButton] = useState(props.edit ? false : true);
-  const [duplicatedID, setDuplicatedID] = useState(false);
   const [addingError, setAddingError] = useState(false);
   const add_person = async () => {
     try {

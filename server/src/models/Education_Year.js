@@ -6,6 +6,7 @@ const Education_Yaer = mongoose.model("Education_Yaers", {
     type: String,
     required: true,
     trim: true,
+    unique: true,
   },
 });
 

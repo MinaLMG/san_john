@@ -1,11 +1,5 @@
-.options{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-}
 .area{
     height:30vh;
-    width: 50%;
     display :flex;
     justify-content: center;
     align-items: center;

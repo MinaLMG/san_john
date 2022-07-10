@@ -1,7 +1,7 @@
 const express = require("express");
 const Role = require("../models/Role");
 const router = new express.Router();
-
+const Person = require("../models/Person");
 router.post("/Roles", async (req, res) => {
   try {
     const role = new Role(req.body);
@@ -66,6 +66,10 @@ router.patch("/Roles/:id", async (req, res) => {
 
 router.delete("/Roles/:id", async (req, res) => {
   try {
+    const persons = await Person.updateMany(
+      { role: req.params.id },
+      { $unset: { role: "" } }
+    );
     const role = await Role.findByIdAndDelete(req.params.id);
 
     if (!role) {
