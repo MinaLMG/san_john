@@ -130,7 +130,7 @@ export default function ServantsReport(props) {
               chosen={teamChosen}
             ></PrettySelect>
           </div>
-        </div>{" "}
+        </div>
         <div className={General["data-element"]}>
           <div className={General["element-container"]}>
             <PrettySelect

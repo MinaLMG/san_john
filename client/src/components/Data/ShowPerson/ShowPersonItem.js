@@ -78,26 +78,9 @@ export default function ShowPersonItem(props) {
   return (
     <div className={classes.container}>
       <React.Fragment>
-        {" "}
         <ShowPersonDataItem
           title="الاسم :"
           content={person.name}
-        ></ShowPersonDataItem>
-        <ShowPersonDataItem
-          title="تاريخ الميلاد :"
-          content={person.birth_date ? getDate(person.birth_date) : undefined}
-        ></ShowPersonDataItem>
-        <ShowPersonDataItem
-          title="المرحلة الدراسية :"
-          content={person.education_year ? person.education_year : undefined}
-        ></ShowPersonDataItem>
-        <ShowPersonDataItem
-          title="اب الاعتراف :"
-          content={person.father ? person.father : undefined}
-        ></ShowPersonDataItem>
-        <ShowPersonDataItem
-          title="الجنس:"
-          content={person.gender ? person.gender : undefined}
         ></ShowPersonDataItem>
         <ShowPersonDataItem
           title="اب العماد :"
@@ -106,10 +89,18 @@ export default function ShowPersonItem(props) {
           }
         ></ShowPersonDataItem>
         <ShowPersonDataItem
+          title=" الرقم القومى :"
+          content={person.ID ? person.ID : undefined}
+        ></ShowPersonDataItem>
+        <ShowPersonDataItem
           title=" كنيسة المعمودية :"
           content={
             person.bapitization_church ? person.bapitization_church : undefined
           }
+        ></ShowPersonDataItem>
+        <ShowPersonDataItem
+          title="تاريخ الميلاد :"
+          content={person.birth_date ? getDate(person.birth_date) : undefined}
         ></ShowPersonDataItem>
         <ShowPersonDataItem
           title="  تاريخ المعمودية :"
@@ -118,40 +109,26 @@ export default function ShowPersonItem(props) {
               ? getDate(person.bapitization_date)
               : undefined
           }
-        ></ShowPersonDataItem>{" "}
-        <ShowPersonDataItem
-          title="  العنوان :"
-          content={person.address ? person.address : undefined}
         ></ShowPersonDataItem>
         <ShowPersonDataItem
-          title="  رقم الموبايل :"
-          content={person.phone_number ? person.phone_number : undefined}
-        ></ShowPersonDataItem>{" "}
-        <ShowPersonDataItem
-          title=" الايميل :"
-          content={person.email ? person.email : undefined}
+          title="اب الاعتراف :"
+          content={person.father ? person.father : undefined}
         ></ShowPersonDataItem>
         <ShowPersonDataItem
           title=" الفيسبوك :"
           content={person.facebook ? person.facebook : undefined}
         ></ShowPersonDataItem>
         <ShowPersonDataItem
-          title=" عمل الوالد :"
-          content={person.father_job ? person.father_job : undefined}
-        ></ShowPersonDataItem>{" "}
-        <ShowPersonDataItem
-          title=" رقم الوالد :"
-          content={
-            person.father_phone_number ? person.father_phone_number : undefined
-          }
+          title="الجنس:"
+          content={person.gender ? person.gender : undefined}
         ></ShowPersonDataItem>
         <ShowPersonDataItem
-          title=" عمل الام :"
-          content={person.mother_job ? person.mother_job : undefined}
+          title=" الايميل :"
+          content={person.email ? person.email : undefined}
         ></ShowPersonDataItem>
         <ShowPersonDataItem
-          title=" الرقم القومى :"
-          content={person.ID ? person.ID : undefined}
+          title="  رقم الموبايل :"
+          content={person.phone_number ? person.phone_number : undefined}
         ></ShowPersonDataItem>
         <ShowPersonDataItem
           title=" تاريخ الالتحاق باعداد خدام :"
@@ -162,13 +139,23 @@ export default function ShowPersonItem(props) {
           }
         ></ShowPersonDataItem>
         <ShowPersonDataItem
+          title=" عمل الوالد :"
+          content={person.father_job ? person.father_job : undefined}
+        ></ShowPersonDataItem>
+        <ShowPersonDataItem
           title=" تاريخ التخرج من اعداد خدام :"
           content={
             person.prep_date_graduated
               ? getDate(person.prep_date_graduated)
               : undefined
           }
-        ></ShowPersonDataItem>{" "}
+        ></ShowPersonDataItem>
+        <ShowPersonDataItem
+          title=" رقم الوالد :"
+          content={
+            person.father_phone_number ? person.father_phone_number : undefined
+          }
+        ></ShowPersonDataItem>
         <ShowPersonDataItem
           title=" تاريخ الالتحاق بالخدمة :"
           content={
@@ -176,7 +163,11 @@ export default function ShowPersonItem(props) {
               ? getDate(person.serv_date_entered)
               : undefined
           }
-        ></ShowPersonDataItem>{" "}
+        ></ShowPersonDataItem>
+        <ShowPersonDataItem
+          title=" عمل الام :"
+          content={person.mother_job ? person.mother_job : undefined}
+        ></ShowPersonDataItem>
         <ShowPersonDataItem
           title=" تاريخ التخرج من الخدمة :"
           content={
@@ -186,25 +177,27 @@ export default function ShowPersonItem(props) {
           }
         ></ShowPersonDataItem>
         <ShowPersonDataItem
+          title="  العنوان :"
+          content={person.address ? person.address : undefined}
+        ></ShowPersonDataItem>
+        <ShowPersonDataItem title=" " content=""></ShowPersonDataItem>
+        <ShowPersonDataItem
+          title="المرحلة الدراسية :"
+          content={person.education_year ? person.education_year : undefined}
+        ></ShowPersonDataItem>
+        <ShowPersonDataItem
           title="الفرقة :"
           content={person.team ? person.team : undefined}
-        ></ShowPersonDataItem>{" "}
+        ></ShowPersonDataItem>
+
         <ShowPersonDataItem
           title="التخصص :"
           content={person.role ? person.role : undefined}
-        ></ShowPersonDataItem>{" "}
+        ></ShowPersonDataItem>
         <ShowPersonDataItem
           title="الحالة :"
           content={person.status ? person.status : undefined}
         ></ShowPersonDataItem>
-        {/*
-
-   الفرقة
-      <div></div>
-      التخصص
-      <div></div>
-      الحالة
-      <div></div> */}
       </React.Fragment>
     </div>
   );
