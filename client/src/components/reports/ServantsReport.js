@@ -286,7 +286,7 @@ export default function ServantsReport(props) {
                 });
                 temp = temp2;
               }
-              if (education_yearChosen != education_yearChosen) {
+              if (education_yearChosen != undefined) {
                 let temp2 = [];
                 temp.map((person) => {
                   if (person.education_year == education_yearChosen)
