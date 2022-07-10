@@ -33,17 +33,31 @@ export default function Report(props) {
     let day = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
     return day + "/" + month + "/" + year;
   }
-  const [perPage, setPerPage] = useState(1);
+  const [perPage, setPerPage] = useState(props.perPage);
+  useEffect(() => {
+    setPerPage(props.perPage);
+  }, [props.perPage]);
   const ref = useRef();
   useEffect(() => {
     if (ref.current) {
       let cm = 37.795275591;
       let cms = ref.current.offsetWidth / cm;
       let floored = Math.floor((0.95 * 28) / cms);
-      setPerPage(floored);
+      // setPerPage(floored);
       props.changePerPage(floored);
     }
-  }, [ref.current, props.people]);
+  }, [
+    ref.current && ref.current.offsetWidth,
+    // props.perPage,
+    // props.showBirth_date,
+    // props.showEducation_year,
+    // props.showFather,
+    // props.showName,
+    // props.showPhone_number,
+    // props.showRole,
+    // props.showStatus,
+    // props.showTeam,
+  ]);
   return (
     <div className={classes.report}>
       <header className={classes.header}>
@@ -64,10 +78,10 @@ export default function Report(props) {
                 style={{ width: 100 / perPage + "%" }}
                 key={index}
               >
-                {tablePersons.length != 0 ? (
+                {tablePersons.length != 0 && perPage ? (
                   <table
                     className={classes.table}
-                    ref={index == 0 ? ref : undefined}
+                    ref={index == 0 && props.current == 1 ? ref : undefined}
                   >
                     <thead>
                       <tr>

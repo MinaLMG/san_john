@@ -53,33 +53,43 @@ export default function ServantsReport(props) {
     }
     setEducation_years_M(obj);
   }, [education_years]);
-  const [options, setOptions] = useState({
-    name: true,
-    phone_number: true,
-    father: true,
-    birth_date: true,
-    team: true,
-    role: true,
-    status: true,
-    education_year: true,
-  });
-  useEffect(() => {
-    setPerPage(1);
-    setUpdate((prev) => prev + 1);
-  }, [
-    options.phone_number,
-    options.father,
-    options.birth_date,
-    options.team,
-    options.role,
-    options.status,
-    options.education_year,
-  ]);
+  //   const [options, setOptions] = useState({
+  //     name: true,
+  //     phone_number: true,
+  //     father: true,
+  //     birth_date: true,
+  //     team: true,
+  //     role: true,
+  //     status: true,
+  //     education_year: true,
+  //   });
+  const [showName, setShowName] = useState(true);
+  const [showPhone_number, setShowPhone_number] = useState(true);
+  const [showFather, setShowFather] = useState(true);
+  const [showBirth_date, setShowBirth_date] = useState(true);
+  const [showTeam, setShowTeam] = useState(true);
+  const [showRole, setShowRole] = useState(true);
+  const [showStatus, setShowStatus] = useState(true);
+  const [showEducation_year, setShowEducation_year] = useState(true);
+  //   useEffect(() => {
+  //     setPerPage(1);
+  //     setUpdate((prev) => prev + 1);
+  //   }, [
+  //     showBirth_date,
+  //     showEducation_year,
+  //     showFather,
+  //     showName,
+  //     showPhone_number,
+  //     showRole,
+  //     showStatus,
+  //     showTeam,
+  //   ]);
   const [update, setUpdate] = useState(1);
   const [personsToReport, setPersonsToReport] = useState([]);
   const [showReport, setShowReport] = useState(false);
   const [perPage, setPerPage] = useState(1);
   const perTable = 42;
+  //   console.log("per page ", perPage);
   return (
     <Fragment>
       <div className={General.actions}>
@@ -150,125 +160,102 @@ export default function ServantsReport(props) {
           تدوس )
         </div>
         <div className={General["data-element-small"]}>
-          {update && (
-            <CheckListItem
-              content={"الاسم"}
-              value={options.name}
-              onChange={() => {}}
-              //   onChange={(val) => {
-              //     setOptions((prev) => {
-              //       prev.name = val;
-              //       return prev;
-              //     });
-              //     setUpdate((prev) => prev + 1);
-              //   }}
-            ></CheckListItem>
-          )}
+          <CheckListItem
+            content={"الاسم"}
+            value={showName}
+            onChange={() => {}}
+            //   onChange={(val) => {
+            //     setOptions((prev) => {
+            //       prev.name = val;
+            //       return prev;
+            //     });
+            //     setUpdate((prev) => prev + 1);
+            //   }}
+          ></CheckListItem>
         </div>
         <div className={General["data-element-small"]}>
-          {update && (
-            <CheckListItem
-              content={"رقم الموبايل"}
-              value={options.phone_number}
-              onChange={(val) => {
-                setOptions((prev) => {
-                  prev.phone_number = val;
-                  return prev;
-                });
-                setUpdate((prev) => prev + 1);
-              }}
-            ></CheckListItem>
-          )}
+          <CheckListItem
+            content={"رقم الموبايل"}
+            value={showPhone_number}
+            onChange={(val) => {
+              setShowPhone_number(val);
+              setPerPage(1);
+
+              // setUpdate((prev) => prev + 1);
+            }}
+          ></CheckListItem>
         </div>
         <div className={General["data-element-small"]}>
-          {update && (
-            <CheckListItem
-              content={"اب الاعتراف"}
-              value={options.father}
-              onChange={(val) => {
-                setOptions((prev) => {
-                  prev.father = val;
-                  return prev;
-                });
-                setUpdate((prev) => prev + 1);
-              }}
-            ></CheckListItem>
-          )}
+          <CheckListItem
+            content={"اب الاعتراف"}
+            value={showFather}
+            onChange={(val) => {
+              setShowFather(val);
+              setPerPage(1);
+
+              // setUpdate((prev) => prev + 1);
+            }}
+          ></CheckListItem>
         </div>
         <div className={General["data-element-small"]}>
-          {update && (
-            <CheckListItem
-              content={"تاريخ الميلاد"}
-              value={options.birth_date}
-              onChange={(val) => {
-                setOptions((prev) => {
-                  prev.birth_date = val;
-                  return prev;
-                });
-                setUpdate((prev) => prev + 1);
-              }}
-            ></CheckListItem>
-          )}
+          <CheckListItem
+            content={"تاريخ الميلاد"}
+            value={showBirth_date}
+            onChange={(val) => {
+              setShowBirth_date(val);
+              setPerPage(1);
+
+              //   setUpdate((prev) => prev + 1);
+            }}
+          ></CheckListItem>
         </div>
         <div className={General["data-element-small"]}>
-          {update && (
-            <CheckListItem
-              content={"الفرقة"}
-              value={options.team}
-              onChange={(val) => {
-                setOptions((prev) => {
-                  prev.team = val;
-                  return prev;
-                });
-                setUpdate((prev) => prev + 1);
-              }}
-            ></CheckListItem>
-          )}
+          <CheckListItem
+            content={"الفرقة"}
+            value={showTeam}
+            onChange={(val) => {
+              setShowTeam(val);
+              setPerPage(1);
+
+              //   setUpdate((prev) => prev + 1);
+            }}
+          ></CheckListItem>
         </div>
         <div className={General["data-element-small"]}>
-          {update && (
-            <CheckListItem
-              content={"التخصص"}
-              value={options.role}
-              onChange={(val) => {
-                setOptions((prev) => {
-                  prev.role = val;
-                  return prev;
-                });
-                setUpdate((prev) => prev + 1);
-              }}
-            ></CheckListItem>
-          )}
+          <CheckListItem
+            content={"التخصص"}
+            value={showRole}
+            onChange={(val) => {
+              setShowRole(val);
+              setPerPage(1);
+
+              // setUpdate((prev) => prev + 1);
+            }}
+          ></CheckListItem>
         </div>
         <div className={General["data-element-small"]}>
-          {update && (
-            <CheckListItem
-              content={"حالة الخدمة"}
-              value={options.status}
-              onChange={(val) => {
-                setOptions((prev) => {
-                  prev.status = val;
-                  return prev;
-                });
-                setUpdate((prev) => prev + 1);
-              }}
-            ></CheckListItem>
-          )}
+          <CheckListItem
+            content={"حالة الخدمة"}
+            value={showStatus}
+            onChange={(val) => {
+              setShowStatus(val);
+              setPerPage(1);
+
+              //   setUpdate((prev) => prev + 1);
+            }}
+          ></CheckListItem>
         </div>
         <div className={General["data-element-small"]}>
-          {update && (
-            <CheckListItem
-              content={"المرحلة الدراسية"}
-              value={options.education_year}
-              onChange={(val) => {
-                setOptions((prev) => {
-                  prev.education_year = val;
-                  return prev;
-                });
-                setUpdate((prev) => prev + 1);
-              }}
-            ></CheckListItem>
-          )}
+          <CheckListItem
+            content={"المرحلة الدراسية"}
+            value={showEducation_year}
+            onChange={(val) => {
+              setShowEducation_year(val);
+              setPerPage(1);
+
+              //   setUpdate((prev) => prev + 1);
+            }}
+          ></CheckListItem>
         </div>
       </form>
       <div className={General.final}>
@@ -342,6 +329,8 @@ export default function ServantsReport(props) {
           />
           <div ref={componentRef} className="PrintSection">
             {showReport &&
+              perPage &&
+              update &&
               personsToReport.map((person, index) => {
                 return index % (perPage * perTable) == 0 ? (
                   <React.Fragment key={index}>
@@ -381,14 +370,14 @@ export default function ServantsReport(props) {
                       teams={props.teamsDict}
                       status={props.StatusDict}
                       education_years={props.education_yearsDict}
-                      showName={options.name}
-                      showPhone_number={options.phone_number}
-                      showFather={options.father}
-                      showTeam={options.team}
-                      showRole={options.role}
-                      showEducation_year={options.education_year}
-                      showStatus={options.status}
-                      showBirth_date={options.birth_date}
+                      showName={showName}
+                      showPhone_number={showPhone_number}
+                      showFather={showFather}
+                      showTeam={showTeam}
+                      showRole={showRole}
+                      showEducation_year={showEducation_year}
+                      showStatus={showStatus}
+                      showBirth_date={showBirth_date}
                       perPage={perPage}
                       changePerPage={(val) => {
                         setPerPage(val);
