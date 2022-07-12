@@ -16,6 +16,7 @@
     "nodemon": "^1.18.3"
   },
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
     "validator": "^13.7.0"
   }

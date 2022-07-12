@@ -165,7 +165,7 @@ export default function Reports(props) {
           <ReportsItem
             onClick={() => {
               setChosen(undefined);
-              // setChosen("meetings");
+              setChosen("meetings");
             }}
             buttonContent={"تقارير ( حضور/غياب ) اجتماعات"}
           ></ReportsItem>
@@ -199,7 +199,25 @@ export default function Reports(props) {
           education_years={education_years}
         ></ServantsReport>
       )}
-      {false && (
+      {chosen == "meetings" && (
+        <ServantsReport
+          onGoBack={() => {
+            setChosen(undefined);
+          }}
+          rolesDict={rolesDict}
+          teamsDict={teamsDict}
+          StatusDict={StatusDict}
+          education_yearsDict={education_yearsDict}
+          persons={persons}
+          Status={Status}
+          teams={teams}
+          roles={roles}
+          education_years={education_years}
+          meetings={true}
+        ></ServantsReport>
+      )}
+
+      {/* {false && (
         <React.Fragment>
           <ReactToPrint
             trigger={() => (
@@ -246,7 +264,7 @@ export default function Reports(props) {
               })}
           </div>
         </React.Fragment>
-      )}
+      )} */}
     </Fragment>
   );
 }

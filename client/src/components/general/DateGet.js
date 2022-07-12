@@ -68,14 +68,14 @@ export default function DateGet(props) {
       <select
         className={classes.select}
         onChange={yearChangeHandler}
-        selected={c_year}
+        value={c_year ? c_year : ""}
       >
-        <option disabled={true} selected={c_year === undefined}>
+        <option disabled={true} value="">
           year
         </option>
         {years.map((year) => {
           return (
-            <option value={year} selected={c_year === year}>
+            <option key={year} value={year}>
               {year}
             </option>
           );
@@ -84,15 +84,15 @@ export default function DateGet(props) {
 
       <select
         className={classes.select}
-        selected={c_month}
+        value={c_month ? c_month : ""}
         onChange={monthChangeHandler}
       >
-        <option disabled={true} selected={c_month === undefined}>
+        <option disabled={true} value="">
           month
         </option>
         {months.map((month) => {
           return (
-            <option value={month} selected={c_month === month}>
+            <option key={month} value={month}>
               {month}
             </option>
           );
@@ -101,9 +101,9 @@ export default function DateGet(props) {
       <select
         className={classes.select}
         onChange={dayChangeHandler}
-        selected={c_day}
+        value={c_day ? c_day : ""}
       >
-        <option disabled={true} selected={c_day === undefined}>
+        <option disabled={true} value="">
           day
         </option>
         ;
@@ -117,7 +117,7 @@ export default function DateGet(props) {
                 ([2].includes(c_month) && c_year % 4 !== 0 && day < 29)
               )
                 return (
-                  <option value={day} selected={c_day === day}>
+                  <option key={day} value={day}>
                     {day}
                   </option>
                 );

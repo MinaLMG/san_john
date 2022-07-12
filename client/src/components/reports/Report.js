@@ -46,18 +46,7 @@ export default function Report(props) {
       // setPerPage(floored);
       props.changePerPage(floored);
     }
-  }, [
-    ref.current && ref.current.offsetWidth,
-    // props.perPage,
-    // props.showBirth_date,
-    // props.showEducation_year,
-    // props.showFather,
-    // props.showName,
-    // props.showPhone_number,
-    // props.showRole,
-    // props.showStatus,
-    // props.showTeam,
-  ]);
+  }, [ref.current && ref.current.offsetWidth]);
   return (
     <div className={classes.report}>
       <header className={classes.header}>

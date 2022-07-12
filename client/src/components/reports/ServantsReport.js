@@ -6,6 +6,10 @@ import PrettySelect from "../general/PrettySelect";
 import Report from "./Report";
 import ReactToPrint from "react-to-print";
 import CheckListItem from "../general/CheckListItem";
+import { Autocomplete } from "@mui/material";
+import { TextField } from "@mui/material";
+import instance from "../axios";
+
 export default function ServantsReport(props) {
   const componentRef = useRef();
   const [teamChosen, setTeamChosen] = useState(undefined);
@@ -71,25 +75,42 @@ export default function ServantsReport(props) {
   const [showRole, setShowRole] = useState(true);
   const [showStatus, setShowStatus] = useState(true);
   const [showEducation_year, setShowEducation_year] = useState(true);
-  //   useEffect(() => {
-  //     setPerPage(1);
-  //     setUpdate((prev) => prev + 1);
-  //   }, [
-  //     showBirth_date,
-  //     showEducation_year,
-  //     showFather,
-  //     showName,
-  //     showPhone_number,
-  //     showRole,
-  //     showStatus,
-  //     showTeam,
-  //   ]);
   const [update, setUpdate] = useState(1);
   const [personsToReport, setPersonsToReport] = useState([]);
   const [showReport, setShowReport] = useState(false);
   const [perPage, setPerPage] = useState(1);
   const perTable = 42;
-  //   console.log("per page ", perPage);
+  const [meetings, setMeetings] = useState([]);
+  const getMeetings = async () => {
+    try {
+      const res = await instance.get("/Meetings");
+      setMeetings(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    getMeetings();
+  }, []);
+  function getDate(val) {
+    let date = new Date(val);
+    let year = date.getFullYear();
+    let month = date.getMonth();
+    let day = date.getDate();
+    return day + "/" + (month + 1) + "/" + year;
+  }
+  const [chosen, setChosen] = useState(null); //for meeting selection
+  const [meeting_follower, setMeeting_follower] = useState(null); //for meeting selection
+  const [disabled, setDisabled] = useState(true);
+  const getAttendees = async (id) => {
+    try {
+      const res = await instance.get(`/Meeting_Attendeds/Meeting/${id}`);
+      setAttendees(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const [attendees, setAttendees] = useState([]);
   return (
     <Fragment>
       <div className={General.actions}>
@@ -103,6 +124,60 @@ export default function ServantsReport(props) {
           ></img>
         </h3>
       </div>
+
+      {props.meetings && (
+        <Fragment>
+          <div className={classes.note}>
+            اختار الاجتماع و شوف عاوز غياب و لا حضور يا حبوب :D
+          </div>
+          <div className={`${General.auto} flex-column`}>
+            <Autocomplete
+              disablePortal
+              id="combo-box-demo"
+              options={meetings.map((meeting) => {
+                return { id: meeting._id, date: getDate(meeting.date) };
+              })}
+              getOptionLabel={(option) => option.date}
+              isOptionEqualToValue={(option, value) => option.id === value.id}
+              sx={{ width: "50%" }}
+              renderInput={(params) => (
+                <TextField {...params} label="تاريخ الاجتماع"></TextField>
+              )}
+              value={chosen}
+              onChange={(e, newVal) => {
+                setChosen(newVal);
+                getAttendees(newVal.id);
+                if (!newVal) {
+                  setDisabled(true);
+                } else {
+                  if (meeting_follower) {
+                    setDisabled(false);
+                  }
+                }
+              }}
+            />
+            <div className={General["data-element"]}>
+              <div className={General["element-container"]}>
+                <PrettySelect
+                  data={{ absent: "غياب", attend: "حضور" }}
+                  option="غياب/حضور"
+                  onChange={(status) => {
+                    setMeeting_follower(status);
+                    if (!status) {
+                      setDisabled(true);
+                    } else {
+                      if (chosen) {
+                        setDisabled(false);
+                      }
+                    }
+                  }}
+                  chosen={statusChosen}
+                ></PrettySelect>
+              </div>
+            </div>
+          </div>
+        </Fragment>
+      )}
       <form className={General.form}>
         <div className={classes.note}>
           لو عاوز كل الخدام ممكن ما تحددش حاجة :D
@@ -261,7 +336,7 @@ export default function ServantsReport(props) {
       <div className={General.final}>
         <button
           className={General.button}
-          disabled={false}
+          disabled={props.meetings ? disabled : false}
           onClick={() => {
             setPersonsToReport(() => {
               let temp = JSON.parse(JSON.stringify(props.persons));
@@ -292,6 +367,31 @@ export default function ServantsReport(props) {
                   if (person.education_year == education_yearChosen)
                     temp2.push(person);
                 });
+                temp = temp2;
+              }
+              if (props.meetings) {
+                let temp2 = [];
+                // let data = await getAttendees();
+                let dict = {};
+                attendees.map((p) => {
+                  dict[p.person._id] = true;
+                });
+                switch (meeting_follower) {
+                  case "attend":
+                    temp.map((person) => {
+                      if (dict[person._id]) {
+                        temp2.push(person);
+                      }
+                    });
+                    break;
+                  case "absent":
+                    temp.map((person) => {
+                      if (!dict[person._id]) {
+                        temp2.push(person);
+                      }
+                    });
+                    break;
+                }
                 temp = temp2;
               }
               return temp;

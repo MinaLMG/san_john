@@ -6,7 +6,7 @@ export default function PrettySelect(props) {
   const [options, setOptions] = useState(props.data);
   const optionsKeys = Object.keys(props.data);
   function changeState(e) {
-    props.onChange(e.target.value);
+    props.onChange(e.target.value != "" ? e.target.value : undefined);
   }
   function reset() {
     props.onChange(undefined);
@@ -20,14 +20,15 @@ export default function PrettySelect(props) {
         } ${props.red ? classes.red : ""}`}
         aria-label="Default select example"
         onChange={changeState}
+        value={props.chosen ? props.chosen : ""}
         // style={{ width: props.width ? props.width : "" }}\
       >
-        <option disabled={true} selected={props.chosen == undefined}>
+        <option disabled={true} value={""}>
           {props.option}
         </option>
         {optionsKeys.map((key, index) => {
           return (
-            <option key={key} value={key} selected={key == props.chosen}>
+            <option key={key} value={key}>
               {props.data[key]}
             </option>
           );

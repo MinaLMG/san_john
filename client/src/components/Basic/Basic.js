@@ -170,6 +170,65 @@ export default function Basic(props) {
   //     }
   //   });
   // }
+  // function randomizeStatus() {
+  //   persons.map(async (person) => {
+  //     if (!person.status) {
+  //       let to_send = JSON.parse(JSON.stringify(person));
+  //       delete to_send["__v"];
+  //       let id_to_send = to_send["_id"];
+  //       delete to_send["_id"];
+  //       // let statusKeys = Object.keys(Status);
+  //       let x = Math.floor(Math.random() * Status.length);
+  //       to_send["status"] = Status[x]._id;
+  //       const res = await instance.patch(`/Persons/${id_to_send}`, to_send);
+  //       console.log(res.data);
+  //     }
+  //   });
+  // }
+  // function randomizeTeams() {
+  //   persons.map(async (person) => {
+  //     if (!person.team) {
+  //       let to_send = JSON.parse(JSON.stringify(person));
+  //       delete to_send["__v"];
+  //       let id_to_send = to_send["_id"];
+  //       delete to_send["_id"];
+  //       let x = Math.floor(Math.random() * teams.length);
+  //       to_send["team"] = teams[x]._id;
+  //       const res = await instance.patch(`/Persons/${id_to_send}`, to_send);
+  //       console.log(res.data);
+  //     }
+  //   });
+  // }
+  // function randomizeEdu() {
+  //   persons.map(async (person) => {
+  //     if (!person.education_year) {
+  //       let to_send = JSON.parse(JSON.stringify(person));
+  //       delete to_send["__v"];
+  //       let id_to_send = to_send["_id"];
+  //       delete to_send["_id"];
+  //       // let statusKeys = Object.keys(Status);
+  //       let x = Math.floor(Math.random() * education_years.length);
+  //       to_send["education_year"] = education_years[x]._id;
+  //       const res = await instance.patch(`/Persons/${id_to_send}`, to_send);
+  //       console.log(res.data);
+  //     }
+  //   });
+  // }
+  // function randomizeRoles() {
+  //   persons.map(async (person) => {
+  //     if (!person.role) {
+  //       let to_send = JSON.parse(JSON.stringify(person));
+  //       delete to_send["__v"];
+  //       let id_to_send = to_send["_id"];
+  //       delete to_send["_id"];
+  //       // let statusKeys = Object.keys(Status);
+  //       let x = Math.floor(Math.random() * roles.length);
+  //       to_send["role"] = roles[x]._id;
+  //       const res = await instance.patch(`/Persons/${id_to_send}`, to_send);
+  //       console.log(res.data);
+  //     }
+  //   });
+  // }
   const [chosen, setChosen] = useState(
     localStorage.getItem("BasicChosen")
       ? localStorage.getItem("BasicChosen")
@@ -258,7 +317,11 @@ export default function Basic(props) {
   <button onClick={createStatus}> create status</button> */
 }
 {
-  /* <button onClick={randomizeDates}> randomize dates</button> */
+  /* <button onClick={randomizeDates}> randomize dates</button> 
+      <button onClick={randomizeStatus}> randomize status</button>
+      <button onClick={randomizeRoles}> randomize roles</button>
+      <button onClick={randomizeEdu}> randomize Edu</button>
+      <button onClick={randomizeTeams}> randomize teams</button>  */
 }
 {
   /* 
