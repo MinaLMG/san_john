@@ -9,13 +9,13 @@ export default function BasicChosen(props) {
   const dict = {
     edu: "المراحل الدراسية",
     status: "الحالة",
-    roles: "الأدوار",
+    roles: "التخصصات",
     teams: "الفرق",
   };
   const dict2 = {
     edu: "مرحلة دراسية",
     status: "حالة",
-    roles: "دور",
+    roles: "تخصص",
     teams: "فريق",
   };
   return (

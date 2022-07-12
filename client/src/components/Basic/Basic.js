@@ -271,7 +271,7 @@ export default function Basic(props) {
                 }}
                 className={General["area-button"]}
               >
-                الأدوار
+                التخصصات
               </button>
             </div>
             <div className={classes.area}>
@@ -292,6 +292,16 @@ export default function Basic(props) {
                 className={General["area-button"]}
               >
                 المراحل الدراسية
+              </button>
+            </div>
+            <div className={classes.area}>
+              <button
+                onClick={() => {
+                  setChosen("speaker");
+                }}
+                className={General["area-button"]}
+              >
+                المتكلمين
               </button>
             </div>
           </div>
@@ -333,7 +343,7 @@ export default function Basic(props) {
           })}
         </ul>
       )}
-      <h1> الادوار </h1>
+      <h1> التخصصات </h1>
       {roles.length != 0 && (
         <ul>
           {roles.map((role) => {

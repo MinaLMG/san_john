@@ -110,13 +110,13 @@ export default function AddBasic(props) {
   const dict = {
     teams: "الفريق",
     status: "الحالة",
-    roles: "الدور",
+    roles: "التخصص",
     edu: "المرحلة الدراسية",
   };
   const dict2 = {
     teams: "فريق",
     status: "حالة",
-    roles: "دور",
+    roles: "تخصص",
     edu: "مرحلة الدراسية",
   };
   return (

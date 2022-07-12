@@ -210,7 +210,7 @@ export default function ServantsReport(props) {
           <div className={General["element-container"]}>
             <PrettySelect
               data={roles_M}
-              option="الدور"
+              option="التخصص"
               onChange={(role) => {
                 setRoleChosen(role);
               }}

@@ -71,19 +71,19 @@ export default function ShowBasic(props) {
   const dict = {
     teams: "الفريق",
     status: "الحالة",
-    roles: "الدور",
+    roles: "التخصص",
     edu: "المرحلة الدراسية",
   };
   const dict2 = {
     teams: "فريق",
     status: "حالة",
-    roles: "دور",
+    roles: "تخصص",
     edu: "مرحلة الدراسية",
   };
   const dict3 = {
     teams: "الفرق",
     status: "الحالات",
-    roles: "الادوار",
+    roles: "التخصصات",
     edu: "المراحل الدراسية",
   };
   return (
