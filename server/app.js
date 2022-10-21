@@ -43,6 +43,9 @@ app.use(SpeakerRouter);
 const Meeting_Type_Router = require("./src/routers/Meeting_Type");
 app.use(Meeting_Type_Router);
 
+const User_Router = require("./src/routers/User");
+app.use(User_Router);
+
 app.listen(port, () => {
   console.log("Server is up on port " + port);
 });
