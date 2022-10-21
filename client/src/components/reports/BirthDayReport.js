@@ -15,7 +15,7 @@ export default function BirthDayReport(props) {
     useState(undefined);
 
   const [showReport, setShowReport] = useState(false);
-  const perPage = 1;
+  const [perPage, setPerPage] = useState(1);
   const perTable = 42;
   const [personsToReport, setPersonsToReport] = useState([]);
   return (
@@ -131,6 +131,9 @@ export default function BirthDayReport(props) {
                       showStatus={true}
                       showBirth_date={true}
                       perPage={perPage}
+                      changePerPage={(val) => {
+                        setPerPage(val);
+                      }}
                       perTable={perTable}
                     ></Report>
                   </React.Fragment>

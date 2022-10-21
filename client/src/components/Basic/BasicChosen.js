@@ -11,12 +11,16 @@ export default function BasicChosen(props) {
     status: "الحالة",
     roles: "التخصصات",
     teams: "الفرق",
+    speakers: "المتكلمين",
+    meeting_types: "انواع الاجتماعات",
   };
   const dict2 = {
     edu: "مرحلة دراسية",
     status: "حالة",
     roles: "تخصص",
     teams: "فريق",
+    speakers: "متكلم",
+    meeting_types: "نوع اجتماع",
   };
   return (
     <Fragment>

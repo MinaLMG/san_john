@@ -156,6 +156,17 @@ export default function Basic(props) {
   //     const team = await instance.post("/Status", status[i]);
   //   }
   // }
+  // async function createMeeting_Types() {
+  //   const Meeting_Types = [
+  //     { name: "اجتماع امناء" },
+  //     { name: "اجتماع اسبوعى " },
+  //     { name: "اعداد قادة" },
+  //     { name: "اجتماع فرقة" },
+  //   ];
+  //   for (let i = 0; i < Meeting_Types.length; i++) {
+  //     const team = await instance.post("/Meeting_Types", Meeting_Types[i]);
+  //   }
+  // }
   // function randomizeDates() {
   //   persons.map(async (person) => {
   //     if (!person.birth_date) {
@@ -229,6 +240,21 @@ export default function Basic(props) {
   //     }
   //   });
   // }
+  function randomizeGender() {
+    persons.map(async (person) => {
+      let genders = ["ذكر", "أنثى"];
+      if (!person.gender) {
+        let to_send = JSON.parse(JSON.stringify(person));
+        delete to_send["__v"];
+        let id_to_send = to_send["_id"];
+        delete to_send["_id"];
+        let x = Math.floor(Math.random() * genders.length);
+        to_send["gender"] = genders[x];
+        const res = await instance.patch(`/Persons/${id_to_send}`, to_send);
+        console.log(res.data);
+      }
+    });
+  }
   const [chosen, setChosen] = useState(
     localStorage.getItem("BasicChosen")
       ? localStorage.getItem("BasicChosen")
@@ -297,11 +323,21 @@ export default function Basic(props) {
             <div className={classes.area}>
               <button
                 onClick={() => {
-                  setChosen("speaker");
+                  setChosen("speakers");
                 }}
                 className={General["area-button"]}
               >
                 المتكلمين
+              </button>
+            </div>
+            <div className={classes.area}>
+              <button
+                onClick={() => {
+                  setChosen("meeting_types");
+                }}
+                className={General["area-button"]}
+              >
+                انواع الاجتماعات
               </button>
             </div>
           </div>
@@ -324,14 +360,19 @@ export default function Basic(props) {
   <button onClick={createTeams}> create teams</button>
   <button onClick={createRoles}> create roles</button>
   <button onClick={create_e_y}> create education_years</button>
-  <button onClick={createStatus}> create status</button> */
+  <button onClick={createStatus}> create status</button> 
+  <button onClick={createMeeting_Types}> create Meeting Types</button>
+  */
 }
 {
-  /* <button onClick={randomizeDates}> randomize dates</button> 
+  /* 
+  <button onClick={randomizeDates}> randomize dates</button> 
       <button onClick={randomizeStatus}> randomize status</button>
       <button onClick={randomizeRoles}> randomize roles</button>
       <button onClick={randomizeEdu}> randomize Edu</button>
-      <button onClick={randomizeTeams}> randomize teams</button>  */
+      <button onClick={randomizeTeams}> randomize teams</button> 
+      <button onClick={randomizeGender}> randomize genders</button>
+  */
 }
 {
   /* 

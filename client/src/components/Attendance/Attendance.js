@@ -15,8 +15,8 @@ export default function Attendance(props) {
       : undefined
   );
   useEffect(() => {
-    if (chosen != undefined) localStorage.setItem("AttendanceChosen", chosen);
-    else localStorage.removeItem("AttendaneChosen");
+    if (chosen == undefined) localStorage.removeItem("AttendanceChosen");
+    else localStorage.setItem("AttendanceChosen", chosen);
   }, [chosen]);
   return (
     <Fragment>

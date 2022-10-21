@@ -29,6 +29,12 @@ export default function AddBasic(props) {
         case "edu":
           res = await instance.post("/Education_Years", element);
           break;
+        case "speakers":
+          res = await instance.post("/Speakers", element);
+          break;
+        case "meeting_types":
+          res = await instance.post("/Meeting_Types", element);
+          break;
         default:
           break;
       }
@@ -62,6 +68,12 @@ export default function AddBasic(props) {
         case "edu":
           res = await instance.patch(`/Education_Years/${id_to_send}`, to_send);
           break;
+        case "speakers":
+          res = await instance.patch(`/Speakers/${id_to_send}`, to_send);
+          break;
+        case "meeting_types":
+          res = await instance.patch(`/Meeting_Types/${id_to_send}`, to_send);
+          break;
         default:
           break;
       }
@@ -92,6 +104,12 @@ export default function AddBasic(props) {
         case "edu":
           res = await instance.delete(`/Education_Years/${id_to_send}`);
           break;
+        case "speakers":
+          res = await instance.delete(`/Speakers/${id_to_send}`);
+          break;
+        case "meeting_types":
+          res = await instance.delete(`/Meeting_Types/${id_to_send}`);
+          break;
         default:
           break;
       }
@@ -112,12 +130,16 @@ export default function AddBasic(props) {
     status: "الحالة",
     roles: "التخصص",
     edu: "المرحلة الدراسية",
+    speakers: "المتكلم",
+    meeting_types: "نوع الاجتماع",
   };
   const dict2 = {
     teams: "فريق",
     status: "حالة",
     roles: "تخصص",
     edu: "مرحلة الدراسية",
+    speakers: "متكلم",
+    meeting_types: "نوع اجتماع",
   };
   return (
     <React.Fragment>

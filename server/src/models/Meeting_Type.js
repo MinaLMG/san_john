@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
 
-const Speaker = mongoose.model("Speaker", {
+const Meeting_Type = mongoose.model("Meeting_Type", {
   name: {
     type: String,
     required: true,
@@ -10,4 +10,4 @@ const Speaker = mongoose.model("Speaker", {
   },
 });
 
-module.exports = Speaker;
+module.exports = Meeting_Type;

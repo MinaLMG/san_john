@@ -24,6 +24,12 @@ export default function ShowBasic(props) {
         case "edu":
           res = await instance.get("/Education_Years");
           break;
+        case "speakers":
+          res = await instance.get("/Speakers");
+          break;
+        case "meeting_types":
+          res = await instance.get("/Meeting_Types");
+          break;
         default:
           break;
       }
@@ -73,25 +79,34 @@ export default function ShowBasic(props) {
     status: "الحالة",
     roles: "التخصص",
     edu: "المرحلة الدراسية",
+    speakers: "المتكلم",
+    meeting_types: "نوع الاجتماع",
   };
   const dict2 = {
     teams: "فريق",
     status: "حالة",
     roles: "تخصص",
     edu: "مرحلة الدراسية",
+    speakers: "متكلم",
+    meeting_types: "نوع اجتماع",
   };
   const dict3 = {
     teams: "الفرق",
     status: "الحالات",
     roles: "التخصصات",
     edu: "المراحل الدراسية",
+    speakers: "المتكلمون",
+    meeting_types: "انواع الاجتماعات",
   };
   return (
     <React.Fragment>
       {!edit && (
         <React.Fragment>
           <div className={General.actions}>
-            <h3> {dict3[props.data]} المسجلة : </h3>
+            <h3>
+              {dict3[props.data]}
+              {props.data == "speakers" ? " المسجلون" : " المسجلة"}
+            </h3>
             <h3 className={General.h3} onClick={props.onGoBack}>
               back
               <img
