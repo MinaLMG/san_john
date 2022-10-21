@@ -99,9 +99,9 @@ export default function Login(props) {
           <button className={General.button} onClick={checkAccount}>
             تسجيل دخول
           </button>
-          <button className={General.button} onClick={createAccount}>
+          {/* <button className={General.button} onClick={createAccount}>
             اول مرة
-          </button>
+          </button> */}
         </div>
         {enteringError && (
           <span className={General.error}>
