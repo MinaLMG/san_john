@@ -7,6 +7,8 @@ import Reports from "./reports/Reports";
 import Basic from "./Basic/Basic";
 import MainMenuItem from "./MainMenuItem";
 import logo from "../assets/logo.jpeg";
+import Login from "./Login/Login";
+import logout from "../assets/icons/logout.png";
 export default function MainMenu() {
   const [chosen, setChosen] = useState(
     localStorage.getItem("MainMenuChosen")
@@ -20,70 +22,91 @@ export default function MainMenu() {
     if (chosen != undefined) localStorage.setItem("MainMenuChosen", chosen);
     else localStorage.removeItem("MainMenuChosen");
   }, [chosen]);
+  const [registered, setRegistered] = useState(
+    localStorage["registered"] == "true" ? localStorage["registered"] : false
+  );
+  function changeRegistered() {
+    setRegistered(true);
+    localStorage["registered"] = true;
+  }
   return (
     <div className={classes.backgroud}>
       <header className={classes.header}>
         <h1 className={classes.title}>خدمة القديس حبيب جرجس</h1>
         <img src={logo} className={classes.image}></img>
       </header>
-      <div className=" container-width">
-        {chosen == undefined && (
-          <React.Fragment>
-            <MainMenuItem
-              onClick={() => {
-                changeChosen("data");
+      {registered ? (
+        <div className=" container-width">
+          {chosen == undefined && (
+            <React.Fragment>
+              <MainMenuItem
+                onClick={() => {
+                  changeChosen("data");
+                }}
+                buttonContent={"بيانات الخدام"}
+              ></MainMenuItem>
+              <MainMenuItem
+                onClick={() => {
+                  changeChosen("attendance");
+                }}
+                buttonContent={"الغياب / الحضور"}
+              ></MainMenuItem>
+              <MainMenuItem
+                onClick={() => {
+                  changeChosen("reports");
+                }}
+                buttonContent={"التقارير"}
+              ></MainMenuItem>
+              <MainMenuItem
+                onClick={() => {
+                  changeChosen("basic");
+                }}
+                buttonContent={"قاعدة البيانات (not recommended)"}
+              ></MainMenuItem>
+              <div className={classes.out}>
+                <button
+                  onClick={() => {
+                    setRegistered(false);
+                    localStorage["registered"] = false;
+                  }}
+                >
+                  تسجيل الخروج <img src={logout}></img>
+                </button>
+              </div>
+            </React.Fragment>
+          )}
+          {chosen == "data" && (
+            <PData
+              onGoBack={() => {
+                changeChosen(undefined);
               }}
-              buttonContent={"بيانات الخدام"}
-            ></MainMenuItem>
-            <MainMenuItem
-              onClick={() => {
-                changeChosen("attendance");
+            ></PData>
+          )}
+          {chosen == "attendance" && (
+            <Attendance
+              onGoBack={() => {
+                changeChosen(undefined);
               }}
-              buttonContent={"الغياب / الحضور"}
-            ></MainMenuItem>
-            <MainMenuItem
-              onClick={() => {
-                changeChosen("reports");
+            ></Attendance>
+          )}
+          {chosen == "reports" && (
+            <Reports
+              onGoBack={() => {
+                changeChosen(undefined);
               }}
-              buttonContent={"التقارير"}
-            ></MainMenuItem>
-            <MainMenuItem
-              onClick={() => {
-                changeChosen("basic");
+            ></Reports>
+          )}
+          {chosen == "basic" && (
+            <Basic
+              onGoBack={() => {
+                changeChosen(undefined);
               }}
-              buttonContent={"قاعدة البيانات (not recommended)"}
-            ></MainMenuItem>
-          </React.Fragment>
-        )}
-        {chosen == "data" && (
-          <PData
-            onGoBack={() => {
-              changeChosen(undefined);
-            }}
-          ></PData>
-        )}
-        {chosen == "attendance" && (
-          <Attendance
-            onGoBack={() => {
-              changeChosen(undefined);
-            }}
-          ></Attendance>
-        )}
-        {chosen == "reports" && (
-          <Reports
-            onGoBack={() => {
-              changeChosen(undefined);
-            }}
-          ></Reports>
-        )}
-        {chosen == "basic" && (
-          <Basic
-            onGoBack={() => {
-              changeChosen(undefined);
-            }}
-          ></Basic>
-        )}
-      </div>
+            ></Basic>
+          )}
+        </div>
+      ) : (
+        <Login setRegistered={changeRegistered}></Login>
+      )}
     </div>
   );
 }

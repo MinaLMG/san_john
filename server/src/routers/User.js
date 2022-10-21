@@ -16,13 +16,32 @@ router.post("/Users", async (req, res) => {
 router.get("/User/:id", async (req, res) => {
   try {
     const _id = req.params.id;
-
     const user = await User.findById(_id);
 
     if (!user) {
       return res.status(404).send();
     }
 
+    res.send(user);
+  } catch (e) {
+    res.status(500).send();
+  }
+});
+
+router.post("/User", async (req, res) => {
+  try {
+    console.log(req.body);
+    const user = new User(req.body);
+
+    const userExist = await User.find({
+      name: user.name,
+      password: user.password,
+    });
+    console.log(userExist);
+    if (userExist.length == 0) {
+      return res.status(404).send();
+    }
+    console.log(user);
     res.send(user);
   } catch (e) {
     res.status(500).send();

@@ -12,3 +12,23 @@
 .title{
     cursor: default;
 }
+.out{
+    display: flex;
+    justify-content: flex-end;
+    color: red;
+    padding: 0 20px;
+}
+.out button{
+    padding: 2px;
+    border-radius: 2px;
+    background-color: transparent;
+    border: 1px solid #ccc;
+    opacity: 0.8;
+}
+.out button:hover{
+opacity: 1;
+}
+
+.out img{
+    height: 15px;
+}
