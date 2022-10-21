@@ -5,7 +5,6 @@ let schema = new mongoose.Schema({
   date: {
     type: Date,
     required: true,
-    unique: true,
   },
   description: {
     type: String,
@@ -20,6 +19,11 @@ let schema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Meeting_Type",
     required: true,
+  },
+  speaker: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Speaker",
+    required: false,
   },
 });
 schema = schema.index({ meeting_type: 1, date: 1 }, { unique: true });

@@ -60,7 +60,7 @@ router.patch("/Meetings/:id", async (req, res) => {
     }
   }
   const updates = Object.keys(req.body);
-  const allowedUpdates = ["date", "description", "meeting_type"];
+  const allowedUpdates = ["date", "description", "meeting_type", "speaker"];
   const isValidOperation = updates.every((update) =>
     allowedUpdates.includes(update)
   );

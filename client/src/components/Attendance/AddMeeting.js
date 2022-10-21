@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import classes from "./AddMeeting.module.css";
 import General from "../general/General.module.css";
 import back from "../../assets/icons/arrow.png";
@@ -6,12 +6,19 @@ import InputWithLabel from "../general/InputWithLabel";
 import DateGet from "../general/DateGet";
 import instance from "../axios";
 import Modal from "../general/Modal";
+import PrettySelect from "../general/PrettySelect";
 export default function AddMeeting(props) {
+  let start = new Date(Date.now());
+  start.setHours(0);
+  start.setMinutes(0);
+  start.setSeconds(0);
+  start.setMilliseconds(0);
+
   const [meeting, setMeeting] = useState(
     props.meeting
       ? props.meeting
       : {
-          date: new Date(Date.now()),
+          date: start,
         }
   );
   const [date_error, setDate_error] = useState(false);
@@ -70,6 +77,49 @@ export default function AddMeeting(props) {
       }, 3000);
     }
   };
+  const [meeting_types, setMeeting_types] = useState([]);
+  const [meeting_types_M, setMeeting_types_M] = useState([]);
+
+  const [speaker, setSpeaker] = useState(undefined);
+  const [speakers_M, setSpeakers_M] = useState([]);
+  const getMeeting_Types = async () => {
+    try {
+      const res = await instance.get("/Meeting_Types");
+      //   console.log(res);
+      console.log(res.data);
+      setMeeting_types(res.data);
+      //   let temp = res.data.map((x) => ({ [x.id]: x.country }));
+      //   setTeams_M(temp);
+      let obj = {};
+      for (let i = 0; i < res.data.length; i++) {
+        obj[res.data[i]._id] = res.data[i].name;
+      }
+      setMeeting_types_M(obj);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const getSpeakers = async () => {
+    try {
+      const res = await instance.get("/Speakers");
+      //   console.log(res);
+      console.log(res.data);
+      setSpeakers_M(res.data);
+      //   let temp = res.data.map((x) => ({ [x.id]: x.country }));
+      //   setTeams_M(temp);
+      let obj = {};
+      for (let i = 0; i < res.data.length; i++) {
+        obj[res.data[i]._id] = res.data[i].name;
+      }
+      setSpeakers_M(obj);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    getMeeting_Types();
+    getSpeakers();
+  }, []);
   return (
     <React.Fragment>
       <div className={General.actions}>
@@ -148,6 +198,61 @@ export default function AddMeeting(props) {
             red={false}
           ></InputWithLabel>
         </div>
+        <div className={General["data-element"]}>
+          <div className={General["element-container"]}>
+            <PrettySelect
+              data={meeting_types_M}
+              option="نوع الاجتماع"
+              onChange={(type) => {
+                const val = type;
+                if (val == undefined) {
+                  // setTeam_error(true);
+                  setMeeting((prev) => {
+                    delete prev["meeting_type"];
+                    return prev;
+                  });
+                } else {
+                  // setTeam_error(false);
+                  setMeeting((prev) => {
+                    return { ...prev, meeting_type: val };
+                  });
+                }
+              }}
+              chosen={meeting.meeting_type}
+            ></PrettySelect>
+          </div>
+        </div>
+        <div className={General["data-element"]}>
+          <div className={General["element-container"]}>
+            <PrettySelect
+              data={speakers_M}
+              option="المتكلم"
+              onChange={(speaker) => {
+                const val = speaker;
+                if (val == undefined) {
+                  // setTeam_error(true);
+                  setMeeting((prev) => {
+                    delete prev["speaker"];
+                    return prev;
+                  });
+                } else {
+                  // setTeam_error(false);
+                  setMeeting((prev) => {
+                    return { ...prev, speaker: val };
+                  });
+                }
+                // if (val == undefined) {
+                //   // setTeam_error(true);
+                //   setSpeaker(undefined);
+                // } else {
+                //   // setTeam_error(false);
+                //   setSpeaker(val);
+                // }
+              }}
+              chosen={meeting.speaker}
+            ></PrettySelect>
+          </div>
+        </div>
       </form>
       <div
         className={`${General.final} ${
@@ -163,7 +268,8 @@ export default function AddMeeting(props) {
         </button>
         {addingError && (
           <span className={General.error}>
-            السيرفر وقع او البيانات غلط .. خلى بالك لازم يكون فيه تاريخ
+            السيرفر وقع او البيانات غلط .. خلى بالك لازم يكون فيه تاريخ و نوع
+            اجتماع مختلفين
           </span>
         )}
         {props.edit && (
