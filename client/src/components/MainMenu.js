@@ -6,7 +6,7 @@ import Attendance from "./Attendance/Attendance";
 import Reports from "./reports/Reports";
 import Basic from "./Basic/Basic";
 import MainMenuItem from "./MainMenuItem";
-import logo from "../assets/logo.jpeg";
+import logo from "../assets/logo New.png";
 import Login from "./Login/Login";
 import logout from "../assets/icons/logout.png";
 export default function MainMenu() {
