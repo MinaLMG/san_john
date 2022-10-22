@@ -84,10 +84,20 @@ export default function ServantsReport(props) {
   const [perPage, setPerPage] = useState(1);
   const perTable = 42;
   const [meetings, setMeetings] = useState([]);
+  const [meetings_M, setMeetings_M] = useState([]);
   const getMeetings = async () => {
     try {
       const res = await instance.get("/Meetings");
       setMeetings(res.data);
+
+      let obj = {};
+      for (let i = 0; i < res.data.length; i++) {
+        obj[res.data[i]._id] =
+          res.data[i].date +
+          " " +
+          (res.data[i].meeting_type ? res.data[i].meeting_type : "");
+      }
+      setMeetings_M(obj);
     } catch (error) {
       console.log(error);
     }
@@ -470,7 +480,13 @@ export default function ServantsReport(props) {
                       all={Math.ceil(
                         (personsToReport.length + 1) / (perPage * perTable)
                       )}
-                      headerContent={` تقرير خدام ${
+                      headerContent={` تقرير ${
+                        props.meetings
+                          ? meeting_follower == "attend"
+                            ? "حضور"
+                            : "غياب"
+                          : ""
+                      } خدام ${
                         roleChosenToView ||
                         education_yearChosenToView ||
                         teamChosenToView ||
@@ -489,6 +505,14 @@ export default function ServantsReport(props) {
                         teamChosenToView ||
                         statusChosenToView
                           ? ")"
+                          : ""
+                      }${
+                        props.meetings
+                          ? " (" +
+                            chosen.date +
+                            " " +
+                            chosen.meeting_type +
+                            " )"
                           : ""
                       }`}
                       people={personsToReport.slice(
