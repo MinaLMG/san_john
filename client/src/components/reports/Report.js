@@ -128,6 +128,11 @@ export default function Report(props) {
                 ) : (
                   ""
                 )}
+                {props.last && (
+                  <div className={classes.total}>
+                    <span>اجمالى عدد الخدام {props.total}</span>
+                  </div>
+                )}
               </div>
             );
           })}

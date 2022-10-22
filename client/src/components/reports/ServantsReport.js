@@ -536,6 +536,11 @@ export default function ServantsReport(props) {
                         setPerPage(val);
                       }}
                       perTable={perTable}
+                      last={
+                        perPage * perTable * (index + 1) >
+                        personsToReport.length
+                      }
+                      total={personsToReport.length}
                     ></Report>
                   </React.Fragment>
                 ) : (
