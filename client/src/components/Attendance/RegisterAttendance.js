@@ -156,6 +156,7 @@ export default function RegisterAttendance(props) {
         <table className="table">
           <thead>
             <tr>
+              <th scope="col"></th>
               <th scope="col">الاسم</th>
               <th scope="col">الرقم القومى</th>
               <th scope="col">وقت الحضور</th>
@@ -164,9 +165,10 @@ export default function RegisterAttendance(props) {
           </thead>
           {attendees && (
             <tbody>
-              {attendees.map((attendee) => {
+              {attendees.map((attendee, index) => {
                 return (
                   <tr key={attendee.person._id} className={classes.tr}>
+                    <td>{index + 1}</td>
                     <td>{attendee.person.name}</td>
                     <td>{attendee.person.ID}</td>
                     <td>{getTime(attendee.date)}</td>
