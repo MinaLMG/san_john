@@ -32,7 +32,8 @@ export default function AddMeeting(props) {
       meeting["date_created"] = nowDate;
       const res = await instance.post("/Meetings", meeting);
       console.log(res.data);
-      props.onGoBack();
+      // props.onGoBack();
+      props.GoMeeting(res.data._id);
     } catch (error) {
       console.log(error);
       setAddingError(true);

@@ -14,6 +14,8 @@ export default function Attendance(props) {
       ? localStorage.getItem("AttendanceChosen")
       : undefined
   );
+  const [regChosen, setRegChosen] = useState(undefined);
+
   useEffect(() => {
     if (chosen == undefined) localStorage.removeItem("AttendanceChosen");
     else localStorage.setItem("AttendanceChosen", chosen);
@@ -73,6 +75,10 @@ export default function Attendance(props) {
           onGoBack={() => {
             setChosen(undefined);
           }}
+          GoMeeting={(id) => {
+            setChosen("Register");
+            setRegChosen(id);
+          }}
         ></AddMeeting>
       )}
       {chosen == "Edit" && (
@@ -90,6 +96,7 @@ export default function Attendance(props) {
             onGoBack={() => {
               setChosen(undefined);
             }}
+            chosen={regChosen ? regChosen : undefined}
           ></RegisterMeeting>
         </React.Fragment>
       )}

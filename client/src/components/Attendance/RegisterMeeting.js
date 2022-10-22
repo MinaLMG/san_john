@@ -7,7 +7,7 @@ import TextField from "@mui/material/TextField";
 import instance from "../axios";
 import RegisterAttendance from "./RegisterAttendance";
 export default function RegisterMeeting(props) {
-  const [chosen, setChosen] = useState(null);
+  const [chosen, setChosen] = useState(props.chosen ? props.chosen : null);
   const [meetings, setMeetings] = useState([]);
   const getMeetings = async () => {
     try {
