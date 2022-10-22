@@ -28,6 +28,18 @@ export default function Reports(props) {
       //   console.log(res);
       // console.log(res.data);
       setPersons(res.data);
+      // setPersons((prev) => {
+      //   return prev.concat(prev);
+      // });
+      // setPersons((prev) => {
+      //   return prev.concat(prev);
+      // });
+      // setPersons((prev) => {
+      //   return prev.concat(prev);
+      // });
+      // setPersons((prev) => {
+      //   return prev.concat(prev);
+      // });
     } catch (error) {
       console.log(error);
     }

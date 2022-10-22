@@ -13,7 +13,7 @@ export default function AddMeeting(props) {
   start.setMinutes(0);
   start.setSeconds(0);
   start.setMilliseconds(0);
-
+  const [update, setUpdate] = useState(1);
   const [meeting, setMeeting] = useState(
     props.meeting
       ? props.meeting
@@ -26,6 +26,13 @@ export default function AddMeeting(props) {
     props.edit ? false : false
   );
   const [addingError, setAddingError] = useState(false);
+  function getDate(val) {
+    let date = new Date(val);
+    let year = date.getFullYear();
+    let month = date.getMonth();
+    let day = date.getDate();
+    return day + "/" + (month + 1) + "/" + year;
+  }
   const add_meeting = async () => {
     try {
       let nowDate = new Date(Date.now());
@@ -33,7 +40,11 @@ export default function AddMeeting(props) {
       const res = await instance.post("/Meetings", meeting);
       console.log(res.data);
       // props.onGoBack();
-      props.GoMeeting(res.data._id);
+      props.GoMeeting({
+        id: res.data._id,
+        date: getDate(res.data.date),
+        meeting_type: meeting_types_M[res.data.meeting_type],
+      });
     } catch (error) {
       console.log(error);
       setAddingError(true);
@@ -150,12 +161,14 @@ export default function AddMeeting(props) {
                     delete prev["date"];
                     return prev;
                   });
+                  setUpdate((prev) => prev + 1);
                 } else {
                   setDisableButton(false);
                   setDate_error(false);
                   setMeeting((prev) => {
                     return { ...prev, date: val };
                   });
+                  setUpdate((prev) => prev + 1);
                 }
               }}
               edit={props.edit}
@@ -183,10 +196,12 @@ export default function AddMeeting(props) {
                 setMeeting((prev) => {
                   return { ...prev, description: val };
                 });
+                setUpdate((prev) => prev + 1);
               } else {
                 setMeeting((prev) => {
                   return { ...prev, description: val };
                 });
+                setUpdate((prev) => prev + 1);
               }
             }}
             value={
@@ -201,57 +216,65 @@ export default function AddMeeting(props) {
         </div>
         <div className={General["data-element"]}>
           <div className={General["element-container"]}>
-            <PrettySelect
-              data={meeting_types_M}
-              option="نوع الاجتماع"
-              onChange={(type) => {
-                const val = type;
-                if (val == undefined) {
-                  // setTeam_error(true);
-                  setMeeting((prev) => {
-                    delete prev["meeting_type"];
-                    return prev;
-                  });
-                } else {
-                  // setTeam_error(false);
-                  setMeeting((prev) => {
-                    return { ...prev, meeting_type: val };
-                  });
-                }
-              }}
-              chosen={meeting.meeting_type}
-            ></PrettySelect>
+            {update && (
+              <PrettySelect
+                data={meeting_types_M}
+                option="نوع الاجتماع"
+                onChange={(type) => {
+                  const val = type;
+                  if (val == undefined) {
+                    // setTeam_error(true);
+                    setMeeting((prev) => {
+                      delete prev["meeting_type"];
+                      return prev;
+                    });
+                    setUpdate((prev) => prev + 1);
+                  } else {
+                    // setTeam_error(false);
+                    setMeeting((prev) => {
+                      return { ...prev, meeting_type: val };
+                    });
+                    setUpdate((prev) => prev + 1);
+                  }
+                }}
+                chosen={meeting.meeting_type}
+              ></PrettySelect>
+            )}
           </div>
         </div>
         <div className={General["data-element"]}>
           <div className={General["element-container"]}>
-            <PrettySelect
-              data={speakers_M}
-              option="المتكلم"
-              onChange={(speaker) => {
-                const val = speaker;
-                if (val == undefined) {
-                  // setTeam_error(true);
-                  setMeeting((prev) => {
-                    delete prev["speaker"];
-                    return prev;
-                  });
-                } else {
-                  // setTeam_error(false);
-                  setMeeting((prev) => {
-                    return { ...prev, speaker: val };
-                  });
-                }
-                // if (val == undefined) {
-                //   // setTeam_error(true);
-                //   setSpeaker(undefined);
-                // } else {
-                //   // setTeam_error(false);
-                //   setSpeaker(val);
-                // }
-              }}
-              chosen={meeting.speaker}
-            ></PrettySelect>
+            {update && (
+              <PrettySelect
+                data={speakers_M}
+                option="المتكلم"
+                onChange={(speaker) => {
+                  const val = speaker;
+                  if (val == undefined) {
+                    // setTeam_error(true);
+                    setMeeting((prev) => {
+                      delete prev["speaker"];
+                      return prev;
+                      setUpdate((prev) => prev + 1);
+                    });
+                  } else {
+                    // setTeam_error(false);
+                    setMeeting((prev) => {
+                      return { ...prev, speaker: val };
+                    });
+                    setUpdate((prev) => prev + 1);
+                  }
+                  // if (val == undefined) {
+                  //   // setTeam_error(true);
+                  //   setSpeaker(undefined);
+                  // } else {
+                  //   // setTeam_error(false);
+                  //   setSpeaker(val);
+                  // }
+                }}
+                chosen={meeting.speaker}
+              ></PrettySelect>
+            )}
           </div>
         </div>
       </form>
