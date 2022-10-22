@@ -17,8 +17,28 @@ export default function RegisterMeeting(props) {
       console.log(error);
     }
   };
+  const [meeting_types, setMeeting_types] = useState([]);
+  const [meeting_types_M, setMeeting_types_M] = useState([]);
+  const getMeeting_Types = async () => {
+    try {
+      const res = await instance.get("/Meeting_Types");
+      //   console.log(res);
+      console.log(res.data);
+      setMeeting_types(res.data);
+      //   let temp = res.data.map((x) => ({ [x.id]: x.country }));
+      //   setTeams_M(temp);
+      let obj = {};
+      for (let i = 0; i < res.data.length; i++) {
+        obj[res.data[i]._id] = res.data[i].name;
+      }
+      setMeeting_types_M(obj);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   useEffect(() => {
     getMeetings();
+    getMeeting_Types();
   }, []);
   function getDate(val) {
     let date = new Date(val);
@@ -27,6 +47,7 @@ export default function RegisterMeeting(props) {
     let day = date.getDate();
     return day + "/" + (month + 1) + "/" + year;
   }
+
   return (
     <React.Fragment>
       {chosen == null && (
@@ -47,9 +68,17 @@ export default function RegisterMeeting(props) {
               disablePortal
               id="combo-box-demo"
               options={meetings.map((meeting) => {
-                return { id: meeting._id, date: getDate(meeting.date) };
+                return {
+                  id: meeting._id,
+                  date: getDate(meeting.date),
+                  meeting_type: meeting_types_M[meeting.meeting_type],
+                };
               })}
-              getOptionLabel={(option) => option.date}
+              getOptionLabel={(option) =>
+                option.date +
+                " " +
+                (option.meeting_type ? option.meeting_type : "")
+              }
               isOptionEqualToValue={(option, value) => option.id === value.id}
               sx={{ width: "50%" }}
               renderInput={(params) => (

@@ -23,11 +23,13 @@ export default function MainMenu() {
     else localStorage.removeItem("MainMenuChosen");
   }, [chosen]);
   const [registered, setRegistered] = useState(
-    localStorage["registered"] == "true" ? localStorage["registered"] : false
+    sessionStorage["registered"] == "true"
+      ? sessionStorage["registered"]
+      : false
   );
   function changeRegistered() {
     setRegistered(true);
-    localStorage["registered"] = true;
+    sessionStorage["registered"] = true;
   }
   return (
     <div className={classes.backgroud}>
@@ -67,7 +69,7 @@ export default function MainMenu() {
                 <button
                   onClick={() => {
                     setRegistered(false);
-                    localStorage["registered"] = false;
+                    sessionStorage["registered"] = false;
                   }}
                 >
                   تسجيل الخروج <img src={logout}></img>

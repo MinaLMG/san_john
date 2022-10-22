@@ -13,7 +13,9 @@ function App() {
       }
     });
   }
-
+  // window.addEventListener("beforeunload", () => {
+  //   localStorage.clear();
+  // });
   return (
     <div className="App">
       <MainMenu></MainMenu>

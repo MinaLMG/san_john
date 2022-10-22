@@ -57,6 +57,9 @@ export default function ServantsReport(props) {
     }
     setEducation_years_M(obj);
   }, [education_years]);
+
+  const [meeting_types, setMeeting_types] = useState([]);
+  const [meeting_types_M, setMeeting_types_M] = useState([]);
   //   const [options, setOptions] = useState({
   //     name: true,
   //     phone_number: true,
@@ -89,8 +92,26 @@ export default function ServantsReport(props) {
       console.log(error);
     }
   };
+  const getMeeting_Types = async () => {
+    try {
+      const res = await instance.get("/Meeting_Types");
+      //   console.log(res);
+      console.log(res.data);
+      setMeeting_types(res.data);
+      //   let temp = res.data.map((x) => ({ [x.id]: x.country }));
+      //   setTeams_M(temp);
+      let obj = {};
+      for (let i = 0; i < res.data.length; i++) {
+        obj[res.data[i]._id] = res.data[i].name;
+      }
+      setMeeting_types_M(obj);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   useEffect(() => {
     getMeetings();
+    getMeeting_Types();
   }, []);
   function getDate(val) {
     let date = new Date(val);
@@ -135,9 +156,17 @@ export default function ServantsReport(props) {
               disablePortal
               id="combo-box-demo"
               options={meetings.map((meeting) => {
-                return { id: meeting._id, date: getDate(meeting.date) };
+                return {
+                  id: meeting._id,
+                  date: getDate(meeting.date),
+                  meeting_type: meeting_types_M[meeting.meeting_type],
+                };
               })}
-              getOptionLabel={(option) => option.date}
+              getOptionLabel={(option) =>
+                option.date +
+                " " +
+                (option.meeting_type ? option.meeting_type : "")
+              }
               isOptionEqualToValue={(option, value) => option.id === value.id}
               sx={{ width: "50%" }}
               renderInput={(params) => (
@@ -146,10 +175,10 @@ export default function ServantsReport(props) {
               value={chosen}
               onChange={(e, newVal) => {
                 setChosen(newVal);
-                getAttendees(newVal.id);
                 if (!newVal) {
                   setDisabled(true);
                 } else {
+                  getAttendees(newVal.id);
                   if (meeting_follower) {
                     setDisabled(false);
                   }
@@ -171,7 +200,7 @@ export default function ServantsReport(props) {
                       }
                     }
                   }}
-                  chosen={statusChosen}
+                  chosen={meeting_follower}
                 ></PrettySelect>
               </div>
             </div>
