@@ -6,10 +6,19 @@ import Modal from "../general/Modal";
 import InputWithLabel from "../general/InputWithLabel";
 import instance from "../axios";
 export default function AddBasic(props) {
+  function getInitialElement() {
+    switch (props.data) {
+      case "users":
+        return { name: "", password: "", admin: false };
+      default:
+        return { name: "" };
+    }
+  }
   const [element, setElement] = useState(
-    props.edit ? props.element : { name: "" }
+    props.edit ? props.element : getInitialElement()
   );
   const [name_error, setName_error] = useState(false);
+  const [pass_error, setPass_error] = useState(false);
   const [disableButton, setDisableButton] = useState(props.edit ? false : true);
   const [addingError, setAddingError] = useState(false);
 
@@ -34,6 +43,9 @@ export default function AddBasic(props) {
           break;
         case "meeting_types":
           res = await instance.post("/Meeting_Types", element);
+          break;
+        case "users":
+          res = await instance.post("/Users", element);
           break;
         default:
           break;
@@ -74,6 +86,9 @@ export default function AddBasic(props) {
         case "meeting_types":
           res = await instance.patch(`/Meeting_Types/${id_to_send}`, to_send);
           break;
+        case "users":
+          res = await instance.patch(`/Users/${id_to_send}`, to_send);
+          break;
         default:
           break;
       }
@@ -110,6 +125,9 @@ export default function AddBasic(props) {
         case "meeting_types":
           res = await instance.delete(`/Meeting_Types/${id_to_send}`);
           break;
+        case "users":
+          res = await instance.delete(`/Users/${id_to_send}`);
+          break;
         default:
           break;
       }
@@ -132,6 +150,7 @@ export default function AddBasic(props) {
     edu: "المرحلة الدراسية",
     speakers: "المتكلم",
     meeting_types: "نوع الاجتماع",
+    users: "المستخدم",
   };
   const dict2 = {
     teams: "فريق",
@@ -140,7 +159,16 @@ export default function AddBasic(props) {
     edu: "مرحلة الدراسية",
     speakers: "متكلم",
     meeting_types: "نوع اجتماع",
+    users: "مستخدم",
   };
+  function getDisableValue() {
+    switch (props.data) {
+      case "users":
+        return !(element.name.trim() != "" && element.password != "");
+      default:
+        return false;
+    }
+  }
   return (
     <React.Fragment>
       <div className={General.actions}>
@@ -175,7 +203,7 @@ export default function AddBasic(props) {
                 });
               } else {
                 setName_error(false);
-                setDisableButton(false);
+                setDisableButton(getDisableValue());
                 setElement((prev) => {
                   return { ...prev, name: val };
                 });
@@ -184,6 +212,40 @@ export default function AddBasic(props) {
             value={props.edit ? element.name : element.name ? element.name : ""}
             red={name_error}
           ></InputWithLabel>
+        </div>
+        <div className={General["data-element"]}>
+          {props.data == "users" && (
+            <InputWithLabel
+              label={"كلمة المرور"}
+              placeHolder={`كلمة المرور`}
+              type={"password"}
+              width={"100%"}
+              onChange={(e) => {
+                const val = e.target.value;
+                if (val == "") {
+                  setPass_error(true);
+                  setDisableButton(true);
+                  setElement((prev) => {
+                    return { ...prev, password: "" };
+                  });
+                } else {
+                  setPass_error(false);
+                  setDisableButton(getDisableValue());
+                  setElement((prev) => {
+                    return { ...prev, password: val };
+                  });
+                }
+              }}
+              value={
+                props.edit
+                  ? element.password
+                  : element.password
+                  ? element.password
+                  : ""
+              }
+              red={pass_error}
+            ></InputWithLabel>
+          )}
         </div>
       </form>
       <div

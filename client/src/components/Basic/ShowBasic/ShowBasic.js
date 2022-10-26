@@ -30,6 +30,9 @@ export default function ShowBasic(props) {
         case "meeting_types":
           res = await instance.get("/Meeting_Types");
           break;
+        case "users":
+          res = await instance.get("/Users");
+          break;
         default:
           break;
       }
@@ -81,6 +84,7 @@ export default function ShowBasic(props) {
     edu: "المرحلة الدراسية",
     speakers: "المتكلم",
     meeting_types: "نوع الاجتماع",
+    users: "المستخدم",
   };
   const dict2 = {
     teams: "فريق",
@@ -89,6 +93,7 @@ export default function ShowBasic(props) {
     edu: "مرحلة الدراسية",
     speakers: "متكلم",
     meeting_types: "نوع اجتماع",
+    users: "مستخدم",
   };
   const dict3 = {
     teams: "الفرق",
@@ -97,6 +102,7 @@ export default function ShowBasic(props) {
     edu: "المراحل الدراسية",
     speakers: "المتكلمون",
     meeting_types: "انواع الاجتماعات",
+    users: "المستخدمون",
   };
   return (
     <React.Fragment>

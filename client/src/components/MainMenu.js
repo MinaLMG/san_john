@@ -27,10 +27,32 @@ export default function MainMenu() {
       ? sessionStorage["registered"]
       : false
   );
-  function changeRegistered() {
-    setRegistered(true);
-    sessionStorage["registered"] = true;
+  function changeRegistered(reg, admin) {
+    setRegistered(reg);
+    sessionStorage["registered"] = reg;
+    sessionStorage["admin"] = admin;
   }
+  // const axios = require("axios");
+
+  // const options = {
+  //   method: "GET",
+  //   url: "https://barcode-generator4.p.rapidapi.com/",
+  //   params: { text: "123456", barcodeType: "C128", imageType: "PNG" },
+  //   headers: {
+  //     "X-RapidAPI-Key": "9c3403d856msh2c3649954542f94p1f7dd9jsn4d08a2c9cb22",
+  //     "X-RapidAPI-Host": "barcode-generator4.p.rapidapi.com",
+  //   },
+  // };
+
+  // axios
+  //   .request(options)
+  //   .then(function (response) {
+  //     console.log(response.data);
+  //   })
+  //   .catch(function (error) {
+  //     console.error(error);
+  //   });
+
   return (
     <div className={classes.backgroud}>
       <header className={classes.header}>
@@ -70,6 +92,7 @@ export default function MainMenu() {
                   onClick={() => {
                     setRegistered(false);
                     sessionStorage["registered"] = false;
+                    sessionStorage["admin"] = false;
                   }}
                 >
                   تسجيل الخروج <img src={logout}></img>

@@ -98,6 +98,17 @@ export default function Basic(props) {
       console.log(error);
     }
   };
+  const [users, setUsers] = useState([]);
+  const getUsers = async () => {
+    try {
+      const res = await instance.get("/Users");
+      //   console.log(res);
+      console.log(res.data);
+      setUsers(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   useEffect(() => {
     getTeams();
     getRoles();
@@ -107,6 +118,7 @@ export default function Basic(props) {
     getPhone_numbers();
     getPersons();
     getMeetings();
+    if (sessionStorage["admin"]) getUsers();
   }, []);
 
   // async function createTeams() {
@@ -340,6 +352,18 @@ export default function Basic(props) {
                 انواع الاجتماعات
               </button>
             </div>
+            {sessionStorage["admin"] == "true" && (
+              <div className={classes.area}>
+                <button
+                  onClick={() => {
+                    setChosen("users");
+                  }}
+                  className={General["area-button"]}
+                >
+                  المستخدمون
+                </button>
+              </div>
+            )}
           </div>
         </Fragment>
       )}

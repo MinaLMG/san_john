@@ -15,7 +15,7 @@ export default function Login(props) {
         name: name,
         password: password,
       });
-      props.setRegistered(true);
+      props.setRegistered(true, res.data.admin);
     } catch (error) {
       setEnteringError(true);
       setTimeout(() => {

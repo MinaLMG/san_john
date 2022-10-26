@@ -30,19 +30,19 @@ router.get("/User/:id", async (req, res) => {
 
 router.post("/User", async (req, res) => {
   try {
-    console.log(req.body);
+    // console.log(req.body);
     const user = new User(req.body);
 
     const userExist = await User.find({
       name: user.name,
       password: user.password,
     });
-    console.log(userExist);
+    // console.log(userExist);
     if (userExist.length == 0) {
       return res.status(404).send();
     }
-    console.log(user);
-    res.send(user);
+    // console.log(user);
+    res.send(userExist[0]);
   } catch (e) {
     res.status(500).send();
   }

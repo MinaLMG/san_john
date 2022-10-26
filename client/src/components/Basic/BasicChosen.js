@@ -13,6 +13,7 @@ export default function BasicChosen(props) {
     teams: "الفرق",
     speakers: "المتكلمين",
     meeting_types: "انواع الاجتماعات",
+    users: "المستخدمين",
   };
   const dict2 = {
     edu: "مرحلة دراسية",
@@ -21,6 +22,7 @@ export default function BasicChosen(props) {
     teams: "فريق",
     speakers: "متكلم",
     meeting_types: "نوع اجتماع",
+    users: "مستخدم",
   };
   return (
     <Fragment>
