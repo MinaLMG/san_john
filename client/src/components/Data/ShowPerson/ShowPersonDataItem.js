@@ -7,7 +7,7 @@ export default function ShowPersonDataItem(props) {
   //   setData(props);
   // }, [props]);
   return (
-    <div className={classes.data}>
+    <div className={props.partial ? classes.partial : classes.data}>
       <SmallItem title={props.title} content={props.content}></SmallItem>
     </div>
   );

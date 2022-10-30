@@ -168,7 +168,7 @@ export default function RegisterAttendance(props) {
               {attendees.map((attendee, index) => {
                 return (
                   <tr key={attendee.person._id} className={classes.tr}>
-                    <td>{index + 1}</td>
+                    <td>{attendees.length - index}</td>
                     <td>{attendee.person.name}</td>
                     <td>{attendee.person.ID}</td>
                     <td>{getTime(attendee.date)}</td>

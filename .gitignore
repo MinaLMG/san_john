@@ -11,6 +11,7 @@
 
 # production
 /client/build
+/client/images
 
 # misc
 /client/.DS_Store

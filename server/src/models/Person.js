@@ -115,6 +115,9 @@ const Person = mongoose.model("Person", {
   serv_date_graduated: {
     type: Date,
   },
+  image: {
+    type: String,
+  },
 });
 
 module.exports = Person;

@@ -59,7 +59,7 @@ router.get("/Users", async (req, res) => {
 
 router.patch("/Users/:id", async (req, res) => {
   const updates = Object.keys(req.body);
-  const allowedUpdates = ["name", "password"];
+  const allowedUpdates = ["name", "password", "admin"];
   const isValidOperation = updates.every((update) =>
     allowedUpdates.includes(update)
   );

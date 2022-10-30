@@ -2,44 +2,10 @@ import React, { useEffect, useState } from "react";
 import instance from "../../axios";
 import ShowPersonDataItem from "./ShowPersonDataItem";
 import classes from "./ShowPersonItem.module.css";
+import anonymous from "../../../assets/anonymous.png";
 export default function ShowPersonItem(props) {
   const [person, setPerson] = useState({});
-  // useEffect(() => {
-  //   async function fetchData() {
-  //     // setPerson(props.person);
-  //     if (person.team) {
-  //       const res = await instance.get(`/Team/${person.team}`);
-  //       setPerson((prev) => {
-  //         prev.team = res.data.name;
-  //         return prev;
-  //       });
-  //     }
-  //     if (person.role) {
-  //       const res = await instance.get(`/Role/${person.role}`);
-  //       setPerson((prev) => {
-  //         prev.role = res.data.name;
-  //         return prev;
-  //       });
-  //     }
-  //     if (person.status) {
-  //       const res = await instance.get(`/Status/${person.status}`);
-  //       setPerson((prev) => {
-  //         prev.status = res.data.name;
-  //         return prev;
-  //       });
-  //     }
-  //     if (person.education_year) {
-  //       const res = await instance.get(
-  //         `/Education_Year/${person.education_year}`
-  //       );
-  //       setPerson((prev) => {
-  //         prev.education_year = res.data.name;
-  //         return prev;
-  //       });
-  //     }
-  //   }
-  //   fetchData();
-  // }, [props.person]);
+  const [imported, setImported] = useState({});
   useEffect(() => {
     async function fetchData() {
       let element = JSON.parse(JSON.stringify(props.person));
@@ -63,6 +29,8 @@ export default function ShowPersonItem(props) {
         element.education_year = res.data.name;
       }
       setPerson(element);
+      // if (element.image)
+      //   setImported(await import(`../../../../images/${element.image}`));
     }
     fetchData();
   }, [props.person]);
@@ -78,10 +46,38 @@ export default function ShowPersonItem(props) {
   return (
     <div className={classes.container}>
       <React.Fragment>
-        <ShowPersonDataItem
-          title="الاسم :"
-          content={person.name}
-        ></ShowPersonDataItem>
+        <div className={classes["partial-container"]}>
+          <ShowPersonDataItem
+            title="الاسم :"
+            content={person.name}
+            partial={true}
+          ></ShowPersonDataItem>
+          <ShowPersonDataItem
+            title=" الرقم القومى :"
+            content={person.ID ? person.ID : undefined}
+            partial={true}
+          ></ShowPersonDataItem>
+          <ShowPersonDataItem
+            title="تاريخ الميلاد :"
+            content={person.birth_date ? getDate(person.birth_date) : undefined}
+            partial={true}
+          ></ShowPersonDataItem>
+          <ShowPersonDataItem
+            title="الجنس:"
+            content={person.gender ? person.gender : undefined}
+            partial={true}
+          ></ShowPersonDataItem>
+        </div>
+        <div className={classes["img-container"]}>
+          <img
+            className={classes.img}
+            src={
+              person.image
+                ? require(`../../../../images/${person.image}`)
+                : anonymous
+            }
+          ></img>
+        </div>
         <ShowPersonDataItem
           title="اب العماد :"
           content={
@@ -89,18 +85,10 @@ export default function ShowPersonItem(props) {
           }
         ></ShowPersonDataItem>
         <ShowPersonDataItem
-          title=" الرقم القومى :"
-          content={person.ID ? person.ID : undefined}
-        ></ShowPersonDataItem>
-        <ShowPersonDataItem
           title=" كنيسة المعمودية :"
           content={
             person.bapitization_church ? person.bapitization_church : undefined
           }
-        ></ShowPersonDataItem>
-        <ShowPersonDataItem
-          title="تاريخ الميلاد :"
-          content={person.birth_date ? getDate(person.birth_date) : undefined}
         ></ShowPersonDataItem>
         <ShowPersonDataItem
           title="  تاريخ المعمودية :"
@@ -117,10 +105,6 @@ export default function ShowPersonItem(props) {
         <ShowPersonDataItem
           title=" الفيسبوك :"
           content={person.facebook ? person.facebook : undefined}
-        ></ShowPersonDataItem>
-        <ShowPersonDataItem
-          title="الجنس:"
-          content={person.gender ? person.gender : undefined}
         ></ShowPersonDataItem>
         <ShowPersonDataItem
           title=" الايميل :"
@@ -189,7 +173,6 @@ export default function ShowPersonItem(props) {
           title="الفرقة :"
           content={person.team ? person.team : undefined}
         ></ShowPersonDataItem>
-
         <ShowPersonDataItem
           title="التخصص :"
           content={person.role ? person.role : undefined}

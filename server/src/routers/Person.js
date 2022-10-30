@@ -209,6 +209,7 @@ router.patch("/Persons/:id", async (req, res) => {
     "serv_date_graduated",
     "ID",
     "gender",
+    "image",
   ];
   const isValidOperation = updates.every((update) =>
     allowedUpdates.includes(update)

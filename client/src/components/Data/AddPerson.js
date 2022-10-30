@@ -109,6 +109,7 @@ export default function AddPerson(props) {
   const [person, setPerson] = useState(
     props.edit ? props.person : { name: "", ID: "" }
   );
+  const firstPic = useState(props.edit ? props.person.image : undefined);
   const [name_error, setName_error] = useState(false);
   const [birth_date_error, setBirth_date_error] = useState(false);
   const [educ_year_error, setEduc_year_error] = useState(false);
@@ -233,6 +234,38 @@ export default function AddPerson(props) {
       setAge(age);
     }
   }, [person.birth_date]);
+  const [selectedFile, setSelectedFile] = useState(null);
+
+  // On file select (from the pop up)
+  const onFileChange = (event) => {
+    // // Update the state
+    // setSelectedFile(event.target.files[0]);
+
+    setPerson((prev) => {
+      return {
+        ...prev,
+        image:
+          event.target.files.length > 0 ? event.target.files[0].name : firstPic,
+      };
+    });
+    // return event.target.files[0];
+  };
+  // On file upload (click the upload button)
+  const onFileUpload = (x) => {
+    // Create an object of formData
+    const formData = new FormData();
+
+    // // Update the formData object
+    // formData.append("myFile", x, x.name);
+
+    // To Do : handle sending images
+    // Details of the uploaded file
+    console.log(x);
+
+    // Request made to the backend api
+    // Send formData object
+  };
+
   return (
     <React.Fragment>
       <div className={General.actions}>
@@ -1020,7 +1053,17 @@ export default function AddPerson(props) {
             ></PrettySelect>
           </div>
         </div>
-        <div className={General["data-element"]}></div>
+        <div className={General["data-element"]}>
+          <label style={{ marginLeft: "7px" }}>الصورة الشخصية </label>
+          <input
+            type="file"
+            accept="image/*"
+            id="image"
+            onChange={(e) => {
+              onFileChange(e);
+            }}
+          />
+        </div>
 
         {/* <hr className={General.hr}></hr> */}
 
