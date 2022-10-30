@@ -21,6 +21,7 @@ export default function ShowPerson(props) {
   useEffect(() => {
     getPersons();
   }, []);
+  const [selector, setSelector] = useState("name");
   const [chosen, setChosen] = useState(null);
   console.log(chosen);
 
@@ -58,8 +59,8 @@ export default function ShowPerson(props) {
   return (
     <React.Fragment>
       {!edit && (
-        <React.Fragment>
-          <div className={General.actions}>
+        <div className={classes.redistributor}>
+          <div className={General.actions} style={{ order: 1 }}>
             <h3> الخدام المسجلون : </h3>
             <h3 className={General.h3} onClick={props.onGoBack}>
               back
@@ -70,7 +71,13 @@ export default function ShowPerson(props) {
               ></img>
             </h3>
           </div>
-          <div className={General.auto}>
+          <div
+            className={`${General.auto} ${selector != "name" ? `mt-4` : ``}`}
+            style={{
+              order: selector == "name" ? 2 : 7,
+              display: chosen != null && selector != "name" ? "none" : "",
+            }}
+          >
             <Autocomplete
               disablePortal
               id="combo-box-demo"
@@ -84,12 +91,41 @@ export default function ShowPerson(props) {
               renderInput={(params) => (
                 <TextField {...params} label="اسم الخادم"></TextField>
               )}
-              value={chosen}
+              value={selector == "name" ? chosen : null}
               onChange={(e, newVal) => {
                 setChosen(newVal);
+                setSelector("name");
               }}
             />
           </div>
+          <div
+            className={`${General.auto} ${selector != "id" ? `mt-4` : ``}`}
+            style={{
+              order: selector == "id" ? 2 : 7,
+              display: chosen != null && selector != "id" ? "none" : "",
+            }}
+          >
+            <Autocomplete
+              disablePortal
+              id="combo-box-demo"
+              options={persons.map((person) => {
+                return { id: person._id, ID: person.ID };
+              })}
+              getOptionLabel={(option) => option.ID}
+              // getOptionSelected={(option, value) => option.id === value.id}
+              isOptionEqualToValue={(option, value) => option.id === value.id}
+              sx={{ width: "50%" }}
+              renderInput={(params) => (
+                <TextField {...params} label="الرقم القومى للخادم"></TextField>
+              )}
+              value={selector == "id" ? chosen : null}
+              onChange={(e, newVal) => {
+                setChosen(newVal);
+                setSelector("id");
+              }}
+            />
+          </div>
+
           {/* <MuiAutoComplete options={["ko", "mo", "do", "va"]}></MuiAutoComplete> */}
           {/* <Auto
         data={[
@@ -107,8 +143,9 @@ export default function ShowPerson(props) {
                     ? persons.find((x) => x._id === chosen.id)
                     : null
                 }
+                style={{ order: 5 }}
               ></ShowPersonItem>
-              <div className={General.final}>
+              <div className={General.final} style={{ order: 6 }}>
                 <button
                   className={General.button}
                   disabled={false}
@@ -126,7 +163,7 @@ export default function ShowPerson(props) {
               </div>
             </React.Fragment>
           )}
-        </React.Fragment>
+        </div>
       )}
       {edit && (
         <AddPerson

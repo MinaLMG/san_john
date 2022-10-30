@@ -109,7 +109,9 @@ export default function AddPerson(props) {
   const [person, setPerson] = useState(
     props.edit ? props.person : { name: "", ID: "" }
   );
-  const firstPic = useState(props.edit ? props.person.image : undefined);
+  const [firstPic, setFirstPic] = useState(
+    props.edit ? props.person.image : undefined
+  );
   const [name_error, setName_error] = useState(false);
   const [birth_date_error, setBirth_date_error] = useState(false);
   const [educ_year_error, setEduc_year_error] = useState(false);

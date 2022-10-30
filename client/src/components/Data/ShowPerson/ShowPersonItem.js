@@ -44,7 +44,7 @@ export default function ShowPersonItem(props) {
   }
   console.log(person);
   return (
-    <div className={classes.container}>
+    <div className={classes.container} style={props.style}>
       <React.Fragment>
         <div className={classes["partial-container"]}>
           <ShowPersonDataItem
