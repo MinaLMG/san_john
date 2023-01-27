@@ -192,7 +192,7 @@ export default function AddPerson(props) {
       const res = await instance.patch(`/Persons/${id_to_send}`, to_send);
       //   console.log(res);
       console.log(res.data);
-      props.onEdit(id_to_send, to_send["name"]);
+      props.onEdit(id_to_send, to_send["ID"]);
     } catch (error) {
       console.log(error);
       setAddingError(true);

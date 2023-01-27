@@ -170,10 +170,12 @@ export default function ShowPerson(props) {
           onGoBack={() => {
             setEdit(undefined);
           }}
-          onEdit={async (id, name) => {
+          onEdit={async (id, ID) => {
             setEdit(undefined);
             await getPersons();
-            if (id) setChosen({ id: id, name: name });
+            if (id) {
+              setChosen({ id: id, ID: ID });
+          }
             else setChosen(null);
           }}
           edit={true}
