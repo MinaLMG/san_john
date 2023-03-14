@@ -113,7 +113,7 @@ export default function Report(props) {
                                                     <th>المرحلة الدراسية</th>
                                                 )}
                                                 {props.showNational_ID && (
-                                                    <th>المرحلة الدراسية</th>
+                                                    <th>الرقم القومى</th>
                                                 )}
                                             </tr>
                                         </thead>
