@@ -74,11 +74,11 @@ export default function ServantsReport(props) {
     //   });
     const [showName, setShowName] = useState(true);
     const [showPhone_number, setShowPhone_number] = useState(true);
-    const [showFather, setShowFather] = useState(true);
+    const [showFather, setShowFather] = useState(false);
     const [showBirth_date, setShowBirth_date] = useState(true);
     const [showTeam, setShowTeam] = useState(true);
     const [showRole, setShowRole] = useState(true);
-    const [showStatus, setShowStatus] = useState(true);
+    const [showStatus, setShowStatus] = useState(false);
     const [showEducation_year, setShowEducation_year] = useState(true);
     const [showNational_ID, setShowNational_ID] = useState(false);
     const [update, setUpdate] = useState(1);
