@@ -8,6 +8,8 @@ const Status = require("../models/Status");
 const Education_Year = require("../models/Education_Year");
 const Role = require("../models/Role");
 
+const { readExcelController } = require("./excelController");
+
 router.post("/Persons", async (req, res) => {
     try {
         const team_to_get = req.body.team;
@@ -255,5 +257,7 @@ router.delete("/Persons/:id", async (req, res) => {
         return res.status(500).send();
     }
 });
+
+router.post("/Persons-immediate", readExcelController);
 
 module.exports = router;

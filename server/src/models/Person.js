@@ -19,7 +19,6 @@ const Person = mongoose.model("Person", {
         type: String,
         required: true,
         trim: true,
-        unique: true,
         validate(value) {
             if (value != "ذكر" && value != "أنثى") {
                 throw new Error("not valid gender");
